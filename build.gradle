@@ -2,6 +2,10 @@ apply plugin: "java"
 
 version = '1.0'
 
+repositories {
+    mavenCentral()
+}
+
 sourceSets {
     main {
         java {
@@ -11,7 +15,6 @@ sourceSets {
 }
 
 dependencies {
-    compile project(':twitter4j-core')
     compile group: 'com.ning', name: 'async-http-client', version: '1.9.15'
 
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.13'
@@ -40,7 +43,6 @@ dependencies {
     compile group: 'com.google.apis', name: 'google-api-services-youtubeAnalytics', version: 'v1-rev57-1.21.0'
 
     compile group: 'com.google.http-client', name: 'google-http-client', version: '1.21.0'
-    compile group: 'com.google.http-client', name: 'google-http-client-android', version: '1.21.0'
     compile group: 'com.google.http-client', name: 'google-http-client-appengine', version: '1.21.0'
     compile group: 'com.google.http-client', name: 'google-http-client-gson', version: '1.21.0'
     compile group: 'com.google.http-client', name: 'google-http-client-jackson', version: '1.21.0'
@@ -57,46 +59,6 @@ dependencies {
     compile group: 'ch.qos.logback', name: 'logback-core', version: '1.1.3'
 
     compile group: 'joda-time', name: 'joda-time', version: '2.9.1'
-
-    compile group: 'com.zaxxer', name: 'HikariCP', version: '2.4.1'
-
-    compile group: 'org.glassfish.jersey.containers', name: 'jersey-container-servlet', version: '2.21'
-    compile group: 'org.glassfish.jersey.core', name: 'jersey-server', version: '2.21'
-    compile group: 'org.glassfish.jersey.ext', name: 'jersey-spring3', version: '2.21'
-    compile group: 'org.glassfish.jersey.media', name: 'jersey-media-multipart', version: '2.21'
-
-    compile group: 'org.springframework', name: 'spring-aop', version: '4.1.7.RELEASE'
-    compile group: 'org.springframework', name: 'spring-beans', version: '4.1.7.RELEASE'
-    compile group: 'org.springframework', name: 'spring-context', version: '4.1.7.RELEASE'
-    compile group: 'org.springframework', name: 'spring-context-support', version: '4.1.7.RELEASE'
-    compile group: 'org.springframework', name: 'spring-core', version: '4.1.7.RELEASE'
-    compile group: 'org.springframework', name: 'spring-expression', version: '4.1.7.RELEASE'
-    compile group: 'org.springframework', name: 'spring-jdbc', version: '4.1.7.RELEASE'
-    compile group: 'org.springframework', name: 'spring-jms', version: '4.1.7.RELEASE'
-    compile group: 'org.springframework', name: 'spring-tx', version: '4.1.7.RELEASE'
-    compile group: 'org.springframework', name: 'spring-web', version: '4.1.7.RELEASE'
-    compile group: 'org.springframework', name: 'spring-test', version: '4.1.7.RELEASE'
-
-    compile group: 'org.springframework.data', name: 'spring-data-commons', version: '1.11.2.RELEASE'
-    compile group: 'org.springframework.data', name: 'spring-data-mongodb', version: '1.8.4.RELEASE'
-    compile group: 'org.springframework.data', name: 'spring-data-mongodb-cross-store', version: '1.8.4.RELEASE'
-    compile group: 'org.springframework.data', name: 'spring-data-mongodb-log4j', version: '1.8.4.RELEASE'
-    compile group: 'org.springframework.data', name: 'spring-data-redis', version: '1.4.2.RELEASE'
-
-    compile group: 'org.springframework.security', name: 'spring-security-acl', version: '3.2.5.RELEASE'
-    compile group: 'org.springframework.security', name: 'spring-security-aspects', version: '3.2.5.RELEASE'
-    compile group: 'org.springframework.security', name: 'spring-security-cas', version: '3.2.5.RELEASE'
-    compile group: 'org.springframework.security', name: 'spring-security-config', version: '3.2.5.RELEASE'
-    compile group: 'org.springframework.security', name: 'spring-security-core', version: '3.2.5.RELEASE'
-    compile group: 'org.springframework.security', name: 'spring-security-crypto', version: '3.2.5.RELEASE'
-    compile group: 'org.springframework.security', name: 'spring-security-ldap', version: '3.2.5.RELEASE'
-    compile group: 'org.springframework.security', name: 'spring-security-openid', version: '3.2.5.RELEASE'
-    compile group: 'org.springframework.security', name: 'spring-security-remoting', version: '3.2.5.RELEASE'
-    compile group: 'org.springframework.security', name: 'spring-security-taglibs', version: '3.2.5.RELEASE'
-    compile group: 'org.springframework.security', name: 'spring-security-web', version: '3.2.5.RELEASE'
-
-    compile group: 'org.mortbay.jetty', name: 'jetty', version: '6.1.26'
-    compile group: 'org.mortbay.jetty', name: 'jetty-util', version: '6.1.26'
 
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.5.4'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.5.4'
@@ -157,15 +119,10 @@ dependencies {
     compile group: 'org.opensaml', name: 'openws', version: '1.4.4'
     compile group: 'org.opensaml', name: 'xmltooling', version: '1.4.0'
 
-    compile group: 'org.mongodb', name: 'mongo-java-driver', version: '2.14.1'
-
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.4.1'
     compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.4.1'
     compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.4.1'
     compile group: 'org.apache.httpcomponents', name: 'httpmime', version: '4.4.1'
-
-    compile group: 'com.github.spullara.mustache.java', name: 'core', version: '0.6.2'
-    compile group: 'com.github.spullara.mustache.java', name: 'builder', version: '0.6.2'
 
     compile group: 'org.apache.curator', name: 'curator-client', version: '2.4.1'
     compile group: 'org.apache.curator', name: 'curator-framework', version: '2.4.1'
@@ -184,10 +141,6 @@ dependencies {
     compile group: 'org.apache.oltu.oauth2', name: 'org.apache.oltu.oauth2.common', version: '0.31'
     compile group: 'org.apache.oltu.oauth2', name: 'org.apache.oltu.oauth2.resourceserver', version: '0.31'
 
-    compile group: 'org.apache.zookeeper', name: 'zookeeper', version: '3.4.5'
-    compile group: 'asm', name: 'asm', version: '3.3.1'
-    compile group: 'aopalliance', name: 'aopalliance', version: '1.0'
-
     compile group: 'org.apache.velocity', name: 'velocity', version: '1.7'
 
     compile group: 'org.apache.santuario', name: 'xmlsec', version: '1.5.4'
@@ -200,6 +153,8 @@ dependencies {
     compile group: 'com.yammer.metrics', name: 'metrics-core', version: '2.2.0' //get rid of this
     compile group: 'com.codahale.metrics', name: 'metrics-core', version: '3.0.2'
     compile group: 'org.owasp.esapi', name: 'esapi', version: '2.1.0'
+
     compile group: 'org.twitter4j', name: 'twitter4j-core', version: '4.0.1'
+
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }
