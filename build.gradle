@@ -15,14 +15,8 @@ sourceSets {
 }
 
 dependencies {
-    compile group: 'com.ning', name: 'async-http-client', version: '1.9.15'
-
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.13'
     compile group: 'org.slf4j', name: 'jul-to-slf4j', version: '1.7.13'
-
-    compile group: 'net.java.dev.jets3t', name: 'jets3t', version: '0.9.4'
-
-    compile group: 'com.google.apis', name: 'google-api-services-dfareporting', version: 'v2.3-rev3-1.19.0'
 
     compile group: 'com.google.guava', name: 'guava', version: '19.0'
 
@@ -64,9 +58,6 @@ dependencies {
     compile group: 'org.codehaus.jackson', name: 'jackson-xc', version: '1.9.13'
     compile group: 'org.codehaus.jettison', name: 'jettison', version: '1.3'
 
-    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
-    compile group: 'javax.servlet.jsp', name: 'jsp-api', version: '1.0.0'
-    compile group: 'javax.servlet.jsp.jstl', name: 'jstl-api', version: '1.2'
     compile group: 'javax.jms', name: 'jms-api', version: '1.1-rev-1'
     compile group: 'com.sun.mail', name: 'javax.mail', version: '1.4.4'
     compile group: 'org.eclipse.persistence', name: 'javax.persistence', version: '2.0.0'
@@ -74,7 +65,6 @@ dependencies {
     compile group: 'javax.inject', name: 'javax.inject', version: '1'
     compile group: 'javax.security.jacc', name: 'javax.security.jacc-api', version: '1.4'
     compile group: 'com.sun.facelets', name: 'jsf-facelets', version: '1.1.11'
-    compile group: 'stax', name: 'stax-api', version: '1.0.1'
 
     compile group: 'com.google.code.findbugs', name: 'jsr305', version: '2.0.1'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.1'
@@ -116,28 +106,10 @@ dependencies {
     compile group: 'org.apache.curator', name: 'curator-recipes', version: '2.4.1'
 
     compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.3.2'
-    compile group: 'org.hibernate', name: 'hibernate-validator', version: '5.2.4.Final'
 
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
 
-    compile group: 'com.vividsolutions', name: 'jts', version: '1.13'
-
-    compile group: 'org.mvel', name: 'mvel2', version: '2.0.19'
-
-    compile group: 'org.apache.oltu.oauth2', name: 'org.apache.oltu.oauth2.authzserver', version: '0.31'
-    compile group: 'org.apache.oltu.oauth2', name: 'org.apache.oltu.oauth2.common', version: '0.31'
-    compile group: 'org.apache.oltu.oauth2', name: 'org.apache.oltu.oauth2.resourceserver', version: '0.31'
-
     compile group: 'org.apache.velocity', name: 'velocity', version: '1.7'
-
-    compile group: 'org.apache.santuario', name: 'xmlsec', version: '1.5.4'
-
-    compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.20'
-
-    compile group: 'org.jvnet.mimepull', name: 'mimepull', version: '1.9.4'
-    compile group: 'com.yammer.metrics', name: 'metrics-core', version: '2.2.0' //get rid of this
-    compile group: 'com.codahale.metrics', name: 'metrics-core', version: '3.0.2'
-    compile group: 'org.owasp.esapi', name: 'esapi', version: '2.1.0'
 
     compile group: 'org.twitter4j', name: 'twitter4j-core', version: '4.0.4'
 
