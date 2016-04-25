@@ -38,8 +38,6 @@ import static twitter4j.util.TwitterAdUtil.constructBaseAdsResponse;
  */
 public class TwitterAdsClient extends TwitterImpl implements OAuthSupport {
 
-    private static final HttpParameter[] IMPLICIT_PARAMS = new HttpParameter[0];
-
     public static final Gson GSON_INSTANCE = new Gson();
 
     public static TwitterAdsClient getInstance(Configuration conf, Authorization auth) {
@@ -54,9 +52,6 @@ public class TwitterAdsClient extends TwitterImpl implements OAuthSupport {
         return StringUtils.EMPTY;
     }
 
-    private HttpParameter[] getImplicitParams() {
-        return IMPLICIT_PARAMS;
-    }
 
     public String getBaseAdsAPIUrl() {
         return conf.getAdsAPIURL();
@@ -285,7 +280,8 @@ public class TwitterAdsClient extends TwitterImpl implements OAuthSupport {
 
         params.add(new HttpParameter(PARAM_VIDEO_MEDIA_ID, mediaId));
         params.add(new HttpParameter(PARAM_COMMAND, "STATUS"));
-        Type type = new TypeToken<UploadMediaObjectResponse>() {}.getType();
+        Type type = new TypeToken<UploadMediaObjectResponse>() {
+        }.getType();
         return executeRequest(url, params.toArray(new HttpParameter[params.size()]), type, HttpVerb.POST);
     }
 
@@ -295,7 +291,8 @@ public class TwitterAdsClient extends TwitterImpl implements OAuthSupport {
 
         List<HttpParameter> params = createGetVideoObjectParams(videoId);
 
-        Type type = new TypeToken<BaseAdsListResponse<VideoObjectResponseData>>() {}.getType();
+        Type type = new TypeToken<BaseAdsListResponse<VideoObjectResponseData>>() {
+        }.getType();
         while (totalWaitTime < maxWaitTime) {
             BaseAdsListResponseIterable<VideoObjectResponseData> responseList = executeHttpListRequest(url, params, type, false);
             for (BaseAdsListResponse<VideoObjectResponseData> listResponse : responseList) {
@@ -380,7 +377,8 @@ public class TwitterAdsClient extends TwitterImpl implements OAuthSupport {
         String url = getBaseAdsAPIUrl() + UPLOAD_MEDIA_URL + UPLOAD_JSON;
         List<HttpParameter> params = finalizeVideoUploadParams(mediaId);
         HttpParameter[] parameters = params.toArray(new HttpParameter[params.size()]);
-        Type type = new TypeToken<UploadMediaObjectResponse>() {}.getType();
+        Type type = new TypeToken<UploadMediaObjectResponse>() {
+        }.getType();
         return executeRequest(url, parameters, type, HttpVerb.POST);
     }
 
@@ -389,7 +387,8 @@ public class TwitterAdsClient extends TwitterImpl implements OAuthSupport {
         //TODO add video title and description (optional)
         List<HttpParameter> params = createVideoObjectParams(mediaId);
         HttpParameter[] parameters = params.toArray(new HttpParameter[params.size()]);
-        Type type = new TypeToken<BaseAdsResponse<VideoObjectResponseData>>() {}.getType();
+        Type type = new TypeToken<BaseAdsResponse<VideoObjectResponseData>>() {
+        }.getType();
         BaseAdsResponse<VideoObjectResponseData> response = executeHttpRequest(url, parameters, type, HttpVerb.POST);
         return response.getData().getId();
     }
@@ -508,9 +507,9 @@ public class TwitterAdsClient extends TwitterImpl implements OAuthSupport {
 
     private String initiateVideoUpload(String videoSizeInBytes) throws TwitterException {
         Long videoSizeInBytesLong;
-        try{
+        try {
             videoSizeInBytesLong = Long.valueOf(videoSizeInBytes);
-        } catch (NumberFormatException eX){
+        } catch (NumberFormatException eX) {
             throw new TwitterException("Video could not be uploaded as connection could not be established");
         }
         if (videoSizeInBytesLong > MAX_VIDEO_SIZE_IN_BYTES) {
@@ -544,13 +543,7 @@ public class TwitterAdsClient extends TwitterImpl implements OAuthSupport {
 
     public HttpResponse get(String url) throws TwitterException {
         ensureAuthorizationEnabled();
-        if (IMPLICIT_PARAMS_STR.length() > 0) {
-            if (url.contains("?")) {
-                url = url + "&" + IMPLICIT_PARAMS_STR;
-            } else {
-                url = url + "?" + IMPLICIT_PARAMS_STR;
-            }
-        }
+
         if (!conf.isMBeanEnabled()) {
             return http.get(url, null, auth, this);
         } else {
@@ -570,13 +563,13 @@ public class TwitterAdsClient extends TwitterImpl implements OAuthSupport {
     public HttpResponse get(String url, HttpParameter... params) throws TwitterException {
         ensureAuthorizationEnabled();
         if (!conf.isMBeanEnabled()) {
-            return http.get(url, mergeImplicitParams(params), auth, this);
+            return http.get(url, params, auth, this);
         } else {
             // intercept HTTP call for monitoring purposes
             HttpResponse response = null;
             long start = System.currentTimeMillis();
             try {
-                response = http.get(url, mergeImplicitParams(params), auth, this);
+                response = http.get(url, params, auth, this);
             } finally {
                 long elapsedTime = System.currentTimeMillis() - start;
                 TwitterAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
@@ -588,13 +581,13 @@ public class TwitterAdsClient extends TwitterImpl implements OAuthSupport {
     public HttpResponse post(String url) throws TwitterException {
         ensureAuthorizationEnabled();
         if (!conf.isMBeanEnabled()) {
-            return http.post(url, IMPLICIT_PARAMS, auth, this);
+            return http.post(url, null, auth, this);
         } else {
             // intercept HTTP call for monitoring purposes
             HttpResponse response = null;
             long start = System.currentTimeMillis();
             try {
-                response = http.post(url, IMPLICIT_PARAMS, auth, this);
+                response = http.post(url, null, auth, this);
             } finally {
                 long elapsedTime = System.currentTimeMillis() - start;
                 TwitterAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
@@ -606,13 +599,13 @@ public class TwitterAdsClient extends TwitterImpl implements OAuthSupport {
     public HttpResponse post(String url, HttpParameter... params) throws TwitterException {
         ensureAuthorizationEnabled();
         if (!conf.isMBeanEnabled()) {
-            return http.post(url, mergeImplicitParams(params), auth, this);
+            return http.post(url, params, auth, this);
         } else {
             // intercept HTTP call for monitoring purposes
             HttpResponse response = null;
             long start = System.currentTimeMillis();
             try {
-                response = http.post(url, mergeImplicitParams(params), auth, this);
+                response = http.post(url, params, auth, this);
             } finally {
                 long elapsedTime = System.currentTimeMillis() - start;
                 TwitterAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
@@ -655,10 +648,6 @@ public class TwitterAdsClient extends TwitterImpl implements OAuthSupport {
         }
     }
 
-    public HttpParameter[] mergeImplicitParams(HttpParameter... params) {
-        return mergeParameters(params, IMPLICIT_PARAMS);
-    }
-
     private boolean isOk(HttpResponse response) {
         return response != null && response.getStatusCode() < 300;
     }
@@ -666,13 +655,13 @@ public class TwitterAdsClient extends TwitterImpl implements OAuthSupport {
     protected HttpResponse put(String url) throws TwitterException {
         ensureAuthorizationEnabled();
         if (!conf.isMBeanEnabled()) {
-            return http.put(url, getImplicitParams(), auth, null);
+            return http.put(url, null, auth, null);
         } else {
             // intercept HTTP call for monitoring purposes
             HttpResponse response = null;
             long start = System.currentTimeMillis();
             try {
-                response = http.put(url, getImplicitParams(), auth, null);
+                response = http.put(url, null, auth, null);
             } finally {
                 long elapsedTime = System.currentTimeMillis() - start;
                 TwitterAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
@@ -684,13 +673,13 @@ public class TwitterAdsClient extends TwitterImpl implements OAuthSupport {
     protected HttpResponse put(String url, HttpParameter[] params) throws TwitterException {
         ensureAuthorizationEnabled();
         if (!conf.isMBeanEnabled()) {
-            return http.put(url, mergeImplicitParams(params), auth, null);
+            return http.put(url, params, auth, null);
         } else {
             // intercept HTTP call for monitoring purposes
             HttpResponse response = null;
             long start = System.currentTimeMillis();
             try {
-                response = http.put(url, mergeImplicitParams(params), auth, null);
+                response = http.put(url, params, auth, null);
             } finally {
                 long elapsedTime = System.currentTimeMillis() - start;
                 TwitterAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
@@ -702,13 +691,13 @@ public class TwitterAdsClient extends TwitterImpl implements OAuthSupport {
     protected HttpResponse delete(String url) throws TwitterException {
         ensureAuthorizationEnabled();
         if (!conf.isMBeanEnabled()) {
-            return http.delete(url, getImplicitParams(), auth, null);
+            return http.delete(url, null, auth, null);
         } else {
             // intercept HTTP call for monitoring purposes
             HttpResponse response = null;
             long start = System.currentTimeMillis();
             try {
-                response = http.delete(url, getImplicitParams(), auth, null);
+                response = http.delete(url, null, auth, null);
             } finally {
                 long elapsedTime = System.currentTimeMillis() - start;
                 TwitterAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
@@ -752,6 +741,28 @@ public class TwitterAdsClient extends TwitterImpl implements OAuthSupport {
             }
             return response;
         }
+    }
+
+    protected HttpResponse getWithoutMergingImplicitParams(String url, HttpParameter[] params) throws TwitterException {
+        ensureAuthorizationEnabled();
+        if (!conf.isMBeanEnabled()) {
+            return http.get(url, params, auth, null);
+        } else {
+            // intercept HTTP call for monitoring purposes
+            HttpResponse response = null;
+            long start = System.currentTimeMillis();
+            try {
+                response = http.get(url, params, auth, null);
+            } finally {
+                long elapsedTime = System.currentTimeMillis() - start;
+                TwitterAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
+            }
+            return response;
+        }
+    }
+
+    public Media videoUploadInitAndFinalize(String url, HttpParameter[] parameters) throws TwitterException {
+        return factory.createMediaUpload(post(url, parameters));
     }
 }
 

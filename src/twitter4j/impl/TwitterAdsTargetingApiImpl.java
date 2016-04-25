@@ -210,7 +210,7 @@ public class TwitterAdsTargetingApiImpl implements TwitterAdsTargetingApi {
         }
         params.add(new HttpParameter("location_type", locationType.name()));
         HttpResponse response = twitterAdsClient
-                .getRequest(twitterAdsClient.getConf().getAdsAPIURL() + "0/targeting_criteria/locations", params.toArray(new HttpParameter[params.size()
+                .getRequest(twitterAdsClient.getBaseAdsAPIUrl() + "0/targeting_criteria/locations", params.toArray(new HttpParameter[params.size()
                                                                                                                             ]));
         String responseString = response.asString();
         try {
