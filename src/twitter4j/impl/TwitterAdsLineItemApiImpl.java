@@ -4,8 +4,6 @@ import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.StringUtils;
 import twitter4j.*;
 import twitter4j.api.TwitterAdsLineItemApi;
-import twitter4j.internal.http.HttpParameter;
-import twitter4j.internal.http.HttpResponse;
 import twitter4j.models.ads.*;
 import twitter4j.models.video.AssociateMediaCreativeResponse;
 import twitter4j.models.video.PreRollCallToActionResponse;

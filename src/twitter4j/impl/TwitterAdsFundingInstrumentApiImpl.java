@@ -3,7 +3,6 @@ package twitter4j.impl;
 import com.google.gson.reflect.TypeToken;
 import twitter4j.*;
 import twitter4j.api.TwitterAdsFundingInstrumentApi;
-import twitter4j.internal.http.HttpParameter;
 import twitter4j.models.ads.FundingInstrument;
 import twitter4j.models.ads.HttpVerb;
 import twitter4j.util.TwitterAdUtil;

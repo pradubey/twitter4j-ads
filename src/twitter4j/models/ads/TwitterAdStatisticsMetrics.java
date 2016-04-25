@@ -1,9 +1,12 @@
 package twitter4j.models.ads;
 
-import java.util.*;
+import com.google.api.client.util.Sets;
+import com.google.common.collect.Maps;
 
-import atlas.shaded.com.google.common.collect.Sets;
-import atlas.shaded.com.google.common.collect.Maps;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
 
 import static twitter4j.models.ads.TwitterAdStatistics.*;
 

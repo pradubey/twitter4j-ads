@@ -1,16 +1,14 @@
 package twitter4j;
 
-import atlas.shaded.org.apache.commons.collections4.CollectionUtils;
-import com.gc.android.market.api.Base64;
 import com.google.common.collect.Lists;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.net.util.Base64;
 import twitter4j.auth.Authorization;
 import twitter4j.auth.OAuthSupport;
 import twitter4j.conf.Configuration;
-import twitter4j.internal.http.HttpParameter;
-import twitter4j.internal.http.HttpResponse;
 import twitter4j.models.TwitterTonUploadResponse;
 import twitter4j.models.ads.AudienceUploadDetails;
 import twitter4j.models.ads.HttpVerb;
@@ -38,7 +36,7 @@ import static twitter4j.util.TwitterAdUtil.constructBaseAdsResponse;
  * Date: 4/4/16
  * Time: 7:07 PM
  */
-public class TwitterAdsClient extends TwitterBaseImpl implements OAuthSupport {
+public class TwitterAdsClient extends TwitterImpl implements OAuthSupport {
 
     private static final HttpParameter[] IMPLICIT_PARAMS = new HttpParameter[0];
 
@@ -52,13 +50,11 @@ public class TwitterAdsClient extends TwitterBaseImpl implements OAuthSupport {
         super(conf, auth);
     }
 
-    @Override
-    String getImplicitParamsStr() {
+    private String getImplicitParamsStr() {
         return StringUtils.EMPTY;
     }
 
-    @Override
-    HttpParameter[] getImplicitParams() {
+    private HttpParameter[] getImplicitParams() {
         return IMPLICIT_PARAMS;
     }
 
@@ -139,27 +135,27 @@ public class TwitterAdsClient extends TwitterBaseImpl implements OAuthSupport {
     }
 
     public HttpResponse postRequest(String url, String requestBody) throws TwitterException {
-        return super.post(url, requestBody);
+        return post(url, requestBody);
     }
 
     public HttpResponse postRequest(String url, HttpParameter[] params) throws TwitterException {
-        return super.post(url, params);
+        return post(url, params);
     }
 
     public HttpResponse getRequest(String url, HttpParameter[] params) throws TwitterException {
-        return super.get(url, params);
+        return get(url, params);
     }
 
     public HttpResponse getRequest(String url) throws TwitterException {
-        return super.get(url);
+        return get(url);
     }
 
     public HttpResponse getWithoutMergeOfParams(String url, HttpParameter[] params) throws TwitterException {
-        return super.getWithoutMergingImplicitParams(url, params);
+        return getWithoutMergingImplicitParams(url, params);
     }
 
     public HttpResponse putRequest(String url, HttpParameter[] params) throws TwitterException {
-        return super.put(url, params);
+        return put(url, params);
     }
 
     public <T> BaseAdsResponse<T> executePostRequestWithJsonRequestBody(String baseUrl, String requestBody, Type type) throws TwitterException {
@@ -539,10 +535,222 @@ public class TwitterAdsClient extends TwitterBaseImpl implements OAuthSupport {
             if (bytesRead != -1) {
                 chunk = Arrays.copyOf(chunk, bytesRead);
             }
-            String base64Encoding = Base64.encodeBytes(chunk);
+            String base64Encoding = Base64.encodeBase64String(chunk);
             appendChunk(mediaId, base64Encoding, segmentIndex);
             bytesLeftTOUpload -= bytesRead;
             segmentIndex += 1;
+        }
+    }
+
+    public HttpResponse get(String url) throws TwitterException {
+        ensureAuthorizationEnabled();
+        if (IMPLICIT_PARAMS_STR.length() > 0) {
+            if (url.contains("?")) {
+                url = url + "&" + IMPLICIT_PARAMS_STR;
+            } else {
+                url = url + "?" + IMPLICIT_PARAMS_STR;
+            }
+        }
+        if (!conf.isMBeanEnabled()) {
+            return http.get(url, null, auth, this);
+        } else {
+            // intercept HTTP call for monitoring purposes
+            HttpResponse response = null;
+            long start = System.currentTimeMillis();
+            try {
+                response = http.get(url, null, auth, this);
+            } finally {
+                long elapsedTime = System.currentTimeMillis() - start;
+                TwitterAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
+            }
+            return response;
+        }
+    }
+
+    public HttpResponse get(String url, HttpParameter... params) throws TwitterException {
+        ensureAuthorizationEnabled();
+        if (!conf.isMBeanEnabled()) {
+            return http.get(url, mergeImplicitParams(params), auth, this);
+        } else {
+            // intercept HTTP call for monitoring purposes
+            HttpResponse response = null;
+            long start = System.currentTimeMillis();
+            try {
+                response = http.get(url, mergeImplicitParams(params), auth, this);
+            } finally {
+                long elapsedTime = System.currentTimeMillis() - start;
+                TwitterAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
+            }
+            return response;
+        }
+    }
+
+    public HttpResponse post(String url) throws TwitterException {
+        ensureAuthorizationEnabled();
+        if (!conf.isMBeanEnabled()) {
+            return http.post(url, IMPLICIT_PARAMS, auth, this);
+        } else {
+            // intercept HTTP call for monitoring purposes
+            HttpResponse response = null;
+            long start = System.currentTimeMillis();
+            try {
+                response = http.post(url, IMPLICIT_PARAMS, auth, this);
+            } finally {
+                long elapsedTime = System.currentTimeMillis() - start;
+                TwitterAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
+            }
+            return response;
+        }
+    }
+
+    public HttpResponse post(String url, HttpParameter... params) throws TwitterException {
+        ensureAuthorizationEnabled();
+        if (!conf.isMBeanEnabled()) {
+            return http.post(url, mergeImplicitParams(params), auth, this);
+        } else {
+            // intercept HTTP call for monitoring purposes
+            HttpResponse response = null;
+            long start = System.currentTimeMillis();
+            try {
+                response = http.post(url, mergeImplicitParams(params), auth, this);
+            } finally {
+                long elapsedTime = System.currentTimeMillis() - start;
+                TwitterAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
+            }
+            return response;
+        }
+    }
+
+    public HttpParameter[] mergeParameters(HttpParameter[] params1, HttpParameter[] params2) {
+        if (params1 != null && params2 != null) {
+            HttpParameter[] params = new HttpParameter[params1.length + params2.length];
+            System.arraycopy(params1, 0, params, 0, params1.length);
+            System.arraycopy(params2, 0, params, params1.length, params2.length);
+            return params;
+        }
+        if (null == params1 && null == params2) {
+            return new HttpParameter[0];
+        }
+        if (params1 != null) {
+            return params1;
+        } else {
+            return params2;
+        }
+    }
+
+    public HttpParameter[] mergeParameters(HttpParameter[] params1, HttpParameter params2) {
+        if (params1 != null && params2 != null) {
+            HttpParameter[] params = new HttpParameter[params1.length + 1];
+            System.arraycopy(params1, 0, params, 0, params1.length);
+            params[params.length - 1] = params2;
+            return params;
+        }
+        if (null == params1 && null == params2) {
+            return new HttpParameter[0];
+        }
+        if (params1 != null) {
+            return params1;
+        } else {
+            return new HttpParameter[]{params2};
+        }
+    }
+
+    public HttpParameter[] mergeImplicitParams(HttpParameter... params) {
+        return mergeParameters(params, IMPLICIT_PARAMS);
+    }
+
+    private boolean isOk(HttpResponse response) {
+        return response != null && response.getStatusCode() < 300;
+    }
+
+    protected HttpResponse put(String url) throws TwitterException {
+        ensureAuthorizationEnabled();
+        if (!conf.isMBeanEnabled()) {
+            return http.put(url, getImplicitParams(), auth, null);
+        } else {
+            // intercept HTTP call for monitoring purposes
+            HttpResponse response = null;
+            long start = System.currentTimeMillis();
+            try {
+                response = http.put(url, getImplicitParams(), auth, null);
+            } finally {
+                long elapsedTime = System.currentTimeMillis() - start;
+                TwitterAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
+            }
+            return response;
+        }
+    }
+
+    protected HttpResponse put(String url, HttpParameter[] params) throws TwitterException {
+        ensureAuthorizationEnabled();
+        if (!conf.isMBeanEnabled()) {
+            return http.put(url, mergeImplicitParams(params), auth, null);
+        } else {
+            // intercept HTTP call for monitoring purposes
+            HttpResponse response = null;
+            long start = System.currentTimeMillis();
+            try {
+                response = http.put(url, mergeImplicitParams(params), auth, null);
+            } finally {
+                long elapsedTime = System.currentTimeMillis() - start;
+                TwitterAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
+            }
+            return response;
+        }
+    }
+
+    protected HttpResponse delete(String url) throws TwitterException {
+        ensureAuthorizationEnabled();
+        if (!conf.isMBeanEnabled()) {
+            return http.delete(url, getImplicitParams(), auth, null);
+        } else {
+            // intercept HTTP call for monitoring purposes
+            HttpResponse response = null;
+            long start = System.currentTimeMillis();
+            try {
+                response = http.delete(url, getImplicitParams(), auth, null);
+            } finally {
+                long elapsedTime = System.currentTimeMillis() - start;
+                TwitterAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
+            }
+            return response;
+        }
+    }
+
+    protected HttpResponse delete(String url, HttpParameter[] params) throws TwitterException {
+        ensureAuthorizationEnabled();
+        if (!conf.isMBeanEnabled()) {
+            return http.delete(url, mergeImplicitParams(params), auth, null);
+        } else {
+            // intercept HTTP call for monitoring purposes
+            HttpResponse response = null;
+            long start = System.currentTimeMillis();
+            try {
+                response = http.delete(url, mergeImplicitParams(params), auth, null);
+            } finally {
+                long elapsedTime = System.currentTimeMillis() - start;
+                TwitterAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
+            }
+            return response;
+        }
+    }
+
+    protected HttpResponse putWithCustomHeaders(String url, HttpParameter[] params, Map<String, String> customHeaders, boolean isTonUpload)
+            throws TwitterException {
+        ensureAuthorizationEnabled();
+        if (!conf.isMBeanEnabled()) {
+            return http.putWithCustomHeaders(url, params, auth, customHeaders, isTonUpload);
+        } else {
+            // intercept HTTP call for monitoring purposes
+            HttpResponse response = null;
+            long start = System.currentTimeMillis();
+            try {
+                response = http.putWithCustomHeaders(url, params, auth, customHeaders, isTonUpload);
+            } finally {
+                long elapsedTime = System.currentTimeMillis() - start;
+                TwitterAPIMonitor.getInstance().methodCalled(url, elapsedTime, isOk(response));
+            }
+            return response;
         }
     }
 }

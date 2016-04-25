@@ -1,12 +1,10 @@
 package twitter4j.impl;
 
-import atlas.shaded.com.google.common.collect.Lists;
-import atlas.shaded.org.apache.commons.collections4.CollectionUtils;
+import com.google.common.collect.Lists;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.collections.CollectionUtils;
 import twitter4j.*;
 import twitter4j.api.TwitterAdsAccountApi;
-import twitter4j.internal.http.HttpParameter;
-import twitter4j.internal.http.HttpResponse;
 import twitter4j.models.ads.AdAccount;
 import twitter4j.models.ads.HttpVerb;
 import twitter4j.models.ads.PromotableUser;

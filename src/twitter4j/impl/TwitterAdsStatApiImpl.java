@@ -4,7 +4,6 @@ import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.StringUtils;
 import twitter4j.*;
 import twitter4j.api.TwitterAdsStatApi;
-import twitter4j.internal.http.HttpParameter;
 import twitter4j.models.Granularity;
 import twitter4j.models.ads.TwitterAdStatistics;
 import twitter4j.models.ads.TwitterAdStatisticsMetrics;

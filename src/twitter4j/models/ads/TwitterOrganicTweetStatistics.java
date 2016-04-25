@@ -1,6 +1,5 @@
 package twitter4j.models.ads;
 
-import atlas.shaded.com.google.common.collect.Sets;
 import com.google.gson.annotations.SerializedName;
 import twitter4j.models.Granularity;
 
@@ -35,7 +34,7 @@ public class TwitterOrganicTweetStatistics extends TwitterEntity {
     public static final String ORGANIC_TWEET_URL_CLICKS = "organic_tweet_url_clicks";
 
     static {
-        Set<String> organicMetrics = Sets.newHashSet(ORGANIC_TWEET_APP_INSTALL_ATTEMPTS, ORGANIC_TWEET_APP_OPENS, ORGANIC_TWEET_CLICKS, ORGANIC_TWEET_DETAIL_EXPANDS,
+        Set<String> organicMetrics = com.google.common.collect.Sets.newHashSet(ORGANIC_TWEET_APP_INSTALL_ATTEMPTS, ORGANIC_TWEET_APP_OPENS, ORGANIC_TWEET_CLICKS, ORGANIC_TWEET_DETAIL_EXPANDS,
                                                      ORGANIC_TWEET_ENGAGEMENT_RATE, ORGANIC_TWEET_ENGAGEMENTS, ORGANIC_TWEET_FAVORITES, ORGANIC_TWEET_FOLLOWS,
                                                      ORGANIC_TWEET_IMPRESSIONS, ORGANIC_TWEET_REPLIES, ORGANIC_TWEET_RETWEETS, ORGANIC_TWEET_URL_CLICKS);
         ORGANIC_METRICS = Collections.unmodifiableSet(organicMetrics);

@@ -1,10 +1,11 @@
 package twitter4j.api;
 
-import twitter4j.*;
+import twitter4j.BaseAdsListResponseIterable;
+import twitter4j.BaseAdsResponse;
+import twitter4j.TwitterException;
+import twitter4j.models.LocationType;
 import twitter4j.models.SortByField;
 import twitter4j.models.ads.*;
-import twitter4j.models.ads.TargetingLocation;
-import twitter4j.models.ads.TargetingType;
 import twitter4j.models.ads.tags.TwitterApplicationList;
 
 import java.util.List;

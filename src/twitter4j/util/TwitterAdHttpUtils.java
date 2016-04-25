@@ -1,6 +1,6 @@
 package twitter4j.util;
 
-import twitter4j.internal.http.HttpResponse;
+import twitter4j.HttpResponse;
 import twitter4j.models.RateLimitStatusImpl;
 
 /**

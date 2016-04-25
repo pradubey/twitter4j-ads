@@ -1,6 +1,6 @@
 package twitter4j.models.ads;
 
-import atlas.shaded.com.google.common.collect.Sets;
+import com.google.common.collect.Sets;
 import com.google.gson.annotations.SerializedName;
 import twitter4j.models.Granularity;
 import twitter4j.models.Segment;

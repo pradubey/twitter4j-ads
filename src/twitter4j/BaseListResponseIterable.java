@@ -1,11 +1,7 @@
 package twitter4j;
 
 import twitter4j.conf.Configuration;
-import twitter4j.internal.http.HttpParameter;
-import twitter4j.internal.http.HttpResponse;
-import twitter4j.internal.org.json.JSONArray;
-import twitter4j.internal.org.json.JSONException;
-import twitter4j.internal.org.json.JSONObject;
+import twitter4j.models.ads.TwitterRuntimeException;
 import twitter4j.util.TwitterAdHttpUtils;
 import twitter4j.util.TwitterAdUtil;
 
@@ -15,11 +11,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import static com.restfb.util.StringUtils.isBlank;
+import static org.apache.commons.lang.StringUtils.isBlank;
 
 public abstract class BaseListResponseIterable<T extends BaseListResponse, DataType> implements Iterable<T> {
 
-    protected final TwitterBaseImpl twitterBase;
+    protected final TwitterAdsClient twitterAdsClient;
     protected final Class<T> responseType;
     protected final Class<DataType> responseDataType;
     protected final String baseUrl;
@@ -28,11 +24,11 @@ public abstract class BaseListResponseIterable<T extends BaseListResponse, DataT
     private T data;
     private String nextCursor;
 
-    public BaseListResponseIterable(TwitterBaseImpl twitterBase, String baseUrl, List<HttpParameter> baseParameters, Class<T> clazz,
+    public BaseListResponseIterable(TwitterAdsClient twitterAdsClient, String baseUrl, List<HttpParameter> baseParameters, Class<T> clazz,
                                     Class<DataType> dataTypeClazz, HttpResponse response, Configuration conf) throws IOException, TwitterException {
-        TwitterAdUtil.ensureNotNull(twitterBase, "Twitter Ads API");
+        TwitterAdUtil.ensureNotNull(twitterAdsClient, "Twitter Ads API");
         TwitterAdUtil.ensureNotNull(response, "Twitter Ads Response");
-        this.twitterBase = twitterBase;
+        this.twitterAdsClient = twitterAdsClient;
         this.baseUrl = baseUrl;
         this.baseParameters = baseParameters == null ? Collections.<HttpParameter>emptyList() : Collections.unmodifiableList(baseParameters);
         this.responseType = clazz;
@@ -117,7 +113,7 @@ public abstract class BaseListResponseIterable<T extends BaseListResponse, DataT
     private BaseListResponseIterable<T, DataType> fetchNextResponse() throws IOException, TwitterException {
         List<HttpParameter> parameters = TwitterAdUtil.createMutableList(baseParameters);
         parameters.add(new HttpParameter("cursor", getNextCursor()));
-        HttpResponse httpResponse = twitterBase.get(baseUrl, parameters.toArray(new HttpParameter[parameters.size()]));
+        HttpResponse httpResponse = twitterAdsClient.get(baseUrl, parameters.toArray(new HttpParameter[parameters.size()]));
         return createIterable(httpResponse);
     }
 

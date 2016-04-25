@@ -1,12 +1,11 @@
 package twitter4j.impl;
 
-import atlas.shaded.org.apache.commons.io.IOUtils;
 import com.google.api.client.util.Maps;
 import com.google.gson.reflect.TypeToken;
+import org.apache.commons.io.IOUtils;
 import org.joda.time.DateTime;
 import twitter4j.*;
 import twitter4j.api.TwitterAdsAudienceApi;
-import twitter4j.internal.http.HttpParameter;
 import twitter4j.models.TwitterTonUploadResponse;
 import twitter4j.models.ads.*;
 import twitter4j.util.TwitterAdUtil;

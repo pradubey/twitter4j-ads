@@ -4,7 +4,6 @@ import com.google.common.collect.Lists;
 import com.google.gson.reflect.TypeToken;
 import twitter4j.*;
 import twitter4j.api.TwitterAdsWebEventApi;
-import twitter4j.internal.http.HttpParameter;
 import twitter4j.models.ads.HttpVerb;
 import twitter4j.models.ads.tags.WebEventTag;
 import twitter4j.models.ads.tags.WebEventTagType;

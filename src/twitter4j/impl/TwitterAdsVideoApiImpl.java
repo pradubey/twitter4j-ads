@@ -5,8 +5,6 @@ import com.google.gson.reflect.TypeToken;
 import org.codehaus.jackson.map.ObjectMapper;
 import twitter4j.*;
 import twitter4j.api.TwitterAdsVideoApi;
-import twitter4j.internal.http.HttpParameter;
-import twitter4j.internal.http.HttpResponse;
 import twitter4j.models.video.AssociateVideoToAccountResponse;
 import twitter4j.models.video.TwitterAccountMediaResponse;
 import twitter4j.models.video.TwitterCreativeType;

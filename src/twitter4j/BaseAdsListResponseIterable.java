@@ -1,8 +1,8 @@
 package twitter4j;
 
 import com.google.gson.Gson;
-import twitter4j.internal.http.HttpParameter;
-import twitter4j.internal.http.HttpResponse;
+import org.apache.commons.lang.StringUtils;
+import twitter4j.models.ads.TwitterRuntimeException;
 import twitter4j.util.TwitterAdHttpUtils;
 import twitter4j.util.TwitterAdUtil;
 
@@ -10,15 +10,13 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.*;
 
-import static com.restfb.util.StringUtils.isBlank;
-
 /**
  * User: poly
  * Date: 07/02/14
  * Time: 11:56 AM
  */
 public class BaseAdsListResponseIterable<T> implements Iterable<BaseAdsListResponse<T>> {
-    private final TwitterBaseImpl twitterBase;
+    private final TwitterAdsClient twitterAdsClient;
     private BaseAdsListResponse<T> data;
     private final String baseUrl;
     private final Type type;
@@ -26,12 +24,12 @@ public class BaseAdsListResponseIterable<T> implements Iterable<BaseAdsListRespo
     private final List<HttpParameter> baseParameters;
     private boolean isCostBasedRateLimit;
 
-    public BaseAdsListResponseIterable(TwitterBaseImpl twitterBase, String baseUrl, List<HttpParameter> baseParameters, Type type,
+    public BaseAdsListResponseIterable(TwitterAdsClient twitterAdsClient, String baseUrl, List<HttpParameter> baseParameters, Type type,
                                        HttpResponse response, boolean isCostBasedRateLimit) throws IOException, TwitterException {
         this.isCostBasedRateLimit = isCostBasedRateLimit;
-        TwitterAdUtil.ensureNotNull(twitterBase, "Twitter Ads API");
+        TwitterAdUtil.ensureNotNull(twitterAdsClient, "Twitter Ads API");
         TwitterAdUtil.ensureNotNull(response, "Twitter Ads Response");
-        this.twitterBase = twitterBase;
+        this.twitterAdsClient = twitterAdsClient;
         this.baseUrl = baseUrl;
         this.baseParameters = baseParameters == null ? Collections.<HttpParameter>emptyList() : Collections.unmodifiableList(baseParameters);
         Gson gson = new Gson();
@@ -103,8 +101,8 @@ public class BaseAdsListResponseIterable<T> implements Iterable<BaseAdsListRespo
         List<HttpParameter> parameters = TwitterAdUtil.createMutableList(baseParameters);
         parameters = removeParamIfExist(parameters, "cursor");
         parameters.add(new HttpParameter("cursor", getNextCursor()));
-        HttpResponse httpResponse = twitterBase.get(baseUrl, parameters.toArray(new HttpParameter[parameters.size()]));
-        return new BaseAdsListResponseIterable<>(twitterBase, baseUrl, baseParameters, type, httpResponse, isCostBasedRateLimit);
+        HttpResponse httpResponse = twitterAdsClient.get(baseUrl, parameters.toArray(new HttpParameter[parameters.size()]));
+        return new BaseAdsListResponseIterable<>(twitterAdsClient, baseUrl, baseParameters, type, httpResponse, isCostBasedRateLimit);
     }
 
     private List<HttpParameter> removeParamIfExist(List<HttpParameter> parameters, String param) {
@@ -131,7 +129,7 @@ public class BaseAdsListResponseIterable<T> implements Iterable<BaseAdsListRespo
     }
 
     private boolean hasNext() {
-        return !isBlank(getNextCursor());
+        return StringUtils.isNotBlank(getNextCursor());
     }
 
     public String getNextCursor() {

@@ -1,11 +1,6 @@
 package twitter4j;
 
 import twitter4j.conf.Configuration;
-import twitter4j.internal.http.HttpParameter;
-import twitter4j.internal.http.HttpResponse;
-import twitter4j.internal.json.StatusJSONImpl;
-import twitter4j.internal.org.json.JSONArray;
-import twitter4j.internal.org.json.JSONException;
 import twitter4j.models.ads.ListStatusResponse;
 
 import java.io.IOException;
@@ -20,10 +15,10 @@ import java.util.List;
  */
 public class StatusListResponseIterableImpl extends BaseListResponseIterable<ListStatusResponse, Status> {
 
-    public StatusListResponseIterableImpl(TwitterBaseImpl twitterBase, String baseUrl, List<HttpParameter> baseParameters, HttpResponse response,
+    public StatusListResponseIterableImpl(TwitterAdsClient twitterAdsClient, String baseUrl, List<HttpParameter> baseParameters, HttpResponse response,
                                           Configuration conf)
             throws IOException, TwitterException {
-        super(twitterBase, baseUrl, baseParameters, ListStatusResponse.class, Status.class, response, conf);
+        super(twitterAdsClient, baseUrl, baseParameters, ListStatusResponse.class, Status.class, response, conf);
     }
 
     @Override
@@ -40,6 +35,6 @@ public class StatusListResponseIterableImpl extends BaseListResponseIterable<Lis
 
     @Override
     protected BaseListResponseIterable<ListStatusResponse, Status> createIterable(HttpResponse httpResponse) throws TwitterException, IOException {
-        return new StatusListResponseIterableImpl(twitterBase, baseUrl, baseParameters, httpResponse, conf);
+        return new StatusListResponseIterableImpl(twitterAdsClient, baseUrl, baseParameters, httpResponse, conf);
     }
 }

@@ -33,11 +33,6 @@ public class RateLimitStatusImpl implements RateLimitStatus {
     }
 
     @Override
-    public int getRemainingHits() {
-        return getRemaining();
-    }
-
-    @Override
     public int getLimit() {
         return limit;
     }

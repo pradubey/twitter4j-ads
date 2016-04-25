@@ -1,8 +1,8 @@
 package twitter4j.api;
 
 import twitter4j.BaseAdsListResponseIterable;
+import twitter4j.HttpParameter;
 import twitter4j.TwitterException;
-import twitter4j.internal.http.HttpParameter;
 import twitter4j.models.Granularity;
 import twitter4j.models.ads.TwitterAdStatistics;
 import twitter4j.models.ads.TwitterOrganicTweetStatistics;

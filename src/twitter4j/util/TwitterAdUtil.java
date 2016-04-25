@@ -5,16 +5,13 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import twitter4j.BaseAdsListResponse;
 import twitter4j.BaseAdsResponse;
+import twitter4j.HttpResponse;
 import twitter4j.RateLimitStatus;
-import twitter4j.TwitterException;
-import twitter4j.internal.http.HttpResponse;
-import twitter4j.internal.json.z_T4JInternalParseUtil;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -38,16 +35,6 @@ public final class TwitterAdUtil {
         DateTime dateTimeStart = new DateTime(time, DateTimeZone.UTC);
 
         return dateTimeStart.toString(dateFormat);
-    }
-
-    public static Date getDate(String dateAsString) {
-        Date date = new Date();
-        try {
-            z_T4JInternalParseUtil.parseTrendsDate(dateAsString);
-        } catch (TwitterException e) {
-            throw new IllegalStateException("Unexpected date format(" + dateAsString + ") returned from twitter.com", e);
-        }
-        return date;
     }
 
     public static <T> String getCsv(Collection<T> collection) {

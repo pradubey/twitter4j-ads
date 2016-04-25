@@ -20,9 +20,6 @@ dependencies {
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.13'
     compile group: 'org.slf4j', name: 'jul-to-slf4j', version: '1.7.13'
 
-    compile group: 'io.netty', name: 'netty-all', version: '4.0.29.Final'
-    compile group: 'io.netty', name: 'netty', version: '3.10.0.Final'
-
     compile group: 'net.java.dev.jets3t', name: 'jets3t', version: '0.9.4'
 
     compile group: 'com.google.apis', name: 'google-api-services-dfareporting', version: 'v2.3-rev3-1.19.0'
@@ -36,11 +33,6 @@ dependencies {
     compile group: 'com.google.api-client', name: 'google-api-client-jackson2', version: '1.21.0'
     compile group: 'com.google.api-client', name: 'google-api-client-java6', version: '1.21.0'
     compile group: 'com.google.api-client', name: 'google-api-client-servlet', version: '1.21.0'
-
-    compile group: 'com.google.apis', name: 'google-api-services-analytics', version: 'v3-rev124-1.21.0'
-    compile group: 'com.google.apis', name: 'google-api-services-plus', version: 'v1-rev341-1.21.0'
-    compile group: 'com.google.apis', name: 'google-api-services-youtube', version: 'v3-rev139-1.20.0'
-    compile group: 'com.google.apis', name: 'google-api-services-youtubeAnalytics', version: 'v1-rev57-1.21.0'
 
     compile group: 'com.google.http-client', name: 'google-http-client', version: '1.21.0'
     compile group: 'com.google.http-client', name: 'google-http-client-appengine', version: '1.21.0'
@@ -80,7 +72,6 @@ dependencies {
     compile group: 'org.eclipse.persistence', name: 'javax.persistence', version: '2.0.0'
     compile group: 'javax.transaction', name: 'transaction-api', version: '1.1'
     compile group: 'javax.inject', name: 'javax.inject', version: '1'
-    compile group: 'org.glassfish', name: 'javax.faces', version: '2.1.25'
     compile group: 'javax.security.jacc', name: 'javax.security.jacc-api', version: '1.4'
     compile group: 'com.sun.facelets', name: 'jsf-facelets', version: '1.1.11'
     compile group: 'stax', name: 'stax-api', version: '1.0.1'
@@ -115,10 +106,6 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-pool2', version: '2.0'
     compile group: 'commons-validator', name: 'commons-validator', version: '1.4.0'
 
-    compile group: 'org.opensaml', name: 'opensaml', version: '2.5.3'
-    compile group: 'org.opensaml', name: 'openws', version: '1.4.4'
-    compile group: 'org.opensaml', name: 'xmltooling', version: '1.4.0'
-
     compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.4.1'
     compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.4.1'
     compile group: 'org.apache.httpcomponents', name: 'httpcore', version: '4.4.1'
@@ -145,8 +132,6 @@ dependencies {
 
     compile group: 'org.apache.santuario', name: 'xmlsec', version: '1.5.4'
 
-    compile group: 'xalan', name: 'serializer', version: '2.7.2'
-
     compile group: 'net.sourceforge.nekohtml', name: 'nekohtml', version: '1.9.20'
 
     compile group: 'org.jvnet.mimepull', name: 'mimepull', version: '1.9.4'
@@ -154,7 +139,7 @@ dependencies {
     compile group: 'com.codahale.metrics', name: 'metrics-core', version: '3.0.2'
     compile group: 'org.owasp.esapi', name: 'esapi', version: '2.1.0'
 
-    compile group: 'org.twitter4j', name: 'twitter4j-core', version: '4.0.1'
+    compile group: 'org.twitter4j', name: 'twitter4j-core', version: '4.0.4'
 
     testCompile group: 'junit', name: 'junit', version: '4.11'
 }

@@ -1,7 +1,7 @@
 package twitter4j.models.ads;
 
 import com.google.gson.annotations.SerializedName;
-import twitter4j.LocationType;
+import twitter4j.models.LocationType;
 
 import java.util.Date;
 import java.util.List;

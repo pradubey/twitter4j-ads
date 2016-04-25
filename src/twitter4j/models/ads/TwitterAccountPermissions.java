@@ -1,9 +1,9 @@
 package twitter4j.models.ads;
 
-import atlas.shaded.com.google.common.collect.Maps;
-import edu.emory.mathcs.backport.java.util.Collections;
+import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Collections;
 import java.util.Map;
 
 /**
