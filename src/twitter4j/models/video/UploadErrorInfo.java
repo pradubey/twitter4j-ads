@@ -7,7 +7,9 @@ import com.google.gson.annotations.SerializedName;
  * Date: 19/04/16 12:05 AM.
  */
 public class UploadErrorInfo {
-
+/*
+Upload error info for video upload
+ */
 
     @SerializedName("code")
     private Integer code;
