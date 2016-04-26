@@ -56,9 +56,4 @@ public interface TwitterAdsPromotedTweetApi {
      */
     BaseAdsResponse<PromotedTweets> deletePromotedTweets(String accountId, String tweetId) throws TwitterException;
 
-    BaseListResponseIterable<ListStatusResponse, Status> getScopedTimeLine(String accountId, List<String> promotedUserIds, AdScopeTimelineScope scope)
-            throws TwitterException;
-
-    Status createPromotedVideoTweet(String accountId, String tweetText, String videoUrl, String videoTitle, String videoDescription,
-                                    String callToAction, String ctaValue) throws TwitterException, IOException, InterruptedException;
 }

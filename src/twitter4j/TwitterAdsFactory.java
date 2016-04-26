@@ -25,18 +25,7 @@ public class TwitterAdsFactory {
     private final Configuration conf;
 
     static {
-        String className = null;
-        if (ConfigurationContext.getInstance().isGAE()) {
-            final String APP_ENGINE_TWITTER_IMPL = "twitter4j.AppEngineTwitterImpl";
-            try {
-                Class.forName(APP_ENGINE_TWITTER_IMPL);
-                className = APP_ENGINE_TWITTER_IMPL;
-            } catch (ClassNotFoundException ignore) {
-            }
-        }
-        if (className == null) {
-            className = "twitter4j.TwitterImpl";
-        }
+        String className = "twitter4j.TwitterImpl";
         Constructor<Twitter> constructor;
         Class clazz;
         try {

@@ -3,14 +3,10 @@ package twitter4j.api;
 import twitter4j.BaseAdsListResponseIterable;
 import twitter4j.BaseAdsResponse;
 import twitter4j.TwitterException;
-import twitter4j.models.TwitterTonUploadResponse;
 import twitter4j.models.ads.TailoredAudience;
 import twitter4j.models.ads.TailoredAudienceChangeInfo;
 import twitter4j.models.ads.TailoredAudienceDataType;
 import twitter4j.models.ads.TailoredAudienceOperation;
-
-import java.io.File;
-import java.io.InputStream;
 
 /**
  * User: abhay
@@ -44,16 +40,6 @@ public interface TwitterAdsAudienceApi {
 
     BaseAdsResponse<TailoredAudienceChangeInfo> getChangeRecordsForAllTailoredAudiences(String accountId, Integer count, String nextCursor)
             throws TwitterException;
-
-    TwitterTonUploadResponse uploadTailoredAudience(File file) throws TwitterException;
-
-
-    TwitterTonUploadResponse resumableUploadTailoredAudience(Boolean resumable, String location, InputStream inputStream, String contentRange,
-                                                             Integer chunkSize) throws TwitterException;
-
-    void getGlobalOptOutListOfTailoredAudience(String accountId, String location) throws TwitterException;
-
-    BaseAdsResponse<TailoredAudience> createFlexibleTailoredAudience(String accountId, String requestBody) throws TwitterException;
 
 }
 

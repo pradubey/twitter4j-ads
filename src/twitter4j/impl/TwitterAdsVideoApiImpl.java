@@ -2,13 +2,11 @@ package twitter4j.impl;
 
 import com.google.common.collect.Lists;
 import com.google.gson.reflect.TypeToken;
-import org.codehaus.jackson.map.ObjectMapper;
 import twitter4j.*;
 import twitter4j.api.TwitterAdsVideoApi;
 import twitter4j.models.video.AssociateVideoToAccountResponse;
 import twitter4j.models.video.TwitterAccountMediaResponse;
 import twitter4j.models.video.TwitterCreativeType;
-import twitter4j.models.video.UploadMediaObjectResponse;
 import twitter4j.util.TwitterAdUtil;
 
 import java.io.IOException;
@@ -24,8 +22,6 @@ import static twitter4j.TwitterAdsConstants.*;
  * Time: 10:41 AM
  */
 public class TwitterAdsVideoApiImpl implements TwitterAdsVideoApi {
-
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     private final TwitterAdsClient twitterAdsClient;
 
@@ -59,71 +55,6 @@ public class TwitterAdsVideoApiImpl implements TwitterAdsVideoApi {
         } catch (IOException e) {
             throw new TwitterException("Failed to parse response for transform media to account", e);
         }
-    }
-
-    @Override
-    public String uploadVideoAndGetMediaId(String videoUrl) throws TwitterException {
-        UploadMediaObjectResponse responseFromFinalize = twitterAdsClient.uploadAndGetMediaId(videoUrl);
-        String mediaIdString = responseFromFinalize.getMediaIdString();
-        UploadMediaObjectResponse statusResponse = twitterAdsClient.getUploadStatus(mediaIdString);
-        if (statusResponse == null) {
-            throw new TwitterException("Could not upload Video successfully");
-        }
-
-        //as per documentation if media process info is null then the video is ready
-        if (statusResponse.getUploadMediaProcessingInfo() == null) {
-            return mediaIdString;
-        }
-
-        if (statusResponse.getUploadMediaProcessingInfo().getUploadErrorInfo() != null) {
-            throw new TwitterException(statusResponse.getUploadMediaProcessingInfo().getUploadErrorInfo().getMessage());
-        }
-
-        String state = statusResponse.getUploadMediaProcessingInfo().getState();
-        Integer progressPercentage = statusResponse.getUploadMediaProcessingInfo().getProgressPercentage();
-        if ((TwitterAdUtil.isNotNullOrEmpty(state) && state.equalsIgnoreCase("succeeded")) ||
-            (progressPercentage != null && progressPercentage == 100)) {
-            return mediaIdString;
-        }
-        return waitForVideoProcessingAndReturnId(mediaIdString, statusResponse);
-    }
-
-    @Override
-    public String waitForVideoProcessingAndReturnId(String mediaIdString, UploadMediaObjectResponse statusResponse) throws TwitterException {
-        if (statusResponse == null) {
-            statusResponse = twitterAdsClient.getUploadStatus(mediaIdString);
-        }
-
-        Long timeToWait = 0l;
-        Long checkAfterSeconds = statusResponse.getUploadMediaProcessingInfo().getCheckAfterSeconds();
-        while (timeToWait < TwitterAdsConstants.WAIT_INTERVAL_MEDIA_UPLOAD) {
-            TwitterAdUtil.reallySleep(checkAfterSeconds);
-            timeToWait = timeToWait + checkAfterSeconds;
-            statusResponse = twitterAdsClient.getUploadStatus(mediaIdString);
-            if (statusResponse == null) {
-                throw new TwitterException("Could not upload Video successfully");
-            }
-            //as per documentation if media process info is null then the video is ready
-            if (statusResponse.getUploadMediaProcessingInfo() == null) {
-                return mediaIdString;
-            }
-            if (statusResponse.getUploadMediaProcessingInfo().getUploadErrorInfo() != null) {
-                throw new TwitterException(statusResponse.getUploadMediaProcessingInfo().getUploadErrorInfo().getMessage());
-            }
-            String state = statusResponse.getUploadMediaProcessingInfo().getState();
-            Integer progressPercentage = statusResponse.getUploadMediaProcessingInfo().getProgressPercentage();
-            if ((TwitterAdUtil.isNotNullOrEmpty(state) && state.equalsIgnoreCase("succeeded")) ||
-                (progressPercentage != null && progressPercentage == 100)) {
-                return mediaIdString;
-            }
-        }
-        if (statusResponse.getUploadMediaProcessingInfo().getProgressPercentage() != null &&
-            statusResponse.getUploadMediaProcessingInfo().getProgressPercentage() < 100 &&
-            statusResponse.getUploadMediaProcessingInfo().getState() != null &&
-            statusResponse.getUploadMediaProcessingInfo().getState().equalsIgnoreCase("in_progress")) {
-            throw new TwitterException("Please retry playing the ad, the video processing is in progress and will take more time");
-        }
-        throw new TwitterException(statusResponse.getUploadMediaProcessingInfo().getUploadErrorInfo().getMessage());
     }
 
     @Override

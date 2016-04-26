@@ -18,10 +18,6 @@ public interface TwitterAdsVideoApi {
     BaseAdsResponse<TwitterAccountMediaResponse> transformMediaInAccount(String accountId, String mediaId, String videoId,
                                                                          TwitterCreativeType twitterCreativeType) throws TwitterException;
 
-    String uploadVideoAndGetMediaId(String videoUrl) throws TwitterException;
-
-    String waitForVideoProcessingAndReturnId(String mediaIdString, UploadMediaObjectResponse statusResponse) throws TwitterException;
-
     BaseAdsResponse<AssociateVideoToAccountResponse> associateVideoWithAccount(String accountId, String mediaId, String title, String description)
             throws TwitterException;
 }
