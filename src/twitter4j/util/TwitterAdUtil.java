@@ -7,6 +7,7 @@ import twitter4j.BaseAdsListResponse;
 import twitter4j.BaseAdsResponse;
 import twitter4j.HttpResponse;
 import twitter4j.RateLimitStatus;
+import twitter4j.models.ads.sort.SortByField;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -78,7 +79,7 @@ public final class TwitterAdUtil {
         }
     }
 
-    public static<T> void ensureNotEmpty(Collection<T> collection, String name) {
+    public static <T> void ensureNotEmpty(Collection<T> collection, String name) {
         if (!isNotEmpty(collection)) {
             throw new IllegalArgumentException(name + " can not be null or empty.");
         }
@@ -97,7 +98,7 @@ public final class TwitterAdUtil {
         return true;
     }
 
-    public static <E> List<E> createMutableList(Collection<E> collection){
+    public static <E> List<E> createMutableList(Collection<E> collection) {
         List<E> mutableList = new ArrayList<>();
         if (isNotEmpty(collection)) {
             for (E data : collection) {

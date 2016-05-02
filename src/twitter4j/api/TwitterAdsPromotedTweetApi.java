@@ -1,12 +1,13 @@
 package twitter4j.api;
 
-import twitter4j.*;
-import twitter4j.models.ads.ListStatusResponse;
+import twitter4j.BaseAdsListResponse;
+import twitter4j.BaseAdsListResponseIterable;
+import twitter4j.BaseAdsResponse;
+import twitter4j.TwitterException;
 import twitter4j.models.ads.PromotedTweets;
+import twitter4j.models.ads.sort.PromotedTweetsSortByField;
 
-import java.io.IOException;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * User: abhay
@@ -20,14 +21,14 @@ public interface TwitterAdsPromotedTweetApi {
      * @param lineItemId  A reference to the line item you are operating with in the request. Omitting the lineItemId will return all promoted
      *                    tweets across all campaigns.
      * @param withDeleted Include deleted results in your request. Defaults to false.
-     * @param sortBy      Sorts by supported attribute in ascending or descending order.
+     * @param sortByField Sorts by supported attribute in ascending or descending order.
      * @param count       Specifies the number of Promoted Tweets to try to retrieve, up to a maximum of 1000 per distinct request.
      * @param cursor      Specifies a cursor to get the next page of Promoted Tweets.
      * @return Retrieve references to the Promoted Tweets associated with one or more line items.
      * @throws TwitterException
      */
-    BaseAdsListResponseIterable<PromotedTweets> getPromotedTweets(String accountId, String lineItemId, boolean withDeleted, String sortBy,
-                                                                  Integer count, String cursor) throws TwitterException;
+    BaseAdsListResponseIterable<PromotedTweets> getAllPromotedTweets(String accountId, String lineItemId, boolean withDeleted,
+                                                                     Integer count, String cursor, PromotedTweetsSortByField sortByField) throws TwitterException;
 
 
     /**

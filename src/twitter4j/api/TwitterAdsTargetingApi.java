@@ -110,22 +110,22 @@ public interface TwitterAdsTargetingApi {
 
     TargetingLocations getTargetingLocations(String query, LocationType locationType) throws TwitterException;
 
-    BaseAdsListResponseIterable<IabCategory> fetchIabCategories(String q) throws TwitterException;
+    BaseAdsListResponseIterable<IabCategory> getAllIabCategories(String q) throws TwitterException;
 
     /**
      * @return all the TVShows(matching q if provided) that can be targeted
      * @throws TwitterException
      */
 
-    BaseAdsListResponseIterable<TargetingCriteria> fetchTVShows(String tvMarket, String q, Integer count, String cursor) throws TwitterException;
+    BaseAdsListResponseIterable<TargetingCriteria> getAllTVShows(String tvMarket, String q, Integer count, String cursor) throws TwitterException;
 
-    BaseAdsListResponseIterable<TargetingCriteria> fetchEvents() throws TwitterException;
+    BaseAdsListResponseIterable<TargetingCriteria> getAllEvents() throws TwitterException;
 
     /**
      * @return All the TV Markets that can be targeted
      * @throws TwitterException
      */
-    BaseAdsListResponseIterable<TargetingCriteria> fetchTVMarkets() throws TwitterException;
+    BaseAdsListResponseIterable<TargetingCriteria> getAllTVMarkets() throws TwitterException;
 
     BaseAdsListResponseIterable<TargetingCriteria> getAllTargetingTVGenres() throws TwitterException;
 
@@ -145,9 +145,9 @@ public interface TwitterAdsTargetingApi {
 
     List<TwitterAppStore> searchAppStoreCategories(String q, AppStoreSearchType appStoreSearchType) throws TwitterException;
 
-    BaseAdsListResponseIterable<TwitterApplicationList> fetchAppList(String accountId) throws TwitterException;
+    BaseAdsListResponseIterable<TwitterApplicationList> getAllAppLists(String accountId) throws TwitterException;
 
-    BaseAdsResponse<TwitterApplicationList> fetchApps(String accountId, String listId) throws TwitterException;
+    BaseAdsResponse<TwitterApplicationList> getAllAppsListsById(String accountId, String listId) throws TwitterException;
 
     BaseAdsResponse<TwitterApplicationList> createNewApplicationList(String accountId, TwitterApplicationList twitterApplicationList)
             throws TwitterException;

@@ -6,6 +6,7 @@ import twitter4j.*;
 import twitter4j.api.TwitterAdsCampaignApi;
 import twitter4j.models.ads.Campaign;
 import twitter4j.models.ads.HttpVerb;
+import twitter4j.models.ads.sort.CampaignSortByField;
 import twitter4j.util.TwitterAdUtil;
 
 import java.lang.reflect.Type;
@@ -33,9 +34,9 @@ public class TwitterAdsCampaignApiImpl implements TwitterAdsCampaignApi {
     }
 
     @Override
-    public BaseAdsListResponseIterable<Campaign> getCampaigns(String accountId, Collection<String> campaignIds,
+    public BaseAdsListResponseIterable<Campaign> getAllCampaigns(String accountId, Collection<String> campaignIds,
                                                               Collection<String> fundingInstrumentIds, boolean withDeleted, Integer count,
-                                                              String cursor) throws TwitterException {
+                                                              String cursor, CampaignSortByField sortByField) throws TwitterException {
         TwitterAdUtil.ensureNotNull(accountId, "accountId");
         String campaignIdsAsString = null;
         String fundingInstrumentIdsAsString = null;
@@ -47,9 +48,14 @@ public class TwitterAdsCampaignApiImpl implements TwitterAdsCampaignApi {
             TwitterAdUtil.ensureMaxSize(fundingInstrumentIds, MAX_REQUEST_PARAMETER_SIZE);
             fundingInstrumentIdsAsString = TwitterAdUtil.getCsv(fundingInstrumentIds);
         }
+
         List<HttpParameter> params =
                 validateCampaignParameters(accountId, campaignIdsAsString, fundingInstrumentIdsAsString, withDeleted, count, cursor);
-        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_URI_0 + accountId + PATH_CAMPAIGN;
+
+        if(sortByField != null) {
+            params.add(new HttpParameter(PARAM_SORT_BY, sortByField.getField()));
+        }
+        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_CAMPAIGN;
 
         Type type = new TypeToken<BaseAdsListResponse<Campaign>>() {}.getType();
         return twitterAdsClient.executeHttpListRequest(baseUrl, params, type);
@@ -60,7 +66,7 @@ public class TwitterAdsCampaignApiImpl implements TwitterAdsCampaignApi {
         TwitterAdUtil.ensureNotNull(accountId, "accountId");
         TwitterAdUtil.ensureNotNull(campaignId, "campaignId");
         HttpParameter[] params = null;
-        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_URI_0 + accountId + PATH_CAMPAIGN + campaignId;
+        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_CAMPAIGN + campaignId;
         params = new HttpParameter[]{new HttpParameter(PARAM_WITH_DELETED, withDeleted)};
         Type type = new TypeToken<BaseAdsResponse<Campaign>>() {}.getType();
         return twitterAdsClient.executeHttpRequest(baseUrl, params, type, HttpVerb.GET);
@@ -75,7 +81,7 @@ public class TwitterAdsCampaignApiImpl implements TwitterAdsCampaignApi {
         if (!params.isEmpty()) {
             parameters = params.toArray(new HttpParameter[params.size()]);
         }
-        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_URI_0 + accountId + PATH_CAMPAIGN;
+        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_CAMPAIGN;
         Type type = new TypeToken<BaseAdsResponse<Campaign>>() {}.getType();
         return twitterAdsClient.executeHttpRequest(baseUrl, parameters, type, HttpVerb.POST);
     }
@@ -89,7 +95,7 @@ public class TwitterAdsCampaignApiImpl implements TwitterAdsCampaignApi {
         List<HttpParameter> params =
                 validateUpdateCampaignParameters(accountId, campaignId, name, totalBudgetAmountLocalMicro, dailyBudgetAmountLocalMicro, startTime,
                                                  endTime, paused, standardDelivery, frequencyCap, durationInDays);
-        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_URI_0 + accountId + PATH_CAMPAIGN + campaignId;
+        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_CAMPAIGN + campaignId;
         Type type = new TypeToken<BaseAdsResponse<Campaign>>() {}.getType();
         return twitterAdsClient.executeHttpRequest(baseUrl, params.toArray(new HttpParameter[params.size()]), type, HttpVerb.PUT);
 
@@ -105,7 +111,7 @@ public class TwitterAdsCampaignApiImpl implements TwitterAdsCampaignApi {
         List<HttpParameter> params = new ArrayList<>();
         params.add(new HttpParameter(PARAM_PAUSED, paused));
 
-        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_URI_0 + accountId + PATH_CAMPAIGN + campaignId;
+        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_CAMPAIGN + campaignId;
         Type type = new TypeToken<BaseAdsResponse<Campaign>>() {}.getType();
         return twitterAdsClient.executeHttpRequest(baseUrl, params.toArray(new HttpParameter[params.size()]), type, HttpVerb.PUT);
 
@@ -115,7 +121,7 @@ public class TwitterAdsCampaignApiImpl implements TwitterAdsCampaignApi {
     public BaseAdsResponse<Campaign> deleteCampaign(String accountId, String campaignId) throws TwitterException {
         TwitterAdUtil.ensureNotNull(accountId, "Account Id");
         TwitterAdUtil.ensureNotNull(campaignId, "Campaign Id");
-        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_URI_0 + accountId + PATH_CAMPAIGN + campaignId;
+        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_CAMPAIGN + campaignId;
         Type type = new TypeToken<BaseAdsResponse<Campaign>>() {}.getType();
         return twitterAdsClient.executeHttpRequest(baseUrl, null, type, HttpVerb.DELETE);
     }

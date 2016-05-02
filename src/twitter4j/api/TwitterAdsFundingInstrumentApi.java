@@ -4,6 +4,7 @@ import twitter4j.BaseAdsListResponseIterable;
 import twitter4j.BaseAdsResponse;
 import twitter4j.TwitterException;
 import twitter4j.models.ads.FundingInstrument;
+import twitter4j.models.ads.sort.FundingInstrumentSortByField;
 
 import java.util.Collection;
 
@@ -21,8 +22,8 @@ public interface TwitterAdsFundingInstrumentApi {
      * @return Retrieve some or all funding instruments associated with the account.
      * @throws TwitterException
      */
-    BaseAdsListResponseIterable<FundingInstrument> getFundingInstruments(String accountId, Collection<String> fundingInstrumentIds,
-                                                                         boolean withDeleted) throws TwitterException;
+    BaseAdsListResponseIterable<FundingInstrument> getAllFundingInstruments(String accountId, Collection<String> fundingInstrumentIds,
+                                                                            boolean withDeleted, FundingInstrumentSortByField sortByField) throws TwitterException;
 
     /**
      * @param accountId           The identifier for the leveraged account.

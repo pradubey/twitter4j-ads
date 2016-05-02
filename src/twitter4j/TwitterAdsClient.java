@@ -239,7 +239,7 @@ public class TwitterAdsClient extends TwitterImpl implements OAuthSupport {
     }
 
     private String createVideoObject(String mediaId, String accountId) throws TwitterException {
-        String url = getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_URI_0 + accountId + PREFIX_VIDEOS;
+        String url = getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PREFIX_VIDEOS;
         //TODO add video title and description (optional)
         List<HttpParameter> params = createVideoObjectParams(mediaId);
         HttpParameter[] parameters = params.toArray(new HttpParameter[params.size()]);

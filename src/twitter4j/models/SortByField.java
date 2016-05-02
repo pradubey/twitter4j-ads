@@ -6,12 +6,9 @@ package twitter4j.models;
 public enum SortByField {
     PARTNER_SOURCE("partner_source"),
     AUDIENCE_SIZE("audience_size"),
-    NAME("name"); //only for taxonomy
+    NAME("name");//only for taxonomy
 
-    private String name;
-
-    SortByField() {
-    }
+    private final String name;
 
     SortByField(String name) {
         this.name = name;

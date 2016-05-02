@@ -4,6 +4,7 @@ import twitter4j.BaseAdsListResponseIterable;
 import twitter4j.BaseAdsResponse;
 import twitter4j.TwitterException;
 import twitter4j.models.ads.Campaign;
+import twitter4j.models.ads.sort.CampaignSortByField;
 
 import java.util.Collection;
 
@@ -25,8 +26,8 @@ public interface TwitterAdsCampaignApi {
      * @return Retrieve details for some or all campaigns associated with the current account.
      * @throws TwitterException
      */
-    BaseAdsListResponseIterable<Campaign> getCampaigns(String accountId, Collection<String> campaignIds, Collection<String> fundingInstrumentIds,
-                                                       boolean withDeleted, Integer count, String cursor) throws TwitterException;
+    BaseAdsListResponseIterable<Campaign> getAllCampaigns(String accountId, Collection<String> campaignIds, Collection<String> fundingInstrumentIds,
+                                                       boolean withDeleted, Integer count, String cursor, CampaignSortByField sortByField) throws TwitterException;
 
     /**
      * @param accountId   The identifier for the leveraged account.

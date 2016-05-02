@@ -9,6 +9,7 @@ import twitter4j.models.ads.AdAccount;
 import twitter4j.models.ads.HttpVerb;
 import twitter4j.models.ads.PromotableUser;
 import twitter4j.models.ads.TwitterAccountPermissions;
+import twitter4j.models.ads.sort.AccountsSortByField;
 import twitter4j.util.TwitterAdUtil;
 
 import java.io.IOException;
@@ -36,10 +37,13 @@ public class TwitterAdsAccountApiImpl implements TwitterAdsAccountApi {
     // *****************                         ****************
 
     @Override
-    public BaseAdsListResponseIterable<AdAccount> getTwitterAdAccounts(boolean withDeleted) throws TwitterException {
+    public BaseAdsListResponseIterable<AdAccount> getAllAccounts(boolean withDeleted, AccountsSortByField sortByField) throws TwitterException {
         List<HttpParameter> param = new ArrayList<>();
-        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_URI_0;
+        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1;
         param.add(new HttpParameter(PARAM_WITH_DELETED, withDeleted));
+        if (sortByField != null) {
+            param.add(new HttpParameter(PARAM_SORT_BY, sortByField.getField()));
+        }
         Type type = new TypeToken<BaseAdsListResponse<AdAccount>>() {}.getType();
         return twitterAdsClient.executeHttpListRequest(baseUrl, param, type);
     }
@@ -48,7 +52,7 @@ public class TwitterAdsAccountApiImpl implements TwitterAdsAccountApi {
     public BaseAdsResponse<AdAccount> getAdAccountById(String accountId, boolean withDeleted) throws TwitterException {
         TwitterAdUtil.ensureNotNull(accountId, "accountId");
         HttpParameter[] param;
-        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_URI_0 + accountId;
+        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId;
         param = new HttpParameter[]{new HttpParameter(PARAM_WITH_DELETED, withDeleted)};
         Type type = new TypeToken<BaseAdsResponse<AdAccount>>() {}.getType();
         return twitterAdsClient.executeHttpRequest(baseUrl, param, type, HttpVerb.GET);
@@ -56,7 +60,7 @@ public class TwitterAdsAccountApiImpl implements TwitterAdsAccountApi {
 
     @Override
     public List<TwitterAccountPermissions> getAccountPermissions(String accountId) throws TwitterException {
-        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_URI_0 + accountId + PATH_FEATURES;
+        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_FEATURES;
         HttpResponse httpResponse = twitterAdsClient.getWithoutMergeOfParams(baseUrl, null);
         List<TwitterAccountPermissions> permissionsFromChannel = Lists.newArrayList();
         try {
@@ -84,7 +88,7 @@ public class TwitterAdsAccountApiImpl implements TwitterAdsAccountApi {
         List<HttpParameter> params = new ArrayList<>();
 
         params.add(new HttpParameter(PARAM_WITH_DELETED, withDeleted));
-        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_URI_0 + accountId + PATH_PROMOTABLE_USERS;
+        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_PROMOTABLE_USERS;
         Type type = new TypeToken<BaseAdsListResponse<PromotableUser>>() {}.getType();
         return twitterAdsClient.executeHttpListRequest(baseUrl, params, type);
     }

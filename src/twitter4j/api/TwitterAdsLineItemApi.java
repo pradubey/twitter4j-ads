@@ -7,6 +7,8 @@ import twitter4j.models.ads.BidType;
 import twitter4j.models.ads.LineItem;
 import twitter4j.models.ads.PromotedAccount;
 import twitter4j.models.ads.Sentiments;
+import twitter4j.models.ads.sort.LineItemsSortByField;
+import twitter4j.models.ads.sort.PromotedAccountsSortByField;
 import twitter4j.models.video.AssociateMediaCreativeResponse;
 import twitter4j.models.video.PreRollCallToActionResponse;
 import twitter4j.models.video.TwitterCallToActionType;
@@ -31,9 +33,9 @@ public interface TwitterAdsLineItemApi {
      * @return Retrieve the line items associated with a specific campaign belonging to the current account.
      * @throws TwitterException
      */
-    BaseAdsListResponseIterable<LineItem> getLineItems(String accountId, Collection<String> campaignIds, Collection<String> lineItemIds,
-                                                       Collection<String> fundingInstrumentIds, Integer count, boolean withDeleted, String cursor)
-            throws TwitterException;
+    BaseAdsListResponseIterable<LineItem> getAllLineItems(String accountId, Collection<String> campaignIds, Collection<String> lineItemIds,
+                                                          Collection<String> fundingInstrumentIds, Integer count, boolean withDeleted, String cursor,
+                                                          LineItemsSortByField sortByField) throws TwitterException;
 
     /**
      * @param accountId   The identifier for the leveraged account.
@@ -85,7 +87,7 @@ public interface TwitterAdsLineItemApi {
      * @throws TwitterException
      */
     BaseAdsListResponseIterable<PromotedAccount> getPromotedAccounts(String accountId, Collection<String> promotedAccountIds, String lineItemId,
-                                                                     boolean withDeleted) throws TwitterException;
+                                                                     boolean withDeleted, PromotedAccountsSortByField sortByField) throws TwitterException;
 
     BaseAdsResponse<PreRollCallToActionResponse> createCallToActionDetailsForPreRollViews(String accountId, String lineItemId,
                                                                                           TwitterCallToActionType twitterCallToActionType,

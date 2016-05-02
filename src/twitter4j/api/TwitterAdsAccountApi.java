@@ -6,6 +6,7 @@ import twitter4j.TwitterException;
 import twitter4j.models.ads.AdAccount;
 import twitter4j.models.ads.PromotableUser;
 import twitter4j.models.ads.TwitterAccountPermissions;
+import twitter4j.models.ads.sort.AccountsSortByField;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface TwitterAdsAccountApi {
      * @return all the advertising-enabled accounts the authenticating user has access to.
      * @throws TwitterException
      */
-    BaseAdsListResponseIterable<AdAccount> getTwitterAdAccounts(boolean withDeleted) throws TwitterException;
+    BaseAdsListResponseIterable<AdAccount> getAllAccounts(boolean withDeleted, AccountsSortByField accountsSortByField) throws TwitterException;
 
     /**
      * @param accountId   The identifier for the leveraged account.
