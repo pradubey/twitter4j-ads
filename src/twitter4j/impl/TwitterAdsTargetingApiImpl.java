@@ -7,9 +7,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import twitter4j.*;
 import twitter4j.api.TwitterAdsTargetingApi;
 import twitter4j.models.LocationType;
-import twitter4j.models.SortByField;
 import twitter4j.models.ads.*;
-import twitter4j.models.ads.TargetingType;
 import twitter4j.models.ads.tags.TwitterApplicationList;
 import twitter4j.util.TwitterAdUtil;
 
@@ -308,7 +306,7 @@ public class TwitterAdsTargetingApiImpl implements TwitterAdsTargetingApi {
     }
 
     @Override
-    public BaseAdsListResponseIterable<TwitterBehavior> getBehaviors(Integer count, String cursor, SortByField sortBy, List<String> behaviorIds)
+    public BaseAdsListResponseIterable<TwitterBehavior> getBehaviors(Integer count, String cursor, List<String> behaviorIds)
             throws TwitterException {
         List<HttpParameter> params = new ArrayList<>();
         if (TwitterAdUtil.isNotNull(count)) {
@@ -316,9 +314,6 @@ public class TwitterAdsTargetingApiImpl implements TwitterAdsTargetingApi {
         }
         if (TwitterAdUtil.isNotNull(cursor)) {
             params.add(new HttpParameter("cursor", cursor));
-        }
-        if (TwitterAdUtil.isNotNull(sortBy)) {
-            params.add(new HttpParameter("sort_by", sortBy.getName()));
         }
         if (TwitterAdUtil.isNotEmpty(behaviorIds)) {
             params.add(new HttpParameter("behavior_ids", TwitterAdUtil.getCsv(behaviorIds)));
@@ -332,7 +327,7 @@ public class TwitterAdsTargetingApiImpl implements TwitterAdsTargetingApi {
     @Override
     public BaseAdsListResponseIterable<TwitterBehaviorTaxonomy> getBehaviorTaxonomy(List<String> behaviorTaxonomyIds,
                                                                                     List<String> parentBehaviorTaxonomyIds, Integer count,
-                                                                                    String cursor, SortByField sortByField) throws TwitterException {
+                                                                                    String cursor) throws TwitterException {
         List<HttpParameter> params = new ArrayList<>();
         if (TwitterAdUtil.isNotEmpty(behaviorTaxonomyIds)) {
             params.add(new HttpParameter("behavior_taxonomy_ids", TwitterAdUtil.getCsv(behaviorTaxonomyIds)));
@@ -340,10 +335,6 @@ public class TwitterAdsTargetingApiImpl implements TwitterAdsTargetingApi {
 
         if (TwitterAdUtil.isNotEmpty(parentBehaviorTaxonomyIds)) {
             params.add(new HttpParameter("parent_behavior_taxonomy_ids", TwitterAdUtil.getCsv(parentBehaviorTaxonomyIds)));
-        }
-
-        if (TwitterAdUtil.isNotNull(sortByField)) {
-            params.add(new HttpParameter("sort_by", sortByField.getName()));
         }
 
         if (TwitterAdUtil.isNotNull(count)) {

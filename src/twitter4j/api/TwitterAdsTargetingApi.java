@@ -4,7 +4,6 @@ import twitter4j.BaseAdsListResponseIterable;
 import twitter4j.BaseAdsResponse;
 import twitter4j.TwitterException;
 import twitter4j.models.LocationType;
-import twitter4j.models.SortByField;
 import twitter4j.models.ads.*;
 import twitter4j.models.ads.tags.TwitterApplicationList;
 
@@ -136,11 +135,11 @@ public interface TwitterAdsTargetingApi {
     List<TargetingSuggestion> getTargetingSuggestion(String accountId, SuggestionType suggestionType, List<String> targetingValues, Integer count,
                                                      List<String> ignoredValues) throws TwitterException;
 
-    BaseAdsListResponseIterable<TwitterBehavior> getBehaviors(Integer count, String cursor, SortByField sortBy, List<String> behaviorIds)
+    BaseAdsListResponseIterable<TwitterBehavior> getBehaviors(Integer count, String cursor, List<String> behaviorIds)
             throws TwitterException;
 
     BaseAdsListResponseIterable<TwitterBehaviorTaxonomy> getBehaviorTaxonomy(List<String> behaviorTaxonomyIds, List<String> parentBehaviorTaxonomyIds,
-                                                                             Integer count, String cursor, SortByField sortByField)
+                                                                             Integer count, String cursor)
             throws TwitterException;
 
     List<TwitterAppStore> searchAppStoreCategories(String q, AppStoreSearchType appStoreSearchType) throws TwitterException;

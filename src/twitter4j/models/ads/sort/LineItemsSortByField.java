@@ -5,7 +5,7 @@ package twitter4j.models.ads.sort;
  * Date: 5/2/16
  * Time: 2:43 PM
  */
-public enum LineItemsSortByField implements SortByField {
+public enum LineItemsSortByField implements SortBy {
     // Ascending
     CREATED_AT_ASC("created_at-asc"),
     UPDATED_AT_ASC("updated_at-asc"),

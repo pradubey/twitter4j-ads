@@ -4,12 +4,10 @@ import com.google.api.client.util.Sets;
 import com.google.common.collect.Maps;
 import twitter4j.models.MetricGroup;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
-import static twitter4j.models.ads.TwitterAdStatistics.*;
 
 /**
  * User: abhay

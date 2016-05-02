@@ -7,7 +7,6 @@ import twitter4j.BaseAdsListResponse;
 import twitter4j.BaseAdsResponse;
 import twitter4j.HttpResponse;
 import twitter4j.RateLimitStatus;
-import twitter4j.models.ads.sort.SortByField;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

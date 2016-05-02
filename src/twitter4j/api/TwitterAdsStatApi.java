@@ -1,6 +1,9 @@
 package twitter4j.api;
 
-import twitter4j.*;
+import twitter4j.BaseAdsListResponse;
+import twitter4j.BaseAdsListResponseIterable;
+import twitter4j.BaseAdsResponse;
+import twitter4j.TwitterException;
 import twitter4j.models.Granularity;
 import twitter4j.models.TwitterSegmentationType;
 import twitter4j.models.ads.*;
