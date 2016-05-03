@@ -32,4 +32,6 @@ public interface TwitterAds extends java.io.Serializable {
     TwitterAdsBiddingApi getBiddingApi();
 
     TwitterAdsClient getTwitterAdsClient();
+
+    TwitterAdsPreviewApi getPreviewApi();
 }

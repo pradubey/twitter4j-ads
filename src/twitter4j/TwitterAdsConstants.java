@@ -13,6 +13,7 @@ public interface TwitterAdsConstants {
     String V1_PREFIX_STATS_JOB_ACCOUNTS_URI = "1/stats/jobs/accounts/";
 
     String PREFIX_ACCOUNTS_V1 = "1/accounts/";
+    String TWEET_PREVIEW_PATH = "/tweet/preview/";
     String UPLOAD_MEDIA_URL = "1.1/media/";
     String UPLOAD_JSON = "upload.json";
     String PREFIX_BATCH_ACCOUNTS_V1 = "1/batch/accounts/";
@@ -25,6 +26,7 @@ public interface TwitterAdsConstants {
     String PARAM_LINE_ITEM_IDS = "line_item_ids";
     String PARAM_LINE_ITEM_ID = "line_item_id";
     String PARAM_ACCOUNT_MEDIA_ID = "account_media_id";
+    String PARAM_MEDIA_IDS = "media_ids";
     String PARAM_LANDING_URL = "landing_url";
     String PARAM_TV_MARKET_LOCALE = "tv_market_locale ";
     String PARAM_COUNT = "count";
@@ -44,7 +46,9 @@ public interface TwitterAdsConstants {
     String PARAM_CREATIVE_TYPE = "creative_type";
     String PARAM_CURRENCY = "currency";
     String PARAM_TWEET_IDS = "tweet_ids";
+    String PARAM_TWEET_ID = "tweet_id";
     String PARAM_USER_ID = "user_id";
+    String PARAM_AS_USER_ID = "as_user_id";
     String PARAM_USER_IDS = "user_ids";
     String PARAM_SCOPED_TO = "scoped_to";
     String PARAM_DAILY_BUDGET_AMOUNT_LOCAL_MICRO = "daily_budget_amount_local_micro";
@@ -197,14 +201,15 @@ public interface TwitterAdsConstants {
     for promoted video tweet
      */
     String PARAM_STATUS = "status";
+    String TWEET_PREVIEW_TARGET = "preview_target";
     String PARAM_VIDEO_TITLE = "video_title";
     String PARAM_VIDEO_DESCRIPTION = "video_description";
     String PARAM_VIDEO_CTA = "video_cta";
     String PARAM_VIDEO_CTA_VALUE = "video_cta_value";
 
 
-    Long MAX_VIDEO_SIZE_IN_BYTES = Long.valueOf(524277511); // 500 MB.
-    Long MAX_CHUNK_SIZE_IN_BYTES = Long.valueOf(5242880);
+    Long MAX_VIDEO_SIZE_IN_BYTES = (long) 524277511; // 500 MB.
+    Long MAX_CHUNK_SIZE_IN_BYTES = (long) 5242880;
     int CHUNK_SIZE_IN_BYTES = 4000000;
     int SUCCESSFULL_CALL_BEGIN_CODE = 200;
     int SUCCESSFULL_CALL_END_CODE = 299;
