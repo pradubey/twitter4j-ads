@@ -1,5 +1,6 @@
 package twitter4j.api;
 
+import com.google.common.base.Optional;
 import twitter4j.BaseAdsListResponseIterable;
 import twitter4j.BaseAdsResponse;
 import twitter4j.TwitterException;
@@ -22,8 +23,8 @@ public interface TwitterAdsFundingInstrumentApi {
      * @return Retrieve some or all funding instruments associated with the account.
      * @throws TwitterException
      */
-    BaseAdsListResponseIterable<FundingInstrument> getAllFundingInstruments(String accountId, Collection<String> fundingInstrumentIds,
-                                                                            boolean withDeleted, FundingInstrumentSortByField sortByField) throws TwitterException;
+    BaseAdsListResponseIterable<FundingInstrument> getAllFundingInstruments(String accountId,boolean withDeleted, Optional<Collection<String>> fundingInstrumentIds,
+                                                                            Optional<FundingInstrumentSortByField> sortByField) throws TwitterException;
 
     /**
      * @param accountId           The identifier for the leveraged account.

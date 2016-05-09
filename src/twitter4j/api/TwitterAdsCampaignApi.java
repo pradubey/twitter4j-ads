@@ -1,5 +1,6 @@
 package twitter4j.api;
 
+import com.google.common.base.Optional;
 import twitter4j.BaseAdsListResponseIterable;
 import twitter4j.BaseAdsResponse;
 import twitter4j.TwitterException;
@@ -26,8 +27,9 @@ public interface TwitterAdsCampaignApi {
      * @return Retrieve details for some or all campaigns associated with the current account.
      * @throws TwitterException
      */
-    BaseAdsListResponseIterable<Campaign> getAllCampaigns(String accountId, Collection<String> campaignIds, Collection<String> fundingInstrumentIds,
-                                                       boolean withDeleted, Integer count, String cursor, CampaignSortByField sortByField) throws TwitterException;
+    BaseAdsListResponseIterable<Campaign> getAllCampaigns(String accountId, Optional<Collection<String>> campaignIds,
+                                                          Optional<Collection<String>> fundingInstrumentIds, boolean withDeleted, Optional<Integer> count,
+                                                          Optional<String> cursor, Optional<CampaignSortByField> sortByField) throws TwitterException;
 
     /**
      * @param accountId   The identifier for the leveraged account.
@@ -49,9 +51,10 @@ public interface TwitterAdsCampaignApi {
      * @return updated campaign
      * @throws TwitterException
      */
-    BaseAdsResponse<Campaign> updateCampaign(String accountId, String campaignId, String name, Long totalBudgetAmountLocalMicro,
-                                             Long dailyBudgetAmountLocalMicro, String startTime, String endTime, Boolean paused,
-                                             Boolean standardDelivery, int frequencyCap, int durationInDays) throws TwitterException;
+    BaseAdsResponse<Campaign> updateCampaign(String accountId, String campaignId, Optional<String> name,
+                                             Long totalBudgetAmountLocalMicro, Optional<Long> dailyBudgetAmountLocalMicro, Optional<String> startTime,
+                                             Optional<String> endTime, Optional<Boolean> paused,
+                                             Optional<Boolean> standardDelivery, int frequencyCap, int durationInDays) throws TwitterException;
 
     /**
      * @return updated campaign

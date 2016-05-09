@@ -1,5 +1,6 @@
 package twitter4j.impl;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import com.google.gson.reflect.TypeToken;
 import twitter4j.*;
@@ -33,14 +34,13 @@ public class TwitterAdsCardsApiImpl implements TwitterAdsCardsApi {
         TwitterAdUtil.ensureNotNull(accountId, "AccountId");
         TwitterAdUtil.ensureNotNull(cardId, "CardId");
         String url = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_LEAD_GENERATION_CARDS + cardId;
-        Type type = new TypeToken<BaseAdsResponse<TwitterLeadGenerationCard>>() {
-        }.getType();
+        Type type = new TypeToken<BaseAdsResponse<TwitterLeadGenerationCard>>() {}.getType();
         return twitterAdsClient.executeHttpRequest(url, null, type, HttpVerb.GET);
     }
 
     @Override
     public BaseAdsListResponseIterable<TwitterLeadGenerationCard> getAllLeadGenerationCards(String accountId, List<String> cardIds,
-                                                                                            boolean withDeleted, Integer count)
+                                                                                            boolean withDeleted, Optional<Integer> count)
             throws TwitterException {
         TwitterAdUtil.ensureNotNull(accountId, "AccountId");
         List<HttpParameter> params = Lists.newArrayList();
@@ -48,18 +48,17 @@ public class TwitterAdsCardsApiImpl implements TwitterAdsCardsApi {
         if (TwitterAdUtil.isNotEmpty(cardIds)) {
             params.add(new HttpParameter(PARAM_CARD_IDS, TwitterAdUtil.getCsv(cardIds)));
         }
-        if (TwitterAdUtil.isNotNull(count)) {
-            params.add(new HttpParameter(PARAM_COUNT, count));
+        if (count.isPresent()) {
+            params.add(new HttpParameter(PARAM_COUNT, count.get()));
         }
         String url = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_LEAD_GENERATION_CARDS;
-        Type type = new TypeToken<BaseAdsListResponse<TwitterLeadGenerationCard>>() {
-        }.getType();
+        Type type = new TypeToken<BaseAdsListResponse<TwitterLeadGenerationCard>>() {}.getType();
         return twitterAdsClient.executeHttpListRequest(url, params, type);
     }
 
     @Override
     public BaseAdsListResponseIterable<TwitterImageAppDownloadCard> getAllImageAppDownloadCards(String accountId, List<String> cardIds,
-                                                                                                boolean withDeleted, Integer count)
+                                                                                                boolean withDeleted, Optional<Integer> count)
             throws TwitterException {
         TwitterAdUtil.ensureNotNull(accountId, "AccountId");
         List<HttpParameter> params = Lists.newArrayList();
@@ -67,18 +66,17 @@ public class TwitterAdsCardsApiImpl implements TwitterAdsCardsApi {
         if (TwitterAdUtil.isNotEmpty(cardIds)) {
             params.add(new HttpParameter(PARAM_CARD_IDS, TwitterAdUtil.getCsv(cardIds)));
         }
-        if (TwitterAdUtil.isNotNull(count)) {
-            params.add(new HttpParameter(PARAM_COUNT, count));
+        if (count.isPresent()) {
+            params.add(new HttpParameter(PARAM_COUNT, count.get()));
         }
         String url = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_IMAGE_APP_DOWNLOAD_CARDS;
-        Type type = new TypeToken<BaseAdsListResponse<TwitterImageAppDownloadCard>>() {
-        }.getType();
+        Type type = new TypeToken<BaseAdsListResponse<TwitterImageAppDownloadCard>>() {}.getType();
         return twitterAdsClient.executeHttpListRequest(url, params, type);
     }
 
     @Override
     public BaseAdsListResponseIterable<TwitterVideoAppDownloadCard> getAllVideoAppDownloadCards(String accountId, List<String> cardIds,
-                                                                                                boolean withDeleted, Integer count)
+                                                                                                boolean withDeleted, Optional<Integer> count)
             throws TwitterException {
         TwitterAdUtil.ensureNotNull(accountId, "AccountId");
         List<HttpParameter> params = Lists.newArrayList();
@@ -86,12 +84,11 @@ public class TwitterAdsCardsApiImpl implements TwitterAdsCardsApi {
         if (TwitterAdUtil.isNotEmpty(cardIds)) {
             params.add(new HttpParameter(PARAM_CARD_IDS, TwitterAdUtil.getCsv(cardIds)));
         }
-        if (TwitterAdUtil.isNotNull(count)) {
-            params.add(new HttpParameter(PARAM_COUNT, count));
+        if (count.isPresent()) {
+            params.add(new HttpParameter(PARAM_COUNT, count.get()));
         }
         String url = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_VIDEO_APP_DOWNLOAD_CARDS;
-        Type type = new TypeToken<BaseAdsListResponse<TwitterVideoAppDownloadCard>>() {
-        }.getType();
+        Type type = new TypeToken<BaseAdsListResponse<TwitterVideoAppDownloadCard>>() {}.getType();
         return twitterAdsClient.executeHttpListRequest(url, params, type);
     }
 
@@ -128,15 +125,15 @@ public class TwitterAdsCardsApiImpl implements TwitterAdsCardsApi {
 
     @Override
     public BaseAdsListResponseIterable<TwitterWebsiteCard> getAllWebsiteCards(String accountId, List<String> cardIds, boolean withDeleted,
-                                                                              Integer count) throws TwitterException {
+                                                                              Optional<Integer> count) throws TwitterException {
         TwitterAdUtil.ensureNotNull(accountId, "AccountId");
         List<HttpParameter> params = Lists.newArrayList();
         params.add(new HttpParameter(PARAM_WITH_DELETED, withDeleted));
         if (TwitterAdUtil.isNotEmpty(cardIds)) {
             params.add(new HttpParameter(PARAM_CARD_IDS, TwitterAdUtil.getCsv(cardIds)));
         }
-        if (TwitterAdUtil.isNotNull(count)) {
-            params.add(new HttpParameter(PARAM_COUNT, count));
+        if (count.isPresent()) {
+            params.add(new HttpParameter(PARAM_COUNT, count.get()));
         }
 
         String url = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_WEBSITE_CARDS;
@@ -147,15 +144,15 @@ public class TwitterAdsCardsApiImpl implements TwitterAdsCardsApi {
 
     @Override
     public BaseAdsListResponseIterable<TwitterMobileAppCard> getAllAppDownloadCards(String accountId, List<String> cardIds, boolean withDeleted,
-                                                                                    Integer count) throws TwitterException {
+                                                                                    Optional<Integer> count) throws TwitterException {
         TwitterAdUtil.ensureNotNull(accountId, "AccountId");
         List<HttpParameter> params = Lists.newArrayList();
         params.add(new HttpParameter(PARAM_WITH_DELETED, withDeleted));
         if (TwitterAdUtil.isNotEmpty(cardIds)) {
             params.add(new HttpParameter(PARAM_CARD_IDS, TwitterAdUtil.getCsv(cardIds)));
         }
-        if (TwitterAdUtil.isNotNull(count)) {
-            params.add(new HttpParameter(PARAM_COUNT, count));
+        if (count.isPresent()) {
+            params.add(new HttpParameter(PARAM_COUNT, count.get()));
         }
         String url = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_APP_DOWNLOAD_CARDS;
         Type type = new TypeToken<BaseAdsListResponse<TwitterMobileAppCard>>() {
@@ -204,8 +201,8 @@ public class TwitterAdsCardsApiImpl implements TwitterAdsCardsApi {
     }
 
     @Override
-    public BaseAdsResponse<TwitterLeadGenerationStat> getTwitterLeadGenerationStat(String accountId, String cardId, String startTime, String endTime,
-                                                                                   String granularity, String metric, Boolean withDeleted)
+    public BaseAdsResponse<TwitterLeadGenerationStat> getTwitterLeadGenerationStat(String accountId, String cardId, String startTime, Optional<String> endTime,
+                                                                                   Optional<String> granularity, Optional<String> metric, Optional<Boolean> withDeleted)
             throws TwitterException {
 
         final List<HttpParameter> params =
@@ -230,103 +227,8 @@ public class TwitterAdsCardsApiImpl implements TwitterAdsCardsApi {
 
     // --------------------------------------- Private Methods ---------------------------------------------
 
-    private List<HttpParameter> getCardHttpParameters(String accountId, String name, String appCountryCode, String iphoneAppId, String ipadAppId,
-                                                      String googlePlayAppId, String iphoneDeepLink, String ipadDeepLink, String googlePlayDeepLink)
-            throws TwitterException {
-        List<HttpParameter> params = Lists.newArrayList();
-        TwitterAdUtil.ensureNotNull(accountId, "AccountId");
-        TwitterAdUtil.ensureNotNull(appCountryCode, "App Country Code");
-        TwitterAdUtil.ensureNotNull(name, "Name");
-        params.add(new HttpParameter(PARAM_NAME, name));
-        params.add(new HttpParameter(PARAM_APP_COUNTRY_CODE, appCountryCode));
-
-        // This is done in order to satisfy the condition: atleast one of the app ids is provided
-        if (!(TwitterAdUtil.isNotNullOrEmpty(googlePlayAppId) || TwitterAdUtil.isNotNullOrEmpty(ipadAppId) ||
-                TwitterAdUtil.isNotNullOrEmpty(iphoneAppId))) {
-            throw new TwitterException(
-                    new UnsupportedOperationException("Please provide atleast one valid store app id to create an app download card"));
-        }
-
-        if (TwitterAdUtil.isNotNullOrEmpty(iphoneAppId)) {
-            params.add(new HttpParameter(PARAM_IPHONE_APP_ID, iphoneAppId));
-            if (TwitterAdUtil.isNotNullOrEmpty(iphoneDeepLink)) {
-                params.add(new HttpParameter(PARAM_IPHONE_DEEP_LINK, iphoneDeepLink));
-            }
-        }
-        if (TwitterAdUtil.isNotNullOrEmpty(ipadAppId)) {
-            params.add(new HttpParameter(PARAM_IPAD_APP_ID, ipadAppId));
-            if (TwitterAdUtil.isNotNullOrEmpty(ipadDeepLink)) {
-                params.add(new HttpParameter(PARAM_IPAD_DEEP_LINK, ipadDeepLink));
-            }
-        }
-        if (TwitterAdUtil.isNotNullOrEmpty(googlePlayAppId)) {
-            params.add(new HttpParameter(PARAM_GOOGLEPLAY_APP_ID, googlePlayAppId));
-            if (TwitterAdUtil.isNotNullOrEmpty(googlePlayDeepLink)) {
-                params.add(new HttpParameter(PARAM_GOOGLEPLAY_DEEP_LINK, googlePlayDeepLink));
-            }
-        }
-        return params;
-    }
-
-    private List<HttpParameter> validateAndCreateParamsForUpdateAppDownloadCard(String accountId, String name, String appCountryCode,
-                                                                                String iphoneAppId, String ipadAppId, String googlePlayAppId,
-                                                                                String iphoneDeepLink, String ipadDeepLink, String googlePlayDeepLink,
-                                                                                String customAppDescription, String mediaId, String callToAction)
-            throws TwitterException {
-        List<HttpParameter> params =
-                getCardHttpParametersForUpdate(accountId, name, appCountryCode, iphoneAppId, ipadAppId, googlePlayAppId, iphoneDeepLink, ipadDeepLink,
-                        googlePlayDeepLink);
-
-        if (TwitterAdUtil.isNotNullOrEmpty(mediaId)) {
-            params.add(new HttpParameter(PARAM_CUSTOM_ICON_MEDIA_ID, mediaId));
-        }
-
-        if (TwitterAdUtil.isNotNullOrEmpty(callToAction)) {
-            params.add(new HttpParameter(APP_CTA, callToAction));
-        }
-
-        if (TwitterAdUtil.isNotNullOrEmpty(customAppDescription)) {
-            params.add(new HttpParameter(PARAM_CUSTOM_APP_DESCRIPTION, customAppDescription));
-        }
-        return params;
-    }
-
-    private List<HttpParameter> getCardHttpParametersForUpdate(String accountId, String name, String appCountryCode, String iphoneAppId,
-                                                               String ipadAppId, String googlePlayAppId, String iphoneDeepLink, String ipadDeepLink,
-                                                               String googlePlayDeepLink) throws TwitterException {
-        List<HttpParameter> params = Lists.newArrayList();
-        TwitterAdUtil.ensureNotNull(accountId, "AccountId");
-        TwitterAdUtil.ensureNotNull(appCountryCode, "App Country Code");
-        TwitterAdUtil.ensureNotNull(name, "Name");
-        params.add(new HttpParameter(PARAM_NAME, name));
-        params.add(new HttpParameter(PARAM_APP_COUNTRY_CODE, appCountryCode));
-
-        // This is done in order to satisfy the condition: atleast one of the app ids is provided
-        if (!(TwitterAdUtil.isNotNullOrEmpty(googlePlayAppId) || TwitterAdUtil.isNotNullOrEmpty(ipadAppId) ||
-                TwitterAdUtil.isNotNullOrEmpty(iphoneAppId))) {
-            throw new TwitterException(
-                    new UnsupportedOperationException("Please provide atleast one valid store app id to create an app download card"));
-        }
-
-        iphoneAppId = iphoneAppId == null ? "" : iphoneAppId;
-        iphoneDeepLink = iphoneDeepLink == null ? "" : iphoneDeepLink;
-        ipadAppId = ipadAppId == null ? "" : ipadAppId;
-        ipadDeepLink = ipadDeepLink == null ? "" : ipadDeepLink;
-        googlePlayAppId = googlePlayAppId == null ? "" : googlePlayAppId;
-        googlePlayDeepLink = googlePlayDeepLink == null ? "" : googlePlayDeepLink;
-
-        params.add(new HttpParameter(PARAM_IPHONE_APP_ID, iphoneAppId));
-        params.add(new HttpParameter(PARAM_IPHONE_DEEP_LINK, iphoneDeepLink));
-        params.add(new HttpParameter(PARAM_IPAD_APP_ID, ipadAppId));
-        params.add(new HttpParameter(PARAM_IPAD_DEEP_LINK, ipadDeepLink));
-        params.add(new HttpParameter(PARAM_GOOGLEPLAY_APP_ID, googlePlayAppId));
-        params.add(new HttpParameter(PARAM_GOOGLEPLAY_DEEP_LINK, googlePlayDeepLink));
-
-        return params;
-    }
-
-    private List<HttpParameter> validateAndCreateParamsForLeadGenerationCardStat(String accountId, String cardId, String startTime, String endTime,
-                                                                                 String granularity, String metric, Boolean withDeleted) {
+    private List<HttpParameter> validateAndCreateParamsForLeadGenerationCardStat(String accountId, String cardId, String startTime, Optional<String> endTime,
+                                                                                 Optional<String> granularity, Optional<String> metric, Optional<Boolean> withDeleted) {
         TwitterAdUtil.ensureNotNull(accountId, "AccountId");
         TwitterAdUtil.ensureNotNull(cardId, "CardId");
         TwitterAdUtil.ensureNotNull(startTime, "StartTime");
@@ -334,17 +236,17 @@ public class TwitterAdsCardsApiImpl implements TwitterAdsCardsApi {
         List<HttpParameter> params = new ArrayList<>();
         params.add(new HttpParameter(PARAM_START_TIME, startTime));
 
-        if (TwitterAdUtil.isNotNull(endTime)) {
-            params.add(new HttpParameter(PARAM_END_TIME, endTime));
+        if (endTime.isPresent()) {
+            params.add(new HttpParameter(PARAM_END_TIME, endTime.get()));
         }
-        if (TwitterAdUtil.isNotNull(granularity)) {
-            params.add(new HttpParameter(PARAM_GRANULARITY, granularity));
+        if (granularity.isPresent()) {
+            params.add(new HttpParameter(PARAM_GRANULARITY, granularity.get()));
         }
-        if (TwitterAdUtil.isNotNull(metric)) {
-            params.add(new HttpParameter(PARAM_METRICS, metric));
+        if (metric.isPresent()) {
+            params.add(new HttpParameter(PARAM_METRICS, metric.get()));
         }
-        if (TwitterAdUtil.isNotNull(withDeleted)) {
-            params.add(new HttpParameter(PARAM_WITH_DELETED, withDeleted));
+        if (withDeleted.isPresent()) {
+            params.add(new HttpParameter(PARAM_WITH_DELETED, withDeleted.get()));
         }
 
         return params;

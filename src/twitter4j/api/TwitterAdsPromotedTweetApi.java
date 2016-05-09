@@ -1,5 +1,6 @@
 package twitter4j.api;
 
+import com.google.common.base.Optional;
 import twitter4j.BaseAdsListResponse;
 import twitter4j.BaseAdsListResponseIterable;
 import twitter4j.BaseAdsResponse;
@@ -28,7 +29,7 @@ public interface TwitterAdsPromotedTweetApi {
      * @throws TwitterException
      */
     BaseAdsListResponseIterable<PromotedTweets> getAllPromotedTweets(String accountId, String lineItemId, boolean withDeleted,
-                                                                     Integer count, String cursor, PromotedTweetsSortByField sortByField) throws TwitterException;
+                                                                     Optional<Integer> count, String cursor, Optional<PromotedTweetsSortByField> sortByField) throws TwitterException;
 
 
     /**

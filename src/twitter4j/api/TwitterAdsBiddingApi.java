@@ -1,5 +1,6 @@
 package twitter4j.api;
 
+import com.google.common.base.Optional;
 import twitter4j.BaseAdsListResponseIterable;
 import twitter4j.TwitterException;
 import twitter4j.models.ads.BiddingRules;
@@ -18,6 +19,6 @@ public interface TwitterAdsBiddingApi {
      */
     BaseAdsListResponseIterable<BiddingRules> getBiddingRules(String currency) throws TwitterException;
 
-    TwitterBidInfo getBidInfo(String accountId, String campaignType, String currency, String objectiveForBidding) throws TwitterException;
+    TwitterBidInfo getBidInfo(String accountId, String campaignType, Optional<String> currency, Optional<String> objectiveForBidding) throws TwitterException;
 
 }

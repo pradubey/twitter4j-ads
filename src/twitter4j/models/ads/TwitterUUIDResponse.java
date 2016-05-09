@@ -1,6 +1,6 @@
 package twitter4j.models.ads;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * User: abhishekanand
@@ -10,7 +10,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 public class TwitterUUIDResponse {
 
 
-    @JsonProperty("uuid")
+    @SerializedName("uuid")
     private String uUID;
 
 

@@ -1,5 +1,6 @@
 package twitter4j.api;
 
+import com.google.common.base.Optional;
 import twitter4j.BaseAdsListResponseIterable;
 import twitter4j.BaseAdsResponse;
 import twitter4j.TwitterException;
@@ -39,8 +40,9 @@ public interface TwitterAdsTargetingApi {
      * @return created targeting criteria
      * @throws TwitterException
      */
-    BaseAdsResponse<TargetingCriteria> createTargetingCriteria(String accountId, String lineItemId, TargetingType targetingType, String targetingValue,
-                                                               boolean tailoredAudienceExpansion, TailoredAudienceType tailoredAudienceType)
+    BaseAdsResponse<TargetingCriteria> createTargetingCriteria(String accountId, String lineItemId, TargetingType targetingType,
+                                                               String targetingValue, boolean tailoredAudienceExpansion,
+                                                               Optional<TailoredAudienceType> tailoredAudienceType)
             throws TwitterException;
 
     /**
@@ -60,8 +62,8 @@ public interface TwitterAdsTargetingApi {
      * @return all possible targeting locations to choose from
      * @throws TwitterException
      */
-    BaseAdsListResponseIterable<TargetingLocation> getAllTargetingLocations(LocationType locationType, String q, String countryCode,
-                                                                            Integer count) throws TwitterException;
+    BaseAdsListResponseIterable<TargetingLocation> getAllTargetingLocations(Optional<LocationType> locationType, String q,
+                                                                            String countryCode, Optional<Integer> count) throws TwitterException;
 
     BaseAdsListResponseIterable<TargetingCriteria> getAllTargetingEvents(String q) throws TwitterException;
 
@@ -104,7 +106,7 @@ public interface TwitterAdsTargetingApi {
     BaseAdsResponse<TwitterReachEstimate> getReachEstimate(String accountId, ProductType productType, String promotableUserId,
                                                            List<TargetingCriteria> targetingCriterias) throws TwitterException;
 
-    BaseAdsListResponseIterable<TargetingCriteria> getAllTargetingTVChannels(String tvMarketLocale, Integer count, String cursor)
+    BaseAdsListResponseIterable<TargetingCriteria> getAllTargetingTVChannels(String tvMarketLocale, Optional<Integer> count, Optional<String> cursor)
             throws TwitterException;
 
     TargetingLocations getTargetingLocations(String query, LocationType locationType) throws TwitterException;
@@ -116,7 +118,7 @@ public interface TwitterAdsTargetingApi {
      * @throws TwitterException
      */
 
-    BaseAdsListResponseIterable<TargetingCriteria> getAllTVShows(String tvMarket, String q, Integer count, String cursor) throws TwitterException;
+    BaseAdsListResponseIterable<TargetingCriteria> getAllTVShows(String tvMarket, String q, Optional<Integer> count, Optional<String> cursor) throws TwitterException;
 
     BaseAdsListResponseIterable<TargetingCriteria> getAllEvents() throws TwitterException;
 
@@ -132,17 +134,18 @@ public interface TwitterAdsTargetingApi {
      * @return get targeting suggestions for keywords and userids
      * @throws TwitterException
      */
-    List<TargetingSuggestion> getTargetingSuggestion(String accountId, SuggestionType suggestionType, List<String> targetingValues, Integer count,
-                                                     List<String> ignoredValues) throws TwitterException;
+    List<TargetingSuggestion> getTargetingSuggestion(String accountId, SuggestionType suggestionType, List<String> targetingValues,
+                                                     Optional<Integer> count, List<String> ignoredValues) throws TwitterException;
 
-    BaseAdsListResponseIterable<TwitterBehavior> getBehaviors(Integer count, String cursor, List<String> behaviorIds)
+    BaseAdsListResponseIterable<TwitterBehavior> getBehaviors(Optional<Integer> count, Optional<String> cursor, List<String> behaviorIds)
             throws TwitterException;
 
-    BaseAdsListResponseIterable<TwitterBehaviorTaxonomy> getBehaviorTaxonomy(List<String> behaviorTaxonomyIds, List<String> parentBehaviorTaxonomyIds,
-                                                                             Integer count, String cursor)
+    BaseAdsListResponseIterable<TwitterBehaviorTaxonomy> getBehaviorTaxonomy(List<String> behaviorTaxonomyIds,
+                                                                             List<String> parentBehaviorTaxonomyIds, Optional<Integer> count,
+                                                                             Optional<String> cursor)
             throws TwitterException;
 
-    List<TwitterAppStore> searchAppStoreCategories(String q, AppStoreSearchType appStoreSearchType) throws TwitterException;
+    List<TwitterAppStore> searchAppStoreCategories(String q, Optional<AppStoreSearchType> appStoreSearchType) throws TwitterException;
 
     BaseAdsListResponseIterable<TwitterApplicationList> getAllAppLists(String accountId) throws TwitterException;
 

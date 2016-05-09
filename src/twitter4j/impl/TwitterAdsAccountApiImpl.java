@@ -1,5 +1,6 @@
 package twitter4j.impl;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.collections.CollectionUtils;
@@ -32,17 +33,13 @@ public class TwitterAdsAccountApiImpl implements TwitterAdsAccountApi {
         this.twitterAdsClient = twitterAdsClient;
     }
 
-    // *****************                         ****************
-    //                  Ads Account Related APIs
-    // *****************                         ****************
-
     @Override
-    public BaseAdsListResponseIterable<AdAccount> getAllAccounts(boolean withDeleted, AccountsSortByField sortByField) throws TwitterException {
+    public BaseAdsListResponseIterable<AdAccount> getAllAccounts(boolean withDeleted, Optional<AccountsSortByField> sortByField) throws TwitterException {
         List<HttpParameter> param = new ArrayList<>();
         String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1;
         param.add(new HttpParameter(PARAM_WITH_DELETED, withDeleted));
-        if (sortByField != null) {
-            param.add(new HttpParameter(PARAM_SORT_BY, sortByField.getField()));
+        if (sortByField.isPresent()) {
+            param.add(new HttpParameter(PARAM_SORT_BY, sortByField.get().getField()));
         }
         Type type = new TypeToken<BaseAdsListResponse<AdAccount>>() {}.getType();
         return twitterAdsClient.executeHttpListRequest(baseUrl, param, type);
@@ -89,7 +86,8 @@ public class TwitterAdsAccountApiImpl implements TwitterAdsAccountApi {
 
         params.add(new HttpParameter(PARAM_WITH_DELETED, withDeleted));
         String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_PROMOTABLE_USERS;
-        Type type = new TypeToken<BaseAdsListResponse<PromotableUser>>() {}.getType();
+        Type type = new TypeToken<BaseAdsListResponse<PromotableUser>>() {
+        }.getType();
         return twitterAdsClient.executeHttpListRequest(baseUrl, params, type);
     }
 }

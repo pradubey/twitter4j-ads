@@ -1,5 +1,6 @@
 package twitter4j.api;
 
+import com.google.common.base.Optional;
 import twitter4j.BaseAdsListResponse;
 import twitter4j.BaseAdsListResponseIterable;
 import twitter4j.BaseAdsResponse;
@@ -23,7 +24,7 @@ public interface TwitterAdsStatApi {
 
     BaseAdsResponse<JobDetails> createAsyncJob(String accountId, TwitterEntityType twitterEntityType, Collection<String> ids, long startTime,
                                                long endTime, boolean withDeleted, Granularity granularity, TwitterAdObjective twitterAdObjective,
-                                               Placement placement, TwitterSegmentationType twitterSegmentationType) throws TwitterException;
+                                               Placement placement, Optional<TwitterSegmentationType> twitterSegmentationType) throws TwitterException;
 
     BaseAdsListResponseIterable<JobDetails> getJobExecutionDetails(String accountId, Collection<String> jobIds) throws TwitterException;
 

@@ -1,13 +1,12 @@
 package twitter4j.api;
 
+import com.google.common.base.Optional;
 import twitter4j.BaseAdsListResponseIterable;
 import twitter4j.BaseAdsResponse;
 import twitter4j.TwitterException;
 import twitter4j.models.ads.cards.*;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 /**
  * User: abhay
@@ -33,7 +32,7 @@ public interface TwitterAdsCardsApi {
      * @throws TwitterException
      */
     BaseAdsListResponseIterable<TwitterLeadGenerationCard> getAllLeadGenerationCards(String accountId, List<String> cardIds, boolean withDeleted,
-                                                                                     Integer count) throws TwitterException;
+                                                                                     Optional<Integer> count) throws TwitterException;
 
     /**
      * @param accountId The identifier for the leveraged account. (required)
@@ -44,10 +43,10 @@ public interface TwitterAdsCardsApi {
     BaseAdsResponse<TwitterLeadGenerationCard> deleteLeadGenerationCard(String accountId, String cardId) throws TwitterException;
 
     BaseAdsListResponseIterable<TwitterImageAppDownloadCard> getAllImageAppDownloadCards(String accountId, List<String> cardIds, boolean withDeleted,
-                                                                                         Integer count) throws TwitterException;
+                                                                                         Optional<Integer> count) throws TwitterException;
 
     BaseAdsListResponseIterable<TwitterVideoAppDownloadCard> getAllVideoAppDownloadCards(String accountId, List<String> cardIds, boolean withDeleted,
-                                                                                         Integer count) throws TwitterException;
+                                                                                         Optional<Integer> count) throws TwitterException;
 
     /**
      * @param accountId The identifier for the leveraged account. (required)
@@ -65,7 +64,7 @@ public interface TwitterAdsCardsApi {
      * @return retrieves details of one or more website cards associated with the account
      * @throws TwitterException
      */
-    BaseAdsListResponseIterable<TwitterWebsiteCard> getAllWebsiteCards(String accountId, List<String> cardIds, boolean withDeleted, Integer count)
+    BaseAdsListResponseIterable<TwitterWebsiteCard> getAllWebsiteCards(String accountId, List<String> cardIds, boolean withDeleted, Optional<Integer> count)
             throws TwitterException;
 
     /**
@@ -85,7 +84,7 @@ public interface TwitterAdsCardsApi {
      * @throws TwitterException
      */
     BaseAdsListResponseIterable<TwitterMobileAppCard> getAllAppDownloadCards(String accountId, List<String> cardIds, boolean withDeleted,
-                                                                             Integer count) throws TwitterException;
+                                                                             Optional<Integer> count) throws TwitterException;
 
     /**
      * @param accountId The identifier for the leveraged account. (required)
@@ -111,7 +110,7 @@ public interface TwitterAdsCardsApi {
     String postVideoCardImage(String imageTonLocation) throws TwitterException;
 
     // ---  Stats  ---
-    BaseAdsResponse<TwitterLeadGenerationStat> getTwitterLeadGenerationStat(String accountId, String cardId, String startTime, String endTime,
-                                                                            String granularity, String metric, Boolean withDeleted)
+    BaseAdsResponse<TwitterLeadGenerationStat> getTwitterLeadGenerationStat(String accountId, String cardId, String startTime, Optional<String> endTime,
+                                                                            Optional<String> granularity, Optional<String> metric, Optional<Boolean> withDeleted)
             throws TwitterException;
 }

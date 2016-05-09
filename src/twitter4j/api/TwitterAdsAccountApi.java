@@ -1,5 +1,6 @@
 package twitter4j.api;
 
+import com.google.common.base.Optional;
 import twitter4j.BaseAdsListResponseIterable;
 import twitter4j.BaseAdsResponse;
 import twitter4j.TwitterException;
@@ -21,7 +22,7 @@ public interface TwitterAdsAccountApi {
      * @return all the advertising-enabled accounts the authenticating user has access to.
      * @throws TwitterException
      */
-    BaseAdsListResponseIterable<AdAccount> getAllAccounts(boolean withDeleted, AccountsSortByField accountsSortByField) throws TwitterException;
+    BaseAdsListResponseIterable<AdAccount> getAllAccounts(boolean withDeleted, Optional<AccountsSortByField> accountsSortByField) throws TwitterException;
 
     /**
      * @param accountId   The identifier for the leveraged account.

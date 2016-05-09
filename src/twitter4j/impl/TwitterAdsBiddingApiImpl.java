@@ -1,8 +1,8 @@
 package twitter4j.impl;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import com.google.gson.reflect.TypeToken;
-import org.apache.commons.lang3.StringUtils;
 import twitter4j.*;
 import twitter4j.api.TwitterAdsBiddingApi;
 import twitter4j.models.ads.BiddingRules;
@@ -44,7 +44,7 @@ public class TwitterAdsBiddingApiImpl implements TwitterAdsBiddingApi {
     This call does not hit any version of twitter ads api, it hits the same end point as is hit on native
     * */
     @Override
-    public TwitterBidInfo getBidInfo(String accountId, String campaignType, String currency, String objectiveForBidding) throws TwitterException {
+    public TwitterBidInfo getBidInfo(String accountId, String campaignType, Optional<String> currency, Optional<String> objectiveForBidding) throws TwitterException {
         TwitterAdUtil.ensureNotNull(accountId, "accountId");
         TwitterAdUtil.ensureNotNull(campaignType, "campaignType");
         List<HttpParameter> params = Lists.newArrayList();
@@ -52,11 +52,11 @@ public class TwitterAdsBiddingApiImpl implements TwitterAdsBiddingApi {
         //noinspection ConstantConditions
         params.add(new HttpParameter("account", accountId));
         params.add(new HttpParameter("campaign_type", campaignType));
-        if (StringUtils.isNotBlank(currency)) {
-            params.add(new HttpParameter("currency", currency));
+        if (currency.isPresent()) {
+            params.add(new HttpParameter("currency", currency.get()));
         }
-        if (StringUtils.isNotBlank(objectiveForBidding)) {
-            params.add(new HttpParameter("objective", objectiveForBidding));
+        if (objectiveForBidding.isPresent()) {
+            params.add(new HttpParameter("objective", objectiveForBidding.get()));
         }
         Type type = new TypeToken<TwitterBidInfo>() {}.getType();
 

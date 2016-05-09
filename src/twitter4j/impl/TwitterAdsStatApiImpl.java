@@ -1,5 +1,6 @@
 package twitter4j.impl;
 
+import com.google.common.base.Optional;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.StringUtils;
@@ -72,7 +73,7 @@ public class TwitterAdsStatApiImpl implements TwitterAdsStatApi {
     public BaseAdsResponse<JobDetails> createAsyncJob(String accountId, TwitterEntityType twitterEntityType, Collection<String> ids, long startTime,
                                                       long endTime, boolean withDeleted, Granularity granularity,
                                                       TwitterAdObjective twitterAdObjective, Placement placement,
-                                                      TwitterSegmentationType twitterSegmentationType) throws TwitterException {
+                                                      Optional<TwitterSegmentationType> twitterSegmentationType) throws TwitterException {
         TwitterAdUtil.ensureNotNull(accountId, "accountId");
         TwitterAdUtil.ensureNotNull(startTime, "startTime");
         TwitterAdUtil.ensureNotNull(ids, "entityIds");
@@ -92,8 +93,8 @@ public class TwitterAdsStatApiImpl implements TwitterAdsStatApi {
             params.add(new HttpParameter(PARAM_END_TIME, endTimeAsString));
         }
 
-        if (TwitterAdUtil.isNotNull(twitterSegmentationType)) {
-            params.add(new HttpParameter(PARAM_SEGMENTATION_TYPE, twitterSegmentationType.name()));
+        if (twitterSegmentationType.isPresent()) {
+            params.add(new HttpParameter(PARAM_SEGMENTATION_TYPE, twitterSegmentationType.get().name()));
         }
 
         String metrics = StringUtils.join(TwitterAdStatisticsMetrics.getMetricGroups(twitterAdObjective), ",");

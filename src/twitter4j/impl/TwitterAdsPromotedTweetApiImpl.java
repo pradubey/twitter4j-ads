@@ -1,5 +1,6 @@
 package twitter4j.impl;
 
+import com.google.common.base.Optional;
 import com.google.gson.reflect.TypeToken;
 import twitter4j.*;
 import twitter4j.api.TwitterAdsPromotedTweetApi;
@@ -33,21 +34,21 @@ public class TwitterAdsPromotedTweetApiImpl implements TwitterAdsPromotedTweetAp
 
     @Override
     public BaseAdsListResponseIterable<PromotedTweets> getAllPromotedTweets(String accountId, String lineItemId, boolean withDeleted,
-                                                                            Integer count, String cursor, PromotedTweetsSortByField sortByField) throws TwitterException {
+                                                                            Optional<Integer> count, String cursor, Optional<PromotedTweetsSortByField> sortByField) throws TwitterException {
         TwitterAdUtil.ensureNotNull(accountId, "accountId");
         List<HttpParameter> params = new ArrayList<>();
         params.add(new HttpParameter(PARAM_WITH_DELETED, withDeleted));
         if (TwitterAdUtil.isNotNullOrEmpty(lineItemId)) {
             params.add(new HttpParameter(PARAM_LINE_ITEM_ID, lineItemId));
         }
-        if (TwitterAdUtil.isNotNull(count)) {
-            params.add(new HttpParameter(PARAM_COUNT, count));
+        if (count.isPresent()) {
+            params.add(new HttpParameter(PARAM_COUNT, count.get()));
         }
         if (TwitterAdUtil.isNotNullOrEmpty(cursor)) {
             params.add(new HttpParameter(PARAM_CURSOR, cursor));
         }
-        if(sortByField != null) {
-            params.add(new HttpParameter(PARAM_SORT_BY, sortByField.getField()));
+        if(sortByField.isPresent()) {
+            params.add(new HttpParameter(PARAM_SORT_BY, sortByField.get().getField()));
         }
         String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_PROMOTED_TWEETS;
         Type type = new TypeToken<BaseAdsListResponse<PromotedTweets>>() {}.getType();

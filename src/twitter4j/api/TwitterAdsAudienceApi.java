@@ -1,5 +1,6 @@
 package twitter4j.api;
 
+import com.google.common.base.Optional;
 import twitter4j.BaseAdsListResponseIterable;
 import twitter4j.BaseAdsResponse;
 import twitter4j.TwitterException;
@@ -15,14 +16,9 @@ import twitter4j.models.ads.TailoredAudienceOperation;
  */
 public interface TwitterAdsAudienceApi {
 
-    /**
-     * @return all possible custom audience targets to choose from
-     * @throws TwitterException
-     */
-    BaseAdsListResponseIterable<TailoredAudience> getAllTailoredAudiences(String accountId, Integer count, Boolean withDeleted)
+    BaseAdsListResponseIterable<TailoredAudience> getAllTailoredAudiences(String accountId, Optional<Integer> count,
+                                                                          Optional<Boolean> withDeleted, Optional<String> cursor)
             throws TwitterException;
-
-    BaseAdsListResponseIterable<TailoredAudience> getAllTailoredAudiences(String accountId, int batchSize, String cursor) throws TwitterException;
 
     BaseAdsResponse<TailoredAudience> getTailoredAudienceForId(String accountId, String tailoredAudienceId) throws TwitterException;
 
@@ -38,7 +34,7 @@ public interface TwitterAdsAudienceApi {
                                                                             TailoredAudienceOperation tailoredAudienceOperation)
             throws TwitterException;
 
-    BaseAdsResponse<TailoredAudienceChangeInfo> getChangeRecordsForAllTailoredAudiences(String accountId, Integer count, String nextCursor)
+    BaseAdsResponse<TailoredAudienceChangeInfo> getChangeRecordsForAllTailoredAudiences(String accountId, Optional<Integer> count, Optional<String> nextCursor)
             throws TwitterException;
 
 }

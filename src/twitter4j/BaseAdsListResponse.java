@@ -2,7 +2,6 @@ package twitter4j;
 
 import com.google.gson.annotations.SerializedName;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
 import twitter4j.models.ads.RequestParameters;
 
 import java.io.Serializable;

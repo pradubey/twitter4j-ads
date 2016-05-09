@@ -1,7 +1,9 @@
 package twitter4j.impl;
 
+import com.google.common.base.Optional;
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.zookeeper.Op;
 import twitter4j.*;
 import twitter4j.api.TwitterAdsCampaignApi;
 import twitter4j.models.ads.Campaign;
@@ -34,26 +36,26 @@ public class TwitterAdsCampaignApiImpl implements TwitterAdsCampaignApi {
     }
 
     @Override
-    public BaseAdsListResponseIterable<Campaign> getAllCampaigns(String accountId, Collection<String> campaignIds,
-                                                              Collection<String> fundingInstrumentIds, boolean withDeleted, Integer count,
-                                                              String cursor, CampaignSortByField sortByField) throws TwitterException {
+    public BaseAdsListResponseIterable<Campaign> getAllCampaigns(String accountId, Optional<Collection<String>> campaignIds,
+                                                              Optional<Collection<String>> fundingInstrumentIds, boolean withDeleted, Optional<Integer> count,
+                                                              Optional<String> cursor, Optional<CampaignSortByField> sortByField) throws TwitterException {
         TwitterAdUtil.ensureNotNull(accountId, "accountId");
         String campaignIdsAsString = null;
         String fundingInstrumentIdsAsString = null;
-        if (TwitterAdUtil.isNotNull(campaignIds)) {
-            TwitterAdUtil.ensureMaxSize(campaignIds, MAX_REQUEST_PARAMETER_SIZE);
-            campaignIdsAsString = TwitterAdUtil.getCsv(campaignIds);
+        if (campaignIds.isPresent()) {
+            TwitterAdUtil.ensureMaxSize(campaignIds.get(), MAX_REQUEST_PARAMETER_SIZE);
+            campaignIdsAsString = TwitterAdUtil.getCsv(campaignIds.get());
         }
-        if (TwitterAdUtil.isNotNull(fundingInstrumentIds)) {
-            TwitterAdUtil.ensureMaxSize(fundingInstrumentIds, MAX_REQUEST_PARAMETER_SIZE);
-            fundingInstrumentIdsAsString = TwitterAdUtil.getCsv(fundingInstrumentIds);
+        if (fundingInstrumentIds.isPresent()) {
+            TwitterAdUtil.ensureMaxSize(fundingInstrumentIds.get(), MAX_REQUEST_PARAMETER_SIZE);
+            fundingInstrumentIdsAsString = TwitterAdUtil.getCsv(fundingInstrumentIds.get());
         }
 
         List<HttpParameter> params =
-                validateCampaignParameters(accountId, campaignIdsAsString, fundingInstrumentIdsAsString, withDeleted, count, cursor);
+                getCampaignParameters(accountId, Optional.fromNullable(campaignIdsAsString), Optional.fromNullable(fundingInstrumentIdsAsString), withDeleted, count, cursor);
 
-        if(sortByField != null) {
-            params.add(new HttpParameter(PARAM_SORT_BY, sortByField.getField()));
+        if(sortByField.isPresent()) {
+            params.add(new HttpParameter(PARAM_SORT_BY, sortByField.get().getField()));
         }
         String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_CAMPAIGN;
 
@@ -65,9 +67,8 @@ public class TwitterAdsCampaignApiImpl implements TwitterAdsCampaignApi {
     public BaseAdsResponse<Campaign> getCampaignById(String accountId, String campaignId, boolean withDeleted) throws TwitterException {
         TwitterAdUtil.ensureNotNull(accountId, "accountId");
         TwitterAdUtil.ensureNotNull(campaignId, "campaignId");
-        HttpParameter[] params = null;
         String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_CAMPAIGN + campaignId;
-        params = new HttpParameter[]{new HttpParameter(PARAM_WITH_DELETED, withDeleted)};
+        HttpParameter[] params = new HttpParameter[]{new HttpParameter(PARAM_WITH_DELETED, withDeleted)};
         Type type = new TypeToken<BaseAdsResponse<Campaign>>() {}.getType();
         return twitterAdsClient.executeHttpRequest(baseUrl, params, type, HttpVerb.GET);
     }
@@ -88,9 +89,10 @@ public class TwitterAdsCampaignApiImpl implements TwitterAdsCampaignApi {
 
 
     @Override
-    public BaseAdsResponse<Campaign> updateCampaign(String accountId, String campaignId, String name, Long totalBudgetAmountLocalMicro,
-                                                    Long dailyBudgetAmountLocalMicro, String startTime, String endTime, Boolean paused,
-                                                    Boolean standardDelivery, int frequencyCap, int durationInDays) throws TwitterException {
+    public BaseAdsResponse<Campaign> updateCampaign(String accountId, String campaignId, Optional<String> name,
+                                                    Long totalBudgetAmountLocalMicro, Optional<Long> dailyBudgetAmountLocalMicro, Optional<String> startTime,
+                                                    Optional<String> endTime, Optional<Boolean> paused,
+                                                    Optional<Boolean> standardDelivery, int frequencyCap, int durationInDays) throws TwitterException {
 
         List<HttpParameter> params =
                 validateUpdateCampaignParameters(accountId, campaignId, name, totalBudgetAmountLocalMicro, dailyBudgetAmountLocalMicro, startTime,
@@ -171,53 +173,54 @@ public class TwitterAdsCampaignApiImpl implements TwitterAdsCampaignApi {
         return params;
     }
 
-    private List<HttpParameter> validateCampaignParameters(String accountId, String campaignIds, String fundingInstrumentIds, boolean withDeleted,
-                                                           Integer count, String cursor) {
+    private List<HttpParameter> getCampaignParameters(String accountId, Optional<String> campaignIds, Optional<String> fundingInstrumentIds, boolean withDeleted,
+                                                      Optional<Integer> count, Optional<String> cursor) {
         TwitterAdUtil.ensureNotNull(accountId, "accountId");
         List<HttpParameter> params = new ArrayList<>();
-        if (StringUtils.isNotBlank(campaignIds)) {
-            params.add(new HttpParameter(PARAM_CAMPAIGN_IDS, campaignIds));
-        }
-        if (StringUtils.isNotBlank(fundingInstrumentIds)) {
-            params.add(new HttpParameter(PARAM_FUNDING_INSTRUMENT_IDS, fundingInstrumentIds));
-        }
         params.add(new HttpParameter(PARAM_WITH_DELETED, withDeleted));
-        if (TwitterAdUtil.isNotNull(count)) {
-            params.add(new HttpParameter(PARAM_COUNT, count));
+        if (campaignIds.isPresent()) {
+            params.add(new HttpParameter(PARAM_CAMPAIGN_IDS, campaignIds.get()));
         }
-        if (StringUtils.isNotBlank(cursor)) {
-            params.add(new HttpParameter(PARAM_CURSOR, cursor));
+        if (fundingInstrumentIds.isPresent()) {
+            params.add(new HttpParameter(PARAM_FUNDING_INSTRUMENT_IDS, fundingInstrumentIds.get()));
+        }
+        if (count.isPresent()) {
+            params.add(new HttpParameter(PARAM_COUNT, count.get()));
+        }
+        if (cursor.isPresent()) {
+            params.add(new HttpParameter(PARAM_CURSOR, cursor.get()));
         }
 
         return params;
     }
 
-    private List<HttpParameter> validateUpdateCampaignParameters(String accountId, String campaignId, String name, Long totalBudgetAmountLocalMicro,
-                                                                 Long dailyBudgetAmountLocalMicro, String startTime, String endTime, Boolean paused,
-                                                                 Boolean standardDelivery, int frequencyCap, int durationInDays) {
+    private List<HttpParameter> validateUpdateCampaignParameters(String accountId, String campaignId, Optional<String> name, Long totalBudgetAmountLocalMicro,
+                                                                 Optional<Long> dailyBudgetAmountLocalMicro, Optional<String> startTime,
+                                                                 Optional<String> endTime, Optional<Boolean> paused,
+                                                                 Optional<Boolean> standardDelivery, int frequencyCap, int durationInDays) {
         TwitterAdUtil.ensureNotNull(accountId, "AccountId");
         TwitterAdUtil.ensureNotNull(campaignId, "Campaign Id");
         List<HttpParameter> params = new ArrayList<>();
         //The Ones that can be changed to null
         params.add(new HttpParameter(PARAM_TOTAL_BUDGET_AMOUNT_LOCAL_MICRO, String.valueOf(totalBudgetAmountLocalMicro)));
         //The Ones that cannot be changed to null below
-        if (TwitterAdUtil.isNotNullOrEmpty(name)) {
-            params.add(new HttpParameter(PARAM_NAME, name));
+        if (name.isPresent()) {
+            params.add(new HttpParameter(PARAM_NAME, name.get()));
         }
-        if (TwitterAdUtil.isNotNull(dailyBudgetAmountLocalMicro)) {
-            params.add(new HttpParameter(PARAM_DAILY_BUDGET_AMOUNT_LOCAL_MICRO, dailyBudgetAmountLocalMicro));
+        if (dailyBudgetAmountLocalMicro.isPresent()) {
+            params.add(new HttpParameter(PARAM_DAILY_BUDGET_AMOUNT_LOCAL_MICRO, dailyBudgetAmountLocalMicro.get()));
         }
-        if (TwitterAdUtil.isNotNullOrEmpty(startTime)) {
-            params.add(new HttpParameter(PARAM_START_TIME, startTime));
+        if (startTime.isPresent()) {
+            params.add(new HttpParameter(PARAM_START_TIME, startTime.get()));
         }
-        if (TwitterAdUtil.isNotNullOrEmpty(endTime)) {
-            params.add(new HttpParameter(PARAM_END_TIME, endTime));
+        if (endTime.isPresent()) {
+            params.add(new HttpParameter(PARAM_END_TIME, endTime.get()));
         }
-        if (TwitterAdUtil.isNotNull(paused)) {
-            params.add(new HttpParameter(PARAM_PAUSED, paused));
+        if (paused.isPresent()) {
+            params.add(new HttpParameter(PARAM_PAUSED, paused.get()));
         }
-        if (TwitterAdUtil.isNotNull(standardDelivery)) {
-            params.add(new HttpParameter(PARAM_STANDARD_DELIVERY, standardDelivery));
+        if (standardDelivery.isPresent()) {
+            params.add(new HttpParameter(PARAM_STANDARD_DELIVERY, standardDelivery.get()));
         }
         if (frequencyCap > 0) {
             params.add(new HttpParameter(PARAM_FREQUENCY_CAP, frequencyCap));
