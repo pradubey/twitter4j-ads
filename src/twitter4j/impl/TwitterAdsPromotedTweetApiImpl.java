@@ -41,13 +41,13 @@ public class TwitterAdsPromotedTweetApiImpl implements TwitterAdsPromotedTweetAp
         if (TwitterAdUtil.isNotNullOrEmpty(lineItemId)) {
             params.add(new HttpParameter(PARAM_LINE_ITEM_ID, lineItemId));
         }
-        if (count.isPresent()) {
+        if (count != null && count.isPresent()) {
             params.add(new HttpParameter(PARAM_COUNT, count.get()));
         }
         if (TwitterAdUtil.isNotNullOrEmpty(cursor)) {
             params.add(new HttpParameter(PARAM_CURSOR, cursor));
         }
-        if(sortByField.isPresent()) {
+        if(sortByField != null && sortByField.isPresent()) {
             params.add(new HttpParameter(PARAM_SORT_BY, sortByField.get().getField()));
         }
         String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_PROMOTED_TWEETS;

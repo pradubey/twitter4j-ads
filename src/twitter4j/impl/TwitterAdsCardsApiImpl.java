@@ -48,7 +48,7 @@ public class TwitterAdsCardsApiImpl implements TwitterAdsCardsApi {
         if (TwitterAdUtil.isNotEmpty(cardIds)) {
             params.add(new HttpParameter(PARAM_CARD_IDS, TwitterAdUtil.getCsv(cardIds)));
         }
-        if (count.isPresent()) {
+        if (count != null && count.isPresent()) {
             params.add(new HttpParameter(PARAM_COUNT, count.get()));
         }
         String url = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_LEAD_GENERATION_CARDS;
@@ -66,7 +66,7 @@ public class TwitterAdsCardsApiImpl implements TwitterAdsCardsApi {
         if (TwitterAdUtil.isNotEmpty(cardIds)) {
             params.add(new HttpParameter(PARAM_CARD_IDS, TwitterAdUtil.getCsv(cardIds)));
         }
-        if (count.isPresent()) {
+        if (count != null && count.isPresent()) {
             params.add(new HttpParameter(PARAM_COUNT, count.get()));
         }
         String url = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_IMAGE_APP_DOWNLOAD_CARDS;
@@ -84,7 +84,7 @@ public class TwitterAdsCardsApiImpl implements TwitterAdsCardsApi {
         if (TwitterAdUtil.isNotEmpty(cardIds)) {
             params.add(new HttpParameter(PARAM_CARD_IDS, TwitterAdUtil.getCsv(cardIds)));
         }
-        if (count.isPresent()) {
+        if (count != null && count.isPresent()) {
             params.add(new HttpParameter(PARAM_COUNT, count.get()));
         }
         String url = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_VIDEO_APP_DOWNLOAD_CARDS;
@@ -132,7 +132,7 @@ public class TwitterAdsCardsApiImpl implements TwitterAdsCardsApi {
         if (TwitterAdUtil.isNotEmpty(cardIds)) {
             params.add(new HttpParameter(PARAM_CARD_IDS, TwitterAdUtil.getCsv(cardIds)));
         }
-        if (count.isPresent()) {
+        if (count != null && count.isPresent()) {
             params.add(new HttpParameter(PARAM_COUNT, count.get()));
         }
 
@@ -151,7 +151,7 @@ public class TwitterAdsCardsApiImpl implements TwitterAdsCardsApi {
         if (TwitterAdUtil.isNotEmpty(cardIds)) {
             params.add(new HttpParameter(PARAM_CARD_IDS, TwitterAdUtil.getCsv(cardIds)));
         }
-        if (count.isPresent()) {
+        if (count != null && count.isPresent()) {
             params.add(new HttpParameter(PARAM_COUNT, count.get()));
         }
         String url = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_APP_DOWNLOAD_CARDS;
@@ -236,16 +236,16 @@ public class TwitterAdsCardsApiImpl implements TwitterAdsCardsApi {
         List<HttpParameter> params = new ArrayList<>();
         params.add(new HttpParameter(PARAM_START_TIME, startTime));
 
-        if (endTime.isPresent()) {
+        if (endTime != null && endTime.isPresent()) {
             params.add(new HttpParameter(PARAM_END_TIME, endTime.get()));
         }
-        if (granularity.isPresent()) {
+        if (granularity != null && granularity.isPresent()) {
             params.add(new HttpParameter(PARAM_GRANULARITY, granularity.get()));
         }
-        if (metric.isPresent()) {
+        if (metric != null && metric.isPresent()) {
             params.add(new HttpParameter(PARAM_METRICS, metric.get()));
         }
-        if (withDeleted.isPresent()) {
+        if (withDeleted != null && withDeleted.isPresent()) {
             params.add(new HttpParameter(PARAM_WITH_DELETED, withDeleted.get()));
         }
 

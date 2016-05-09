@@ -42,11 +42,11 @@ public class TwitterAdsCampaignApiImpl implements TwitterAdsCampaignApi {
         TwitterAdUtil.ensureNotNull(accountId, "accountId");
         String campaignIdsAsString = null;
         String fundingInstrumentIdsAsString = null;
-        if (campaignIds.isPresent()) {
+        if (campaignIds != null && campaignIds.isPresent()) {
             TwitterAdUtil.ensureMaxSize(campaignIds.get(), MAX_REQUEST_PARAMETER_SIZE);
             campaignIdsAsString = TwitterAdUtil.getCsv(campaignIds.get());
         }
-        if (fundingInstrumentIds.isPresent()) {
+        if (fundingInstrumentIds != null && fundingInstrumentIds.isPresent()) {
             TwitterAdUtil.ensureMaxSize(fundingInstrumentIds.get(), MAX_REQUEST_PARAMETER_SIZE);
             fundingInstrumentIdsAsString = TwitterAdUtil.getCsv(fundingInstrumentIds.get());
         }
@@ -54,7 +54,7 @@ public class TwitterAdsCampaignApiImpl implements TwitterAdsCampaignApi {
         List<HttpParameter> params =
                 getCampaignParameters(accountId, Optional.fromNullable(campaignIdsAsString), Optional.fromNullable(fundingInstrumentIdsAsString), withDeleted, count, cursor);
 
-        if(sortByField.isPresent()) {
+        if(sortByField != null && sortByField.isPresent()) {
             params.add(new HttpParameter(PARAM_SORT_BY, sortByField.get().getField()));
         }
         String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_CAMPAIGN;
@@ -178,16 +178,16 @@ public class TwitterAdsCampaignApiImpl implements TwitterAdsCampaignApi {
         TwitterAdUtil.ensureNotNull(accountId, "accountId");
         List<HttpParameter> params = new ArrayList<>();
         params.add(new HttpParameter(PARAM_WITH_DELETED, withDeleted));
-        if (campaignIds.isPresent()) {
+        if (campaignIds != null && campaignIds.isPresent()) {
             params.add(new HttpParameter(PARAM_CAMPAIGN_IDS, campaignIds.get()));
         }
-        if (fundingInstrumentIds.isPresent()) {
+        if (fundingInstrumentIds != null && fundingInstrumentIds.isPresent()) {
             params.add(new HttpParameter(PARAM_FUNDING_INSTRUMENT_IDS, fundingInstrumentIds.get()));
         }
-        if (count.isPresent()) {
+        if (count != null && count.isPresent()) {
             params.add(new HttpParameter(PARAM_COUNT, count.get()));
         }
-        if (cursor.isPresent()) {
+        if (cursor != null && cursor.isPresent()) {
             params.add(new HttpParameter(PARAM_CURSOR, cursor.get()));
         }
 
@@ -204,22 +204,22 @@ public class TwitterAdsCampaignApiImpl implements TwitterAdsCampaignApi {
         //The Ones that can be changed to null
         params.add(new HttpParameter(PARAM_TOTAL_BUDGET_AMOUNT_LOCAL_MICRO, String.valueOf(totalBudgetAmountLocalMicro)));
         //The Ones that cannot be changed to null below
-        if (name.isPresent()) {
+        if (name != null && name.isPresent()) {
             params.add(new HttpParameter(PARAM_NAME, name.get()));
         }
-        if (dailyBudgetAmountLocalMicro.isPresent()) {
+        if (dailyBudgetAmountLocalMicro != null && dailyBudgetAmountLocalMicro.isPresent()) {
             params.add(new HttpParameter(PARAM_DAILY_BUDGET_AMOUNT_LOCAL_MICRO, dailyBudgetAmountLocalMicro.get()));
         }
-        if (startTime.isPresent()) {
+        if (startTime != null && startTime.isPresent()) {
             params.add(new HttpParameter(PARAM_START_TIME, startTime.get()));
         }
-        if (endTime.isPresent()) {
+        if (endTime != null && endTime.isPresent()) {
             params.add(new HttpParameter(PARAM_END_TIME, endTime.get()));
         }
-        if (paused.isPresent()) {
+        if (paused != null && paused.isPresent()) {
             params.add(new HttpParameter(PARAM_PAUSED, paused.get()));
         }
-        if (standardDelivery.isPresent()) {
+        if (standardDelivery != null && standardDelivery.isPresent()) {
             params.add(new HttpParameter(PARAM_STANDARD_DELIVERY, standardDelivery.get()));
         }
         if (frequencyCap > 0) {

@@ -38,7 +38,7 @@ public class TwitterAdsAccountApiImpl implements TwitterAdsAccountApi {
         List<HttpParameter> param = new ArrayList<>();
         String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1;
         param.add(new HttpParameter(PARAM_WITH_DELETED, withDeleted));
-        if (sortByField.isPresent()) {
+        if (sortByField!= null && sortByField.isPresent()) {
             param.add(new HttpParameter(PARAM_SORT_BY, sortByField.get().getField()));
         }
         Type type = new TypeToken<BaseAdsListResponse<AdAccount>>() {}.getType();

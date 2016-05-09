@@ -36,7 +36,7 @@ public class TwitterAdsFundingInstrumentApiImpl implements TwitterAdsFundingInst
                                                                                    Optional<FundingInstrumentSortByField> sortByField) throws TwitterException {
         TwitterAdUtil.ensureNotNull(accountId, "accountId");
         String fundingInstrumentIdsAsString = null;
-        if (fundingInstrumentIds.isPresent()) {
+        if (fundingInstrumentIds != null && fundingInstrumentIds.isPresent()) {
             TwitterAdUtil.ensureMaxSize(fundingInstrumentIds.get(), MAX_REQUEST_PARAMETER_SIZE);
             fundingInstrumentIdsAsString = TwitterAdUtil.getCsv(fundingInstrumentIds.get());
         }
@@ -45,7 +45,7 @@ public class TwitterAdsFundingInstrumentApiImpl implements TwitterAdsFundingInst
         if (TwitterAdUtil.isNotNullOrEmpty(fundingInstrumentIdsAsString)) {
             params.add(new HttpParameter(PARAM_FUNDING_INSTRUMENT_IDS, fundingInstrumentIdsAsString));
         }
-        if(sortByField.isPresent()) {
+        if(sortByField != null && sortByField.isPresent()) {
             params.add(new HttpParameter(PARAM_SORT_BY, sortByField.get().getField()));
         }
         String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_FUNDING_INSTRUMENTS;

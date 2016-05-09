@@ -93,7 +93,7 @@ public class TwitterAdsStatApiImpl implements TwitterAdsStatApi {
             params.add(new HttpParameter(PARAM_END_TIME, endTimeAsString));
         }
 
-        if (twitterSegmentationType.isPresent()) {
+        if (twitterSegmentationType != null && twitterSegmentationType.isPresent()) {
             params.add(new HttpParameter(PARAM_SEGMENTATION_TYPE, twitterSegmentationType.get().name()));
         }
 

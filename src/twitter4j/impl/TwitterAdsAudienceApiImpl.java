@@ -33,13 +33,13 @@ public class TwitterAdsAudienceApiImpl implements TwitterAdsAudienceApi {
         TwitterAdUtil.ensureNotNull(accountId, "AccountId");
         String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_TAILORED_AUDIENCES;
         List<HttpParameter> params = new ArrayList<>();
-        if (count.isPresent() && count.get() < 1000) {
+        if (count != null && count.isPresent() && count.get() < 1000) {
             params.add(new HttpParameter("count", count.get()));
         }
-        if (withDeleted.isPresent()) {
+        if (withDeleted!=null && withDeleted.isPresent()) {
             params.add(new HttpParameter("with_deleted", withDeleted.get()));
         }
-        if (cursor.isPresent()) {
+        if (cursor!=null && cursor.isPresent()) {
             params.add(new HttpParameter(PARAM_CURSOR, cursor.get()));
         }
         Type type = new TypeToken<BaseAdsListResponse<TailoredAudience>>() {}.getType();
@@ -111,11 +111,11 @@ public class TwitterAdsAudienceApiImpl implements TwitterAdsAudienceApi {
             throws TwitterException {
         TwitterAdUtil.ensureNotNull(accountId, "AccountId");
         List<HttpParameter> params = new ArrayList<>();
-        if (count.isPresent() && count.get() < 1000) {
+        if (count != null && count.isPresent() && count.get() < 1000) {
             params.add(new HttpParameter("count", count.get()));
 
         }
-        if (nextCursor.isPresent()) {
+        if (nextCursor != null && nextCursor.isPresent()) {
             params.add(new HttpParameter("cursor", nextCursor.get()));
         }
         String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_TAILORED_AUDIENCE_CHANGES;

@@ -52,10 +52,10 @@ public class TwitterAdsBiddingApiImpl implements TwitterAdsBiddingApi {
         //noinspection ConstantConditions
         params.add(new HttpParameter("account", accountId));
         params.add(new HttpParameter("campaign_type", campaignType));
-        if (currency.isPresent()) {
+        if (currency != null &&currency.isPresent()) {
             params.add(new HttpParameter("currency", currency.get()));
         }
-        if (objectiveForBidding.isPresent()) {
+        if (objectiveForBidding != null && objectiveForBidding.isPresent()) {
             params.add(new HttpParameter("objective", objectiveForBidding.get()));
         }
         Type type = new TypeToken<TwitterBidInfo>() {}.getType();

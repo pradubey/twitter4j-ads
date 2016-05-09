@@ -177,11 +177,11 @@ public class TwitterAdsLineItemApiImpl implements TwitterAdsLineItemApi {
         String promotedAccountsIdsAsString = null;
         List<HttpParameter> params = new ArrayList<>();
         params.add(new HttpParameter(PARAM_WITH_DELETED, withDeleted));
-        if (promotedAccountIds.isPresent()) {
+        if (promotedAccountIds != null && promotedAccountIds.isPresent()) {
             TwitterAdUtil.ensureMaxSize(promotedAccountIds.get(), MAX_REQUEST_PARAMETER_SIZE);
             promotedAccountsIdsAsString = TwitterAdUtil.getCsv(promotedAccountIds.get());
         }
-        if (lineItemId.isPresent()) {
+        if (lineItemId != null && lineItemId.isPresent()) {
             params.add(new HttpParameter(PARAM_LINE_ITEM_ID, lineItemId.get()));
         }
 
@@ -256,22 +256,22 @@ public class TwitterAdsLineItemApiImpl implements TwitterAdsLineItemApi {
         }
 
         List<HttpParameter> params = new ArrayList<>();
-        if (campaignId.isPresent()) {
+        if (campaignId != null && campaignId.isPresent()) {
             params.add(new HttpParameter(PARAM_CAMPAIGN_ID, campaignId.get()));
         }
         if (automaticallySelectBid) {
             params.add(new HttpParameter(AUTOMATICALLY_SELECT_BID, true));
-        } else if (bidAmountLocalMicro.isPresent()) {
+        } else if (bidAmountLocalMicro != null && bidAmountLocalMicro.isPresent()) {
             params.add(new HttpParameter(PARAM_BID_AMOUNT_LOCAL_MICRO, bidAmountLocalMicro.get()));
             if (bidType != null) {
                 params.add(new HttpParameter(PARAM_BID_TYPE, bidType.name()));
             }
         }
 
-        if (chargeBy.isPresent()) {
+        if (chargeBy != null && chargeBy.isPresent()) {
             params.add(new HttpParameter(PARAM_CHARGE_BY, chargeBy.get()));
         }
-        if (bidUnit.isPresent()) {
+        if (bidUnit != null && bidUnit.isPresent()) {
             params.add(new HttpParameter(PARAM_BID_UNIT, bidUnit.get()));
         }
 
@@ -279,22 +279,22 @@ public class TwitterAdsLineItemApiImpl implements TwitterAdsLineItemApi {
             params.add(new HttpParameter(PARAM_PRIMARY_WEB_EVENT_TAG, webEventTag));
         }
 
-        if (paused.isPresent()) {
+        if (paused != null && paused.isPresent()) {
             params.add(new HttpParameter(PARAM_PAUSED, paused.get()));
         }
-        if (includeSentiment.isPresent()) {
+        if (includeSentiment != null && includeSentiment.isPresent()) {
             params.add(new HttpParameter(PARAM_INCLUDE_SENTIMENT, includeSentiment.get().name()));
         }
-        if (matchRelevantPopularQueries.isPresent()) {
+        if (matchRelevantPopularQueries != null && matchRelevantPopularQueries.isPresent()) {
             params.add(new HttpParameter(PARAM_MATCH_RELEVANT_POPULAR_QUERIES, matchRelevantPopularQueries.get()));
         }
-        if (objective.isPresent()) {
+        if (objective != null && objective.isPresent()) {
             params.add(new HttpParameter(PARAM_OBJECTIVE, objective.get()));
 
             // Twitter Audience Platform is supported for these objectives only
             if (TwitterAdUtil.TWEET_ENGAGEMENTS.equals(objective.get()) || TwitterAdUtil.VIDEO_VIEWS.equals(objective.get()) ||
                     TwitterAdUtil.WEBSITE_CLICKS.equals(objective.get())) {
-                if (advertiserDomain.isPresent()) {
+                if (advertiserDomain != null && advertiserDomain.isPresent()) {
                     params.add(new HttpParameter(PARAM_ADVERTISER_DOMAIN, advertiserDomain.get()));
                 }
                 if (categories != null && TwitterAdUtil.isNotEmpty(Arrays.asList(categories))) {
@@ -303,7 +303,7 @@ public class TwitterAdsLineItemApiImpl implements TwitterAdsLineItemApi {
             }
         }
 
-        if (productType.isPresent()) {
+        if (productType != null && productType.isPresent()) {
             params.add(new HttpParameter(PARAM_PRODUCT_TYPE, productType.get().name()));
         }
 
@@ -329,7 +329,7 @@ public class TwitterAdsLineItemApiImpl implements TwitterAdsLineItemApi {
         if (automaticallySelectBid) {
             params.add(new HttpParameter(AUTOMATICALLY_SELECT_BID, true));
             params.add(new HttpParameter(PARAM_BID_AMOUNT_LOCAL_MICRO, ""));
-        } else if (bidAmountLocalMicro.isPresent()) {
+        } else if (bidAmountLocalMicro != null && bidAmountLocalMicro.isPresent()) {
             if (bidType != BidType.TARGET) {
                 params.add(new HttpParameter(AUTOMATICALLY_SELECT_BID, false));
             }
@@ -338,26 +338,26 @@ public class TwitterAdsLineItemApiImpl implements TwitterAdsLineItemApi {
         if (!automaticallySelectBid && bidType != null) {
             params.add(new HttpParameter(PARAM_BID_TYPE, bidType.name()));
         }
-        if (chargeBy.isPresent()) {
+        if (chargeBy != null && chargeBy.isPresent()) {
             params.add(new HttpParameter(PARAM_CHARGE_BY, chargeBy.get()));
         }
-        if (bidUnit.isPresent()) {
+        if (bidUnit != null && bidUnit.isPresent()) {
             params.add(new HttpParameter(PARAM_BID_UNIT, bidUnit.get()));
         }
 
-        if (paused.isPresent()) {
+        if (paused != null && paused.isPresent()) {
             params.add(new HttpParameter(PARAM_PAUSED, paused.get()));
         }
-        if (includeSentiment.isPresent()) {
+        if (includeSentiment != null && includeSentiment.isPresent()) {
             params.add(new HttpParameter(PARAM_INCLUDE_SENTIMENT, includeSentiment.get().name()));
         }
-        if (matchRelevantPopularQueries.isPresent()) {
+        if (matchRelevantPopularQueries != null && matchRelevantPopularQueries.isPresent()) {
             params.add(new HttpParameter(PARAM_MATCH_RELEVANT_POPULAR_QUERIES, matchRelevantPopularQueries.get()));
         }
 
         // Twitter Audience Platform is supported for these objectives only
 
-        if (advertiserDomain.isPresent()) {
+        if (advertiserDomain != null && advertiserDomain.isPresent()) {
             params.add(new HttpParameter(PARAM_ADVERTISER_DOMAIN, advertiserDomain.get()));
         }
         if (iabCategories != null && TwitterAdUtil.isNotEmpty(Arrays.asList(iabCategories))) {
@@ -380,7 +380,7 @@ public class TwitterAdsLineItemApiImpl implements TwitterAdsLineItemApi {
             params.add(new HttpParameter(PARAM_FUNDING_INSTRUMENT_IDS, fundingInstrumentIds));
         }
         params.add(new HttpParameter(PARAM_WITH_DELETED, withDeleted));
-        if (count.isPresent()) {
+        if (count != null && count.isPresent()) {
             params.add(new HttpParameter(PARAM_COUNT, count.get()));
         }
         if (StringUtils.isNotBlank(cursor)) {
