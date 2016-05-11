@@ -1,7 +1,7 @@
-package test.campaign;
+package examples.campaign;
 
 import com.google.common.collect.Lists;
-import test.BaseAdsTest;
+import examples.BaseAdsTest;
 import twitter4j.BaseAdsListResponse;
 import twitter4j.BaseAdsListResponseIterable;
 import twitter4j.TwitterAds;

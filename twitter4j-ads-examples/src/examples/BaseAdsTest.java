@@ -1,4 +1,4 @@
-package test;
+package examples;
 
 import twitter4j.TwitterAds;
 import twitter4j.TwitterAdsFactory;
