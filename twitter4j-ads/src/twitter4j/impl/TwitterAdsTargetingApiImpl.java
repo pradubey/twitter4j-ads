@@ -4,7 +4,6 @@ import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.jackson.map.ObjectMapper;
 import twitter4j.*;
 import twitter4j.api.TwitterAdsTargetingApi;
 import twitter4j.models.LocationType;
@@ -26,8 +25,6 @@ import static twitter4j.TwitterAdsConstants.*;
 public class TwitterAdsTargetingApiImpl implements TwitterAdsTargetingApi {
 
     private static final Integer MAX_REQUEST_PARAMETER_SIZE = 50;
-
-    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     private final TwitterAdsClient twitterAdsClient;
 
@@ -199,22 +196,16 @@ public class TwitterAdsTargetingApiImpl implements TwitterAdsTargetingApi {
     }
 
     @Override
-    public TargetingLocations getTargetingLocations(String query, LocationType locationType) throws TwitterException {
+    public BaseAdsListResponseIterable<TargetingLocation> getTargetingLocations(String query, LocationType locationType) throws TwitterException {
 
         List<HttpParameter> params = new ArrayList<>(2);
         if (StringUtils.isNotBlank(query)) {
             params.add(new HttpParameter("q", query.trim()));
         }
         params.add(new HttpParameter("location_type", locationType.name()));
-        HttpResponse response = twitterAdsClient
-                .getRequest(twitterAdsClient.getBaseAdsAPIUrl() + "0/targeting_criteria/locations", params.toArray(new HttpParameter[params.size()
-                                                                                                                            ]));
-        String responseString = response.asString();
-        try {
-            return OBJECT_MAPPER.readValue(responseString, TargetingLocations.class);
-        } catch (IOException e) {
-            throw new TwitterException("Failed to parse response", e);
-        }
+        String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PATH_TARGETING_CRITERIA_LOCATION;
+        Type type = new TypeToken<BaseAdsListResponse<TargetingLocation>>() {}.getType();
+        return twitterAdsClient.executeHttpListRequest(baseUrl, params, type);
     }
 
     @Override

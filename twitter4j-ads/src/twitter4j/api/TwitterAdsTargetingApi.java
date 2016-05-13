@@ -109,7 +109,7 @@ public interface TwitterAdsTargetingApi {
     BaseAdsListResponseIterable<TargetingCriteria> getAllTargetingTVChannels(String tvMarketLocale, Optional<Integer> count, Optional<String> cursor)
             throws TwitterException;
 
-    TargetingLocations getTargetingLocations(String query, LocationType locationType) throws TwitterException;
+    BaseAdsListResponseIterable<TargetingLocation> getTargetingLocations(String query, LocationType locationType) throws TwitterException;
 
     BaseAdsListResponseIterable<IabCategory> getAllIabCategories(String q) throws TwitterException;
 

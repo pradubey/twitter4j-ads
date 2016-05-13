@@ -1,7 +1,6 @@
 package twitter4j;
 
 import com.google.gson.annotations.SerializedName;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import twitter4j.models.ads.RequestParameters;
 
 import java.io.Serializable;
@@ -13,7 +12,6 @@ import java.util.List;
  * Date: 29/01/14
  * Time: 11:56 AM
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class BaseAdsListResponse<T> implements Serializable, TwitterResponse {
 
     @SerializedName("data_type")

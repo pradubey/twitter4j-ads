@@ -2,8 +2,6 @@ package twitter4j.impl;
 
 import com.google.common.base.Optional;
 import com.google.gson.reflect.TypeToken;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.zookeeper.Op;
 import twitter4j.*;
 import twitter4j.api.TwitterAdsCampaignApi;
 import twitter4j.models.ads.Campaign;
@@ -37,8 +35,8 @@ public class TwitterAdsCampaignApiImpl implements TwitterAdsCampaignApi {
 
     @Override
     public BaseAdsListResponseIterable<Campaign> getAllCampaigns(String accountId, Optional<Collection<String>> campaignIds,
-                                                              Optional<Collection<String>> fundingInstrumentIds, boolean withDeleted, Optional<Integer> count,
-                                                              Optional<String> cursor, Optional<CampaignSortByField> sortByField) throws TwitterException {
+                                                                 Optional<Collection<String>> fundingInstrumentIds, boolean withDeleted, Optional<Integer> count,
+                                                                 Optional<String> cursor, Optional<CampaignSortByField> sortByField) throws TwitterException {
         TwitterAdUtil.ensureNotNull(accountId, "accountId");
         String campaignIdsAsString = null;
         String fundingInstrumentIdsAsString = null;
@@ -54,7 +52,7 @@ public class TwitterAdsCampaignApiImpl implements TwitterAdsCampaignApi {
         List<HttpParameter> params =
                 getCampaignParameters(accountId, Optional.fromNullable(campaignIdsAsString), Optional.fromNullable(fundingInstrumentIdsAsString), withDeleted, count, cursor);
 
-        if(sortByField != null && sortByField.isPresent()) {
+        if (sortByField != null && sortByField.isPresent()) {
             params.add(new HttpParameter(PARAM_SORT_BY, sortByField.get().getField()));
         }
         String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_CAMPAIGN;
@@ -96,7 +94,7 @@ public class TwitterAdsCampaignApiImpl implements TwitterAdsCampaignApi {
 
         List<HttpParameter> params =
                 validateUpdateCampaignParameters(accountId, campaignId, name, totalBudgetAmountLocalMicro, dailyBudgetAmountLocalMicro, startTime,
-                                                 endTime, paused, standardDelivery, frequencyCap, durationInDays);
+                        endTime, paused, standardDelivery, frequencyCap, durationInDays);
         String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_CAMPAIGN + campaignId;
         Type type = new TypeToken<BaseAdsResponse<Campaign>>() {}.getType();
         return twitterAdsClient.executeHttpRequest(baseUrl, params.toArray(new HttpParameter[params.size()]), type, HttpVerb.PUT);

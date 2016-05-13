@@ -185,7 +185,7 @@ public class TwitterAdsLineItemApiImpl implements TwitterAdsLineItemApi {
             params.add(new HttpParameter(PARAM_LINE_ITEM_ID, lineItemId.get()));
         }
 
-        if (org.apache.commons.lang.StringUtils.isNotBlank(promotedAccountsIdsAsString)) {
+        if (StringUtils.isNotBlank(promotedAccountsIdsAsString)) {
             params.add(new HttpParameter(PARAM_PROMOTED_ACCOUNTS_IDS, promotedAccountsIdsAsString));
         }
         String baseUrl = twitterAdsClient.getBaseAdsAPIUrl() + PREFIX_ACCOUNTS_V1 + accountId + PATH_PROMOTED_ACCOUNTS;
