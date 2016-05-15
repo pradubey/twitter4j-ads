@@ -51,13 +51,13 @@ Please reference this Twitter Ads API documentation for more help in generating 
 
 ### Contributors
 
-Abhay Bansal (Sprinklr)
-Abhishek Anand (Sprinklr)
-John Babich (Twitter)
-Manish Aggarwal (Sprinklr)
-Nihit Purwar (Sprinklr)
-Nikhil Kumar (Sprinklr)
-Prashant Dubey (Sprinklr)
+* Abhay Bansal (Sprinklr)
+* Abhishek Anand (Sprinklr)
+* John Babich (Twitter)
+* Manish Aggarwal (Sprinklr)
+* Nihit Purwar (Sprinklr)
+* Nikhil Kumar (Sprinklr)
+* Prashant Dubey (Sprinklr)
 
 ### LICENSE
 
