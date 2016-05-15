@@ -130,11 +130,11 @@ public interface TwitterAdsConstants {
     String PARAM_PRIMARY_WEB_EVENT_TAG = "primary_web_event_tag";
     String PATH_FEATURES = "/features";
 
-    String PARAM_METRICS_GROUPS = "metric_groups";
+    String PARAM_METRIC_GROUPS = "metric_groups";
     String PARAM_ENTITY_TYPE = "entity";
     String PARAM_JOB_IDS = "job_ids";
     String PARAM_ENTITY_IDS = "entity_ids";
-    String PARAMS_PLACEMENT = "placement";
+    String PARAM_PLACEMENT = "placement";
     /**
      * For Twitter Audience Platform
      */

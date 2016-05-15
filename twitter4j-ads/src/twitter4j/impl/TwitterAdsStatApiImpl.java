@@ -60,10 +60,10 @@ public class TwitterAdsStatApiImpl implements TwitterAdsStatApi {
         }
 
         String metrics = StringUtils.join(TwitterAdStatisticsMetrics.getMetricGroups(objective), ",");
-        params.add(new HttpParameter(PARAM_METRICS_GROUPS, metrics));
+        params.add(new HttpParameter(PARAM_METRIC_GROUPS, metrics));
         params.add(new HttpParameter(PARAM_WITH_DELETED, withDeleted));
         params.add(new HttpParameter(PARAM_ENTITY_IDS, TwitterAdUtil.getCsv(entityIds)));
-        params.add(new HttpParameter(PARAMS_PLACEMENT, placement.name()));
+        params.add(new HttpParameter(PARAM_PLACEMENT, placement.name()));
 
         Type type = new TypeToken<BaseAdsListResponse<TwitterEntityStatistics>>() {}.getType();
         return twitterAdsClient.executeHttpListRequest(baseUrl, params, type);
@@ -98,10 +98,10 @@ public class TwitterAdsStatApiImpl implements TwitterAdsStatApi {
         }
 
         String metrics = StringUtils.join(TwitterAdStatisticsMetrics.getMetricGroups(twitterAdObjective), ",");
-        params.add(new HttpParameter(PARAM_METRICS_GROUPS, metrics));
+        params.add(new HttpParameter(PARAM_METRIC_GROUPS, metrics));
         params.add(new HttpParameter(PARAM_WITH_DELETED, withDeleted));
         params.add(new HttpParameter(PARAM_ENTITY_IDS, TwitterAdUtil.getCsv(ids)));
-        params.add(new HttpParameter(PARAMS_PLACEMENT, placement.name()));
+        params.add(new HttpParameter(PARAM_PLACEMENT, placement.name()));
 
         Type type = new TypeToken<BaseAdsResponse<JobDetails>>() {}.getType();
         return twitterAdsClient.executeHttpRequest(baseUrl, params.toArray(new HttpParameter[params.size()]), type, HttpVerb.POST);
