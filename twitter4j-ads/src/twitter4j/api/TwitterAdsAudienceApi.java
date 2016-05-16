@@ -23,6 +23,7 @@ public interface TwitterAdsAudienceApi {
      * @param cursor (optional) Specifies a cursor to get the next page of TailoredAudience objects (function automatically handles paging upon iteration when you do not specify cursor value).
      * @return the collection of TailoredAudience objects belonging to the authenticated user.
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/tailored_audiences">https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/tailored_audiences</a>
      */
     BaseAdsListResponseIterable<TailoredAudience> getAllTailoredAudiences(String accountId, Optional<Integer> count,
                                                                           Optional<Boolean> withDeleted, Optional<String> cursor)
@@ -33,6 +34,7 @@ public interface TwitterAdsAudienceApi {
      * @param tailoredAudienceId The identifier for a specific tailored audience.
      * @return detailed information on a specific tailored audience.
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/tailored_audiences/%3Aid">https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/tailored_audiences/%3Aid</a>
      */
     BaseAdsResponse<TailoredAudience> getTailoredAudienceForId(String accountId, String tailoredAudienceId) throws TwitterException;
 
@@ -41,6 +43,7 @@ public interface TwitterAdsAudienceApi {
      * @param tailoredAudienceId The identifier for a specific tailored audience.
      * @return response of deleting a tailored audience.
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/delete/accounts/%3Aaccount_id/tailored_audiences/%3Aid">https://dev.twitter.com/ads/reference/delete/accounts/%3Aaccount_id/tailored_audiences/%3Aid</a>
      */
     BaseAdsResponse<TailoredAudience> deleteTailoredAudience(String accountId, String tailoredAudienceId) throws TwitterException;
 
@@ -50,6 +53,7 @@ public interface TwitterAdsAudienceApi {
      * @param tailoredAudienceDataType The data type of tailored audience being created (e.g. TWITTER_ID).
      * @return response of creating a tailored audience.
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/tailored_audiences">https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/tailored_audiences</a>
      */
     BaseAdsResponse<TailoredAudience> createTailoredAudience(String accountId, String name, TailoredAudienceDataType tailoredAudienceDataType)
             throws TwitterException;
@@ -59,6 +63,7 @@ public interface TwitterAdsAudienceApi {
      * @param tailoredAudienceId The identifier for a specific tailored audience.
      * @return detailed information on the status of changes being processed for tailored audience.
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/tailored_audience_change/%3Aid">https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/tailored_audience_change/%3Aid</a>
      */
     BaseAdsResponse<TailoredAudienceChangeInfo> getChangeRecordsForTailoredAudienceById(String accountId, String tailoredAudienceId)
             throws TwitterException;
@@ -70,6 +75,7 @@ public interface TwitterAdsAudienceApi {
      * @param tailoredAudienceOperation The operation to perform on tailored audience (e.g. ADD, REMOVE, REPLACE).
      * @return response of request to edit users in existing tailored audience.
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/tailored_audience_change">https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/tailored_audience_change</a>
      */
     BaseAdsResponse<TailoredAudienceChangeInfo> editUsersInTailoredAudience(String accountId, String tailoredAudienceId, String bucketLocation,
                                                                             TailoredAudienceOperation tailoredAudienceOperation)
@@ -82,6 +88,7 @@ public interface TwitterAdsAudienceApi {
      * @param nextCursor (optional) Specify a cursor to retrieve data from a specific page (function automatically handles paging upon iteration when you do not specify cursor value).
      * @return a collection of change records for each tailored audience the authenticating account has access to.
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/tailored_audience_change">https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/tailored_audience_change</a>
      */
     BaseAdsResponse<TailoredAudienceChangeInfo> getChangeRecordsForAllTailoredAudiences(String accountId, Optional<Integer> count, Optional<String> nextCursor)
             throws TwitterException;

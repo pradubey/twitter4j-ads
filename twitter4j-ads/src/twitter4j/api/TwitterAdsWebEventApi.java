@@ -20,6 +20,7 @@ public interface TwitterAdsWebEventApi {
      * @param cursor      (optional) Specify a cursor to retrieve data from a specific page (function automatically handles paging upon iteration when you do not specify cursor value).
      * @return Web Event Tags for the account
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/web_event_tags">https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/web_event_tags</a>
      */
     BaseAdsListResponseIterable<WebEventTag> getAllWebEventTags(String accountId, boolean withDeleted, Integer count, String cursor)
             throws TwitterException;
@@ -30,6 +31,7 @@ public interface TwitterAdsWebEventApi {
      * @param webEventTagId The identifier for the web event tag to retrieve
      * @return Queried web event tag
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/web_event_tags/%3Aid">https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/web_event_tags/%3Aid</a>
      */
     BaseAdsResponse<WebEventTag> getWebEventTag(String accountId, boolean withDeleted, String webEventTagId) throws TwitterException;
 
@@ -42,6 +44,7 @@ public interface TwitterAdsWebEventApi {
      * @param retargetingEnabled Boolean indicating if retargeting should be enabled for this web tag. Possible values are true, 1, false, 0
      * @return created Event Tag
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/web_event_tags">https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/web_event_tags</a>
      */
     BaseAdsResponse<WebEventTag> createWebEventTag(String accountId, String name, Integer clickWindow, Integer viewThroughWindow,
                                                    WebEventTagType type, boolean retargetingEnabled) throws TwitterException;
@@ -57,6 +60,7 @@ public interface TwitterAdsWebEventApi {
      * @param retargetingEnabled Boolean indicating if retargeting should be enabled for this web tag. Possible values are true, 1, false, 0
      * @return Updated Event Tag
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/put/accounts/%3Aaccount_id/web_event_tags/%3Aid">https://dev.twitter.com/ads/reference/put/accounts/%3Aaccount_id/web_event_tags/%3Aid</a>
      */
     BaseAdsResponse<WebEventTag> updateWebEventTag(String accountId, String webEventTagId, String name, Integer clickWindow,
                                                    Integer viewThroughWindow, WebEventTagType type, boolean retargetingEnabled)
@@ -69,6 +73,7 @@ public interface TwitterAdsWebEventApi {
      * @param webEventTagId The identifier for the web event tag
      * @return Deleted Tag
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/delete/accounts/%3Aaccount_id/web_event_tags/%3Aid">https://dev.twitter.com/ads/reference/delete/accounts/%3Aaccount_id/web_event_tags/%3Aid</a>
      */
     BaseAdsResponse<WebEventTag> deleteWebEventTag(String accountId, String webEventTagId) throws TwitterException;
 

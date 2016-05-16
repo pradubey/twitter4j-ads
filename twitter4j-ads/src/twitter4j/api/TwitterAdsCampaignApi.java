@@ -26,6 +26,7 @@ public interface TwitterAdsCampaignApi {
      * @param cursor               (optional) Specify a cursor to retrieve data from a specific page (function automatically handles paging upon iteration when you do not specify cursor value).
      * @return Retrieve details for some or all campaigns associated with the current account.
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/campaigns">https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/campaigns</a>
      */
     BaseAdsListResponseIterable<Campaign> getAllCampaigns(String accountId, Optional<Collection<String>> campaignIds,
                                                           Optional<Collection<String>> fundingInstrumentIds, boolean withDeleted, Optional<Integer> count,
@@ -37,6 +38,7 @@ public interface TwitterAdsCampaignApi {
      * @param withDeleted Include deleted results in your request. Defaults to false.
      * @return Retrieve details for a specific campaign associated with the current account.
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/campaigns/%3Acampaign_id">https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/campaigns/%3Acampaign_id</a>
      */
     BaseAdsResponse<Campaign> getCampaignById(String accountId, String campaignId, boolean withDeleted) throws TwitterException;
 
@@ -45,6 +47,7 @@ public interface TwitterAdsCampaignApi {
      * @param campaign    A Campaign object representing the campaign to be created.
      * @return created campaign response.
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/campaigns">https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/campaigns</a>
      */
     BaseAdsResponse<Campaign> createCampaign(Campaign campaign) throws TwitterException;
 
@@ -62,6 +65,7 @@ public interface TwitterAdsCampaignApi {
      * @param durationInDays               (if value passed greater than 0) Update integer representing the time period within which the frequency_cap frequency is achieved. Only supports values of: 1, 7 and 30.
      * @return updated campaign response.
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/put/accounts/%3Aaccount_id/campaigns/%3Acampaign_id">https://dev.twitter.com/ads/reference/put/accounts/%3Aaccount_id/campaigns/%3Acampaign_id</a>
      */
     BaseAdsResponse<Campaign> updateCampaign(String accountId, String campaignId, Optional<String> name,
                                              Long totalBudgetAmountLocalMicro, Optional<Long> dailyBudgetAmountLocalMicro, Optional<String> startTime,
@@ -74,6 +78,7 @@ public interface TwitterAdsCampaignApi {
      * @param paused                       The paused state of campaign.
      * @return updated campaign response.
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/put/accounts/%3Aaccount_id/campaigns/%3Acampaign_id">https://dev.twitter.com/ads/reference/put/accounts/%3Aaccount_id/campaigns/%3Acampaign_id</a>
      */
     BaseAdsResponse<Campaign> updateCampaignStatus(String accountId, String campaignId, Boolean paused) throws TwitterException;
 
@@ -82,6 +87,7 @@ public interface TwitterAdsCampaignApi {
      * @param campaignId                   The identifier of campaign to delete.
      * @return Campaign to be deleted with deleted field set to true
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/delete/accounts/%3Aaccount_id/campaigns/%3Acampaign_id">https://dev.twitter.com/ads/reference/delete/accounts/%3Aaccount_id/campaigns/%3Acampaign_id</a>
      */
     BaseAdsResponse<Campaign> deleteCampaign(String accountId, String campaignId) throws TwitterException;
 

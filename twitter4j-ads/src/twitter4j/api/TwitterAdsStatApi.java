@@ -30,6 +30,7 @@ public interface TwitterAdsStatApi {
      * @param placement            The placement of entity to retrieve stats for.
      * @return analytics data for the given parameters
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/1/get/stats/accounts/%3Aaccount_id">https://dev.twitter.com/ads/reference/1/get/stats/accounts/%3Aaccount_id</a>
      */
     BaseAdsListResponseIterable<TwitterEntityStatistics> fetchStatsSync(String accountId, TwitterEntityType twitterEntity, Collection<String> ids,
                                                                         long startTime, long endTime, boolean withDeleted, Granularity granularity,
@@ -48,6 +49,7 @@ public interface TwitterAdsStatApi {
      * @param twitterSegmentationType  (optional) Break down analytics data via a supported segmentation type.
      * @return job details for async job to fetch analytics data for the given paramters
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/1/post/stats/jobs/accounts/%3Aaccount_id">https://dev.twitter.com/ads/reference/1/post/stats/jobs/accounts/%3Aaccount_id</a>
      */
     BaseAdsResponse<JobDetails> createAsyncJob(String accountId, TwitterEntityType twitterEntityType, Collection<String> ids, long startTime,
                                                long endTime, boolean withDeleted, Granularity granularity, TwitterAdObjective twitterAdObjective,
@@ -58,6 +60,7 @@ public interface TwitterAdsStatApi {
      * @param jobIds               A collection of job IDs to retrieve status of.
      * @return job execution details for given job IDs
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/1/get/stats/jobs/accounts/%3Aaccount_id">https://dev.twitter.com/ads/reference/1/get/stats/jobs/accounts/%3Aaccount_id</a>
      */
     BaseAdsListResponseIterable<JobDetails> getJobExecutionDetails(String accountId, Collection<String> jobIds) throws TwitterException;
 
@@ -65,6 +68,7 @@ public interface TwitterAdsStatApi {
      * @param dataUrl   The path given as output via a completed async job.
      * @return analytics data extracted from the finished output path of a async job
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/1/get/stats/jobs/accounts/%3Aaccount_id">https://dev.twitter.com/ads/reference/1/get/stats/jobs/accounts/%3Aaccount_id</a>
      */
     BaseAdsListResponse<TwitterEntityStatistics> fetchJobDataAsync(String dataUrl) throws TwitterException;
 }

@@ -34,6 +34,7 @@ public interface TwitterAdsLineItemApi {
      * @param withDeleted          Include deleted results in your request. Defaults to false.
      * @return Retrieve the line items associated with a specific campaign belonging to the current account.
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/line_items">https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/line_items</a>
      */
     BaseAdsListResponseIterable<LineItem> getAllLineItems(String accountId, Optional<Collection<String>> campaignIds, Optional<Collection<String>> lineItemIds,
                                                           Optional<Collection<String>> fundingInstrumentIds, Optional<Integer> count, boolean withDeleted,
@@ -45,6 +46,7 @@ public interface TwitterAdsLineItemApi {
      * @param withDeleted Include deleted results in your request. Defaults to false.
      * @return Retrieve a specific line item associated with a campaign belonging to the current account.
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/line_items/%3Aline_item_id">https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/line_items/%3Aline_item_id</a>
      */
     BaseAdsResponse<LineItem> getLineItemById(String accountId, String lineItemId, boolean withDeleted) throws TwitterException;
 
@@ -53,6 +55,7 @@ public interface TwitterAdsLineItemApi {
      * @param lineItem A LineItem object representing the line item to be created.
      * @return created line item
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/line_items">https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/line_items</a>
      */
     BaseAdsResponse<LineItem> createLineItem(LineItem lineItem) throws TwitterException;
 
@@ -70,6 +73,7 @@ public interface TwitterAdsLineItemApi {
      * @param iabCategories        (optional) Update the IAB categories associated with the line item (for TAP campaigns).
      * @return updated line item
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/put/accounts/%3Aaccount_id/line_items/%3Aline_item_id">https://dev.twitter.com/ads/reference/put/accounts/%3Aaccount_id/line_items/%3Aline_item_id</a>
      */
     BaseAdsResponse<LineItem> updateLineItem(String accountId, String lineItemId, BidType bidType, boolean automaticallySelectBid,
                                              Optional<Long> bidAmountLocalMicro, Optional<Boolean> paused, Optional<Sentiments> includeSentiment,
@@ -82,6 +86,7 @@ public interface TwitterAdsLineItemApi {
      * @param lineItemId           The line item identifier of the line item to delete.
      * @return line item to be deleted with deleted field set to true
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/delete/accounts/%3Aaccount_id/line_items/%3Aline_item_id">https://dev.twitter.com/ads/reference/delete/accounts/%3Aaccount_id/line_items/%3Aline_item_id</a>
      */
     BaseAdsResponse<LineItem> deleteLineItem(String accountId, String lineItemId) throws TwitterException;
 
@@ -91,6 +96,7 @@ public interface TwitterAdsLineItemApi {
      * @param userId     Id of the user of the account to be promoted
      * @return created promoted account
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/promoted_accounts">https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/promoted_accounts</a>
      */
     BaseAdsResponse<PromotedAccount> createPromotedAccounts(String accountId, String lineItemId, String userId) throws TwitterException;
 
@@ -103,6 +109,7 @@ public interface TwitterAdsLineItemApi {
      * @param sortByField        Sorts by supported attribute in ascending or descending order.
      * @return references to the Promoted Accounts associated with one or more line items
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/promoted_accounts">https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/promoted_accounts</a>
      */
     BaseAdsListResponseIterable<PromotedAccount> getPromotedAccounts(String accountId, Optional<Collection<String>> promotedAccountIds,
                                                                      Optional<String> lineItemId, boolean withDeleted,
@@ -115,6 +122,7 @@ public interface TwitterAdsLineItemApi {
      * @param callToActionUrl      The call to action URL to be used with this pre-roll.
      * @return the response of creating call to action details for pre roll views
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/preroll_call_to_action">https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/preroll_call_to_action</a>
      */
     BaseAdsResponse<PreRollCallToActionResponse> createCallToActionDetailsForPreRollViews(String accountId, String lineItemId,
                                                                                           TwitterCallToActionType twitterCallToActionType,
@@ -127,6 +135,7 @@ public interface TwitterAdsLineItemApi {
      * @param landingUrl           The url of the media creative.
      * @return response of associating media creative with account
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/media_creatives">https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/media_creatives</a>
      */
     BaseAdsResponse<AssociateMediaCreativeResponse> associateMediaCreativeWithAccount(String accountId, String lineItemId, String accountMediaId,
                                                                                       String landingUrl) throws TwitterException;

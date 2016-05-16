@@ -20,6 +20,7 @@ public interface TwitterAdsVideoApi {
      * @param videoId               The video ID to be used.
      * @param twitterCreativeType   An enum of creative type being used (e.g. INTERSTITIAL).
      * @return response of transforming media in account to promoted video
+     * @see <a href="https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/account_media">https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/account_media</a>
      */
     BaseAdsResponse<TwitterAccountMediaResponse> transformMediaInAccount(String accountId, String mediaId, String videoId,
                                                                          TwitterCreativeType twitterCreativeType) throws TwitterException;
@@ -30,6 +31,7 @@ public interface TwitterAdsVideoApi {
      * @param title                 Title of video creative being created.
      * @param description           Description of video creative being created.
      * @return response of associating promoted video with account
+     * @see <a href="https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/videos">https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/videos</a>
      */
     BaseAdsResponse<AssociateVideoToAccountResponse> associateVideoWithAccount(String accountId, String mediaId, String title, String description)
             throws TwitterException;

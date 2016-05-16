@@ -21,6 +21,7 @@ public interface TwitterAdsPreviewApi {
      * @param twitterPreviewTarget The line item identifier of the line item to delete.
      * @return tweet preview object built from the provided parameters
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/tweet/preview">https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/tweet/preview</a>
      */
     BaseAdsListResponse<TwitterPreviewInfo> getUnpublishedPromotedTweetPreview(String accountId, String status, String userId, List<String> mediaIds, String cardId, TwitterPreviewTarget twitterPreviewTarget) throws TwitterException;
 
@@ -31,6 +32,7 @@ public interface TwitterAdsPreviewApi {
      * @param twitterPreviewTarget The line item identifier of the line item to delete.
      * @return tweet preview object built from an existing promoted tweet
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/tweet/preview/%3Atweet_id">https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/tweet/preview/%3Atweet_id</a>
      */
     BaseAdsListResponse<TwitterPreviewInfo> getPromotedTweetPreview(String accountId, String tweetId, String userId, TwitterPreviewTarget twitterPreviewTarget) throws TwitterException;
 

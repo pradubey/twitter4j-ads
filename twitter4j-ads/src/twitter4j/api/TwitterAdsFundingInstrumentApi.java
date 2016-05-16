@@ -20,9 +20,10 @@ public interface TwitterAdsFundingInstrumentApi {
      * @param accountId            The identifier for the leveraged account.
      * @param withDeleted          Include deleted results in your request. Defaults to false.
      * @param fundingInstrumentIds (optional) Scope the response to just the desired funding instruments by specifying a Collection of identifiers. Up to 50 ids may be provided.
-     * @param sortByField          (optional) Pass a sort-by parameter to return results in a sorted order.
+     * @param sortByField          (optional) Sorts by supported attribute in ascending or descending order.
      * @return Retrieve some or all funding instruments associated with the account.
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/funding_instruments">https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/funding_instruments</a>
      */
     BaseAdsListResponseIterable<FundingInstrument> getAllFundingInstruments(String accountId,boolean withDeleted, Optional<Collection<String>> fundingInstrumentIds,
                                                                             Optional<FundingInstrumentSortByField> sortByField) throws TwitterException;
@@ -33,6 +34,7 @@ public interface TwitterAdsFundingInstrumentApi {
      * @param withDeleted         Include deleted results in your request. Defaults to false.
      * @return Retrieve a specific funding instrument associated with the account.
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/funding_instruments/%3Aid">https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/funding_instruments/%3Aid</a>
      */
     BaseAdsResponse<FundingInstrument> getFundingInstrumentById(String accountId, String fundingInstrumentId, boolean withDeleted)
             throws TwitterException;

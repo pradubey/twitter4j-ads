@@ -27,6 +27,7 @@ public interface TwitterAdsPromotedTweetApi {
      * @param cursor      (optional) Specify a cursor to retrieve data from a specific page (function automatically handles paging upon iteration when you do not specify cursor value).
      * @return Retrieve references to the Promoted Tweets associated with one or more line items.
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/promoted_tweets">https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/promoted_tweets</a>
      */
     BaseAdsListResponseIterable<PromotedTweets> getAllPromotedTweets(String accountId, String lineItemId, boolean withDeleted,
                                                                      Optional<Integer> count, String cursor, Optional<PromotedTweetsSortByField> sortByField) throws TwitterException;
@@ -37,6 +38,7 @@ public interface TwitterAdsPromotedTweetApi {
      * @param promotedTweetId A reference to the promoted tweet you are operating with in the request.
      * @return Retrieve references to the Promoted Tweets associated with the promotedTweetId.
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/promoted_tweets">https://dev.twitter.com/ads/reference/get/accounts/%3Aaccount_id/promoted_tweets</a>
      */
     BaseAdsResponse<PromotedTweets> getPromotedTweetsById(String accountId, String promotedTweetId) throws TwitterException;
 
@@ -46,6 +48,7 @@ public interface TwitterAdsPromotedTweetApi {
      * @param tweetIds   tweet ids to promote
      * @return created promoted tweet details
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/promoted_tweets">https://dev.twitter.com/ads/reference/post/accounts/%3Aaccount_id/promoted_tweets</a>
      */
     BaseAdsListResponse<PromotedTweets> createPromotedTweets(String accountId, String lineItemId, Collection<String> tweetIds)
             throws TwitterException;
@@ -55,6 +58,7 @@ public interface TwitterAdsPromotedTweetApi {
      * @param tweetId   Tweet Id to be deleted
      * @return Promoted tweet with deleted field set to true
      * @throws TwitterException
+     * @see <a href="https://dev.twitter.com/ads/reference/delete/accounts/%3Aaccount_id/promoted_tweets/%3Aid">https://dev.twitter.com/ads/reference/delete/accounts/%3Aaccount_id/promoted_tweets/%3Aid</a>
      */
     BaseAdsResponse<PromotedTweets> deletePromotedTweets(String accountId, String tweetId) throws TwitterException;
 
