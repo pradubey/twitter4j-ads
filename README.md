@@ -53,6 +53,7 @@ Please reference this Twitter Ads API documentation for more help in generating 
 
 * Abhay Bansal (Sprinklr)
 * Abhishek Anand (Sprinklr)
+* Akash Maurya (Sprinklr)
 * John Babich (Twitter)
 * Manish Aggarwal (Sprinklr)
 * Nihit Purwar (Sprinklr)
