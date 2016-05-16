@@ -18,8 +18,9 @@ public interface TwitterAdsFundingInstrumentApi {
 
     /**
      * @param accountId            The identifier for the leveraged account.
-     * @param fundingInstrumentIds Scope the response to just the desired funding instruments by specifying a comma-separated list of identifiers. Up to 50 ids may be provided.
      * @param withDeleted          Include deleted results in your request. Defaults to false.
+     * @param fundingInstrumentIds (optional) Scope the response to just the desired funding instruments by specifying a Collection of identifiers. Up to 50 ids may be provided.
+     * @param sortByField          (optional) Pass a sort-by parameter to return results in a sorted order.
      * @return Retrieve some or all funding instruments associated with the account.
      * @throws TwitterException
      */

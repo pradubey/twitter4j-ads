@@ -16,7 +16,8 @@ public interface TwitterAdsWebEventApi {
     /**
      * @param accountId   The identifier for the leveraged account. (required)
      * @param withDeleted Include deleted results in your request. Defaults to false.
-     * @param count       Specifies the number of web event tags to retrieve, up to a maximum of 1000 per distinct request.
+     * @param count       (optional) Specifies the number of web event tags to retrieve, up to a maximum of 1000 per distinct request.
+     * @param cursor      (optional) Specify a cursor to retrieve data from a specific page (function automatically handles paging upon iteration when you do not specify cursor value).
      * @return Web Event Tags for the account
      * @throws TwitterException
      */

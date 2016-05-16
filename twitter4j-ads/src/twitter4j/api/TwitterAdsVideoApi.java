@@ -14,10 +14,23 @@ import twitter4j.models.video.UploadMediaObjectResponse;
  */
 public interface TwitterAdsVideoApi {
 
-
+    /**
+     * @param accountId             The identifier for the leveraged account.
+     * @param mediaId               The media ID to be used.
+     * @param videoId               The video ID to be used.
+     * @param twitterCreativeType   An enum of creative type being used (e.g. INTERSTITIAL).
+     * @return response of transforming media in account to promoted video
+     */
     BaseAdsResponse<TwitterAccountMediaResponse> transformMediaInAccount(String accountId, String mediaId, String videoId,
                                                                          TwitterCreativeType twitterCreativeType) throws TwitterException;
 
+    /**
+     * @param accountId             The identifier for the leveraged account.
+     * @param mediaId               The media ID being used to create promoted video.
+     * @param title                 Title of video creative being created.
+     * @param description           Description of video creative being created.
+     * @return response of associating promoted video with account
+     */
     BaseAdsResponse<AssociateVideoToAccountResponse> associateVideoWithAccount(String accountId, String mediaId, String title, String description)
             throws TwitterException;
 }

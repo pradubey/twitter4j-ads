@@ -22,9 +22,9 @@ public interface TwitterAdsPromotedTweetApi {
      * @param lineItemId  A reference to the line item you are operating with in the request. Omitting the lineItemId will return all promoted
      *                    tweets across all campaigns.
      * @param withDeleted Include deleted results in your request. Defaults to false.
-     * @param sortByField Sorts by supported attribute in ascending or descending order.
-     * @param count       Specifies the number of Promoted Tweets to try to retrieve, up to a maximum of 1000 per distinct request.
-     * @param cursor      Specifies a cursor to get the next page of Promoted Tweets.
+     * @param sortByField (optional) Sorts by supported attribute in ascending or descending order.
+     * @param count       (optional) Specifies the number of Promoted Tweets to try to retrieve, up to a maximum of 1000 per distinct request.
+     * @param cursor      (optional) Specify a cursor to retrieve data from a specific page (function automatically handles paging upon iteration when you do not specify cursor value).
      * @return Retrieve references to the Promoted Tweets associated with one or more line items.
      * @throws TwitterException
      */

@@ -16,100 +16,143 @@ import java.util.List;
 public interface TwitterAdsCardsApi {
 
     /**
-     * @param accountId The identifier for the leveraged account. (required)
-     * @param cardId    Lead Generation Card Id to fetch. (required)
+     * @param accountId The identifier for the leveraged account.
+     * @param cardId    Lead Generation Card identifier to fetch.
      * @return retrieved card details
      * @throws TwitterException
      */
     BaseAdsResponse<TwitterLeadGenerationCard> getLeadGenerationCard(String accountId, String cardId) throws TwitterException;
 
     /**
-     * @param accountId   The identifier for the leveraged account. (required)
-     * @param cardIds     Lead Generation Card Ids to fetch (optional). If not provided returns all the lead generation cards.
-     * @param withDeleted Include deleted results in your request. Defaults to false.
-     * @param count       Specifies the number of lead generation cards to try and retrieve, up to a maximum of 1000 per distinct request.
-     * @return retrieves details of one or more lead generation cards associated with the account
+     * @param accountId   The identifier for the leveraged account.
+     * @param cardIds     (optional) Lead Generation Card Ids to fetch. If not provided returns all the Lead Generation Cards.
+     * @param withDeleted (optional) Include deleted results in your request. Defaults to false.
+     * @param count       (optional) Specifies the number of Lead Generation Cards to try and retrieve, up to a maximum of 1000 per distinct request.
+     * @return retrieves details of one or more Lead Generation Cards associated with the account
      * @throws TwitterException
      */
     BaseAdsListResponseIterable<TwitterLeadGenerationCard> getAllLeadGenerationCards(String accountId, List<String> cardIds, boolean withDeleted,
                                                                                      Optional<Integer> count) throws TwitterException;
 
     /**
-     * @param accountId The identifier for the leveraged account. (required)
-     * @param cardId    The identifier of the card to be deleted. (required)
-     * @return Details of the deleted card with deleted true, if successful
+     * @param accountId The identifier for the leveraged account.
+     * @param cardId    The identifier of the card to be deleted.
+     * @return details of the deleted card with deleted true, if successful
      * @throws TwitterException
      */
     BaseAdsResponse<TwitterLeadGenerationCard> deleteLeadGenerationCard(String accountId, String cardId) throws TwitterException;
 
+    /**
+     * @param accountId   The identifier for the leveraged account.
+     * @param cardIds     (optional) Image App Download Card identifiers to scope the request to. If not provided returns all the Image App Download Cards.
+     * @param withDeleted (optional) Include deleted results in your request. Defaults to false.
+     * @param count       (optional) Specifies the number of Image App Download Cards to try and retrieve, up to a maximum of 1000 per distinct request.
+     * @return details of one or more Image App Download Cards associated with the account
+     * @throws TwitterException
+     */
     BaseAdsListResponseIterable<TwitterImageAppDownloadCard> getAllImageAppDownloadCards(String accountId, List<String> cardIds, boolean withDeleted,
                                                                                          Optional<Integer> count) throws TwitterException;
 
+    /**
+     * @param accountId   The identifier for the leveraged account.
+     * @param cardIds     (optional) Video App Download Card identifiers to fetch. If not provided returns all the Video App Download Cards.
+     * @param withDeleted (optional) Include deleted results in your request. Defaults to false.
+     * @param count       (optional) Specifies the number of Video App Download Cards to try and retrieve, up to a maximum of 1000 per distinct request.
+     * @return details of one or more Video App Download Cards associated with the account
+     * @throws TwitterException
+     */
     BaseAdsListResponseIterable<TwitterVideoAppDownloadCard> getAllVideoAppDownloadCards(String accountId, List<String> cardIds, boolean withDeleted,
                                                                                          Optional<Integer> count) throws TwitterException;
 
     /**
-     * @param accountId The identifier for the leveraged account. (required)
-     * @param cardId    The identifier of the card to be deleted. (required)
+     * @param accountId The identifier for the leveraged account.
+     * @param cardId    The identifier of the card to be deleted.
      * @return Details of the deleted card with deleted true, if successful
      * @throws TwitterException
      */
     BaseAdsResponse<TwitterWebsiteCard> deleteWebsiteCard(String accountId, String cardId) throws TwitterException;
 
     /**
-     * @param accountId   The identifier for the leveraged account. (required)
-     * @param cardIds     Website Card Ids to fetch (optional). If not provided returns all the website cards.
-     * @param withDeleted Include deleted results in your request. Defaults to false.
-     * @param count       Specifies the number of website cards to try and retrieve, up to a maximum of 1000 per distinct request.
-     * @return retrieves details of one or more website cards associated with the account
+     * @param accountId   The identifier for the leveraged account.
+     * @param cardIds     (optional) Website Card identifiers to fetch. If not provided returns all the Website Cards.
+     * @param withDeleted (optional) Include deleted results in your request. Defaults to false.
+     * @param count       (optional) Specifies the number of website cards to try and retrieve, up to a maximum of 1000 per distinct request.
+     * @return retrieves details of one or more Website Cards associated with the account
      * @throws TwitterException
      */
     BaseAdsListResponseIterable<TwitterWebsiteCard> getAllWebsiteCards(String accountId, List<String> cardIds, boolean withDeleted, Optional<Integer> count)
             throws TwitterException;
 
     /**
-     * @param accountId The identifier for the leveraged account. (required)
-     * @param cardId    Website Card Id to fetch. (required)
+     * @param accountId The identifier for the leveraged account.
+     * @param cardId    Website Card identifier to fetch.
      * @return retrieved card details
      * @throws TwitterException
      */
     BaseAdsResponse<TwitterWebsiteCard> getWebsiteCard(String accountId, String cardId) throws TwitterException;
 
     /**
-     * @param accountId   The identifier for the leveraged account. (required)
-     * @param cardIds     App Download Card Ids to fetch (optional). If not provided returns all the app download cards.
-     * @param withDeleted Include deleted results in your request. Defaults to false.
-     * @param count       Specifies the number of app download cards to try and retrieve, up to a maximum of 1000 per distinct request.
-     * @return retrieves details of ome or all app download cards associated with the account
+     * @param accountId   The identifier for the leveraged account.
+     * @param cardIds     (optional) App Download Card identifiers to fetch. If not provided returns all the App Download Cards.
+     * @param withDeleted (optional) Include deleted results in your request. Defaults to false.
+     * @param count       (optional) Specifies the number of App Download Cards to try and retrieve, up to a maximum of 1000 per distinct request.
+     * @return retrieves details of ome or all App Download Cards associated with the account
      * @throws TwitterException
      */
     BaseAdsListResponseIterable<TwitterMobileAppCard> getAllAppDownloadCards(String accountId, List<String> cardIds, boolean withDeleted,
                                                                              Optional<Integer> count) throws TwitterException;
 
     /**
-     * @param accountId The identifier for the leveraged account. (required)
-     * @param cardId    App Download Card Id to fetch. (required)
+     * @param accountId The identifier for the leveraged account.
+     * @param cardId    App Download Card identifier to fetch.
      * @return retrieved card details
      * @throws TwitterException
      */
     BaseAdsResponse<TwitterMobileAppCard> getAppDownloadCard(String accountId, String cardId) throws TwitterException;
 
     /**
-     * @param accountId The identifier for the leveraged account. (required)
-     * @param cardId    The identifier of the card to be deleted
+     * @param accountId The identifier for the leveraged account.
+     * @param cardId    The identifier of the App Download Card to be deleted.
      * @return Details of the deleted card with deleted true, if successful
      * @throws TwitterException
      */
     BaseAdsResponse<TwitterMobileAppCard> deleteAppDownloadCard(String accountId, String cardId) throws TwitterException;
 
+    /**
+     * @param accountId The identifier for the leveraged account.
+     * @param cardId    The identifier of the Video App Download Card to be deleted.
+     * @return Details of the deleted card with deleted true, if successful
+     * @throws TwitterException
+     */
     BaseAdsResponse<TwitterVideoAppDownloadCard> deleteVideoAppDownloadCard(String accountId, String cardId) throws TwitterException;
 
-
+    /**
+     * @param accountId The identifier for the leveraged account.
+     * @param cardId    The identifier of the Image App Download Card to be deleted.
+     * @return Details of the deleted card with deleted true, if successful
+     * @throws TwitterException
+     */
     BaseAdsResponse<TwitterImageAppDownloadCard> deleteImageAppDownloadCard(String accountId, String cardId) throws TwitterException;
 
+    /**
+     * @param imageTonLocation The TON server location of image file to be used.
+     * @return response of posting the video card image file
+     * @throws TwitterException
+     */
     String postVideoCardImage(String imageTonLocation) throws TwitterException;
 
     // ---  Stats  ---
+    /**
+     * @param accountId   The identifier for the leveraged account.
+     * @param cardId      Lead Generation Card identifier to fetch stats for.
+     * @param startTime   The time to collect stats from.
+     * @param endTime     The time to collect stats until.
+     * @param granularity (optional) The granularity such as DAY or HOUR as String.
+     * @param metric      (optional) Specifies the number of App Download Cards to try and retrieve, up to a maximum of 1000 per distinct request.
+     * @param withDeleted (optional) Specifies the number of App Download Cards to try and retrieve, up to a maximum of 1000 per distinct request.
+     * @return retrieves details of ome or all App Download Cards associated with the account
+     * @throws TwitterException
+     */
     BaseAdsResponse<TwitterLeadGenerationStat> getTwitterLeadGenerationStat(String accountId, String cardId, String startTime, Optional<String> endTime,
                                                                             Optional<String> granularity, Optional<String> metric, Optional<Boolean> withDeleted)
             throws TwitterException;
