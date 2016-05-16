@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Twitter4j-ads : twitter4j-ads open source">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Twitter4j-ads</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/pradubey/twitter4j-ads">View on GitHub</a>
+
+          <h1 id="project_title">Twitter4j-ads</h1>
+          <h2 id="project_tagline">twitter4j-ads open source</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/pradubey/twitter4j-ads/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/pradubey/twitter4j-ads/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="about-twitter4j-ads" class="anchor" href="#about-twitter4j-ads" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>About Twitter4j-ads</h1>
+
+<p>Twitter4j-ads is a stable and well tested Java SDK for Twitter's Ads API, originally developed and then open sourced by one of the top social media companies building upon the Ads API (Sprinklr). </p>
+
+<p>Learn more about obtaining Ads API access by visiting: <a href="https://dev.twitter.com/ads/overview">https://dev.twitter.com/ads/overview</a></p>
+
+<h3>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting started</h3>
+
+<ol>
+<li>Ensure that Gradle is installed and fork the Twitter4j-ads repo.</li>
+<li>Use the <code>build.gradle</code> file to create a project for Twitter4j-ads.</li>
+<li>Prepare the Consumer Key/Secret and Acess Token for your Ads API test application into appropriate place (see Authentication section for more information).</li>
+<li>Build project and test with test examples or a new main function.</li>
+</ol>
+
+<h3>
+<a id="sdk-structure-and-design" class="anchor" href="#sdk-structure-and-design" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SDK Structure and Design</h3>
+
+<p>The Twitter4j-ads Java SDK is built on top of design of Twitter4j to allow for easy integration with both Ads API and Organic (REST) API. Response objects are returned as iterable collections and SDK handles the work of paging with cursor for endpoints which support cursors.</p>
+
+<h3>
+<a id="gradle" class="anchor" href="#gradle" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Gradle</h3>
+
+<p>We recommend using Gradle to build and manage your project using Twitter4j-ads. The included <code>build.gradle</code> file includes dependency information for quickly getting up and running.</p>
+
+<h3>
+<a id="dependencies" class="anchor" href="#dependencies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dependencies</h3>
+
+<ul>
+<li>JDK 1.7</li>
+<li>Twitter4j 4.0.4 (org.twitter4j)</li>
+<li>com.google.guava</li>
+<li>com.google.http-client</li>
+<li>com.google.api-client</li>
+<li>com.google.code.gson</li>
+<li>com.google.common.base.Optional</li>
+<li>joda-time</li>
+<li>commons-collections</li>
+<li>org.apache.commons</li>
+<li>junit</li>
+</ul>
+
+<h3>
+<a id="authentication" class="anchor" href="#authentication" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authentication</h3>
+
+<p>Twitter4j supports generally three methods of authentication: environment variables, configuration file, and via code functions. Configuration authentication through code is highly recommended to be able to store the access tokens in secure storage as well as scale the number of authentication tokens being used.</p>
+
+<h5>
+<a id="consumer-keysecret" class="anchor" href="#consumer-keysecret" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Consumer Key/Secret</h5>
+
+<p>Storing the consumer key and secret is how you authenticate your Ads API-approved App ID to access Twitter Ads API. Commonly this is stored in encrypted format in a place accessible by servers. Your Consumer Key/Secret for your Twitter Ads API application will come from <a href="http://apps.twitter.com">http://apps.twitter.com</a>.</p>
+
+<h5>
+<a id="access-tokens" class="anchor" href="#access-tokens" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Access Tokens</h5>
+
+<p>Access tokens are OAuth 1.0A generated tokens to allow access on behalf of a user (advertiser) that has given permission to run campaigns on their behalf.</p>
+
+<p>Your implementation code will need to intelligently allow switching between different access tokens in order to provide functionality for more than one advertiser.</p>
+
+<p>Please reference this Twitter Ads API documentation for more help in generating access tokens: <a href="https://dev.twitter.com/ads/overview/obtaining-ads-account-access">https://dev.twitter.com/ads/overview/obtaining-ads-account-access</a></p>
+
+<h3>
+<a id="contributors" class="anchor" href="#contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributors</h3>
+
+<ul>
+<li>
+<a href="https://github.com/pradubey">Prashant Dubey</a> (Sprinklr)</li>
+<li>
+<a href="https://github.com/abhayb1988">Abhay Bansal</a> (Sprinklr)</li>
+<li>
+<a href="https://github.com/abhishekanand100">Abhishek Anand</a> (Sprinklr)</li>
+<li>
+<a href="https://github.com/akash300">Akash Maurya</a> (Sprinklr)</li>
+<li>
+<a href="https://github.com/jbabichjapan">John Babich</a> (Twitter)</li>
+<li>Manish Aggarwal (Sprinklr)</li>
+<li>Nihit Purwar (Sprinklr)</li>
+<li>Nikhil Kumar (Sprinklr)</li>
+</ul>
+
+<h3>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>LICENSE</h3>
+
+<p>The MIT License (MIT)</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Twitter4j-ads maintained by <a href="https://github.com/pradubey">pradubey</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
