@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/twitter4j.iml" filepath="$PROJECT_DIR$/twitter4j.iml" />
+      <module fileurl="file://$PROJECT_DIR$/twitter4j-ads/twitter4j-ads.iml" filepath="$PROJECT_DIR$/twitter4j-ads/twitter4j-ads.iml" />
+      <module fileurl="file://$PROJECT_DIR$/twitter4j-ads-examples/twitter4j-ads-examples.iml" filepath="$PROJECT_DIR$/twitter4j-ads-examples/twitter4j-ads-examples.iml" />
+    </modules>
+  </component>
+</project>
