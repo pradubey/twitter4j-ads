@@ -15,9 +15,9 @@ Learn more about obtaining Ads API access by visiting: https://dev.twitter.com/a
 
 The Twitter4j-ads Java SDK is built on top of design of Twitter4j to allow for easy integration with both Ads API and Organic (REST) API. Response objects are returned as iterable collections and SDK handles the work of paging with cursor for endpoints which support cursors.
 
-### Gradle
+### Gradle or Maven
 
-We recommend using Gradle to build and manage your project using Twitter4j-ads. The included `build.gradle` file includes dependency information for quickly getting up and running.
+We recommend using Gradle or Maven to build and manage your project using Twitter4j-ads. The included `build.gradle` file includes dependency information for quickly getting up and running.
 
 ### Dependencies
 
