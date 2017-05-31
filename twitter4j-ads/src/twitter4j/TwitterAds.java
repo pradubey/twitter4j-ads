@@ -1,6 +1,7 @@
 package twitter4j;
 
 import twitter4j.api.*;
+import twitter4j.models.video.TwitterCallToActionType;
 
 /**
  * Created by poly on 29/01/14.
@@ -32,6 +33,8 @@ public interface TwitterAds extends java.io.Serializable {
     TwitterAdsBiddingApi getBiddingApi();
 
     TwitterAdsClient getTwitterAdsClient();
+
+    TwitterCallToActionApi getCallToActionApi();
 
     TwitterAdsPreviewApi getPreviewApi();
 }
